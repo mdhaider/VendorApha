@@ -84,13 +84,16 @@ class CameraActivity : AppCompatActivity() {
                 tv_result.post {
                     for (i in 0 until items.size()) {
                         val item = items.valueAt(i)
-                        if (item.value.length == 15) {
-                            val num: Int = item.value.toString().substring(0, 2).toInt()
-                            if (num in 1..37) {
-                                tv_result.text = item.value.toString()
-                                AppPreferences.gstNum = item.value.toString()
-                                finish()
+                        if (item.value.length > 15) {
+                            var substrings = item.value.split(" ")
+                            for (i in 0 until substrings.count()) {
+                                if(substrings[i].length == 15) {
+                                    tv_result.text = substrings[i]
+                                    AppPreferences.gstNum = substrings[i]
+                                }
                             }
+
+                           // finish()
                         }
                     }
                 }
