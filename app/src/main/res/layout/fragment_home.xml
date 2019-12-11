@@ -11,7 +11,8 @@
         android:layout_alignParentTop="true"
         android:iconifiedByDefault="false"
         android:inputType="number"
-        android:queryBackground="@android:color/holo_purple"
+        android:queryBackground="@color/white"
+        android:background="@color/white"
         android:queryHint="Search here" />
 
     <com.google.android.material.tabs.TabLayout
@@ -26,7 +27,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tabs"
-        android:layout_marginBottom="70dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
