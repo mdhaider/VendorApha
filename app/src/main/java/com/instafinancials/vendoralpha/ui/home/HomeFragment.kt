@@ -67,9 +67,9 @@ class HomeFragment : Fragment() {
                 activity!!,
                 childFragmentManager
             )
-        adapter.addFragment(BasicFragment(), "Basic")
-        adapter.addFragment(DetailFragment(), "Detail")
-        adapter.addFragment(LastFragment(), "Last")
+        adapter.addFragment(GstTrackerFragment(), "GST Tracker")
+        adapter.addFragment(InstaBasicFragment(), "InstaBasic")
+        adapter.addFragment(InstaSummaryFragment(), "InstaSummary")
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
 

@@ -1,31 +1,31 @@
 package com.instafinancials.vendoralpha
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 
 
-class DetailFragment : Fragment() {
+class InstaSummaryFragment : Fragment() {
 
     companion object {
-        fun newInstance() = DetailFragment()
+        fun newInstance() = InstaSummaryFragment()
     }
 
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: LastViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.detail_fragment, container, false)
+        return inflater.inflate(R.layout.instasummary_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(LastViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
