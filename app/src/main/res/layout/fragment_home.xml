@@ -4,22 +4,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/searchView"
+    <RelativeLayout
+        android:id="@+id/searchParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:iconifiedByDefault="false"
-        android:inputType="number"
-        android:queryBackground="@color/white"
-        android:background="@color/white"
-        android:queryHint="Search here" />
+        android:background="@color/colorPrimary"
+        android:paddingBottom="12dp">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rounded_et"
+            android:drawableEnd="@drawable/ic_search_black_24dp"
+            android:hint="Enter GSTIN"
+            android:textSize="14sp"
+            android:fontFamily="@font/roboto_condensed_regular"
+            android:inputType="textCapCharacters"
+            android:padding="10dip"/>
+
+
+    </RelativeLayout>
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/searchView"
+        android:layout_below="@id/searchParent"
         android:background="@color/white" />
 
     <androidx.viewpager.widget.ViewPager
@@ -34,9 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
         app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
 

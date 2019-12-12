@@ -20,7 +20,6 @@ class MainActivity1 : AppCompatActivity() {
         newsViewModel.newsLiveData.observe(this, Observer {
             hello.text= it.toString()
 
-
         })
 
         }
