@@ -13,6 +13,11 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.instafinancials.vendoralpha.*
+import com.instafinancials.vendoralpha.apicall.network.ewaybillapi.EWayApiHelper
+import com.instafinancials.vendoralpha.apicall.network.ewaybillapi.EwayGSTApi
+import com.instafinancials.vendoralpha.apicall.network.homeapi.instabasic.InstaBasicApi
+import com.instafinancials.vendoralpha.apicall.repositories.APIFactory
+import com.instafinancials.vendoralpha.apicall.repositories.InstaRepo
 import com.instafinancials.vendoralpha.ui.CameraActivity
 
 class HomeFragment : Fragment() {
@@ -54,11 +59,29 @@ class HomeFragment : Fragment() {
            // intent.putExtra("contentUid", contentUid)
             //intent.putExtra("imageUri", imageUri)
             //intent.putExtra("destinationUid", userUid)
-            startActivity(intent)
+           // startActivity(intent)
+
+
+//            EwayGSTApi().validateGSTDetails("29AAGCC4475J2Z7", object : InstaRepo.IResponseStateListener {
+//                override fun onSuccess() {
+//                }
+//
+//                override fun onError() {
+//                }
+//            })
+            InstaBasicApi().fetchImageItems("U72501KA2016PTC092387", object : InstaRepo.IResponseStateListener{
+                override fun onSuccess() {
+                }
+                override fun onError() {
+                }
+            } )
+
+
         }
 
         return root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

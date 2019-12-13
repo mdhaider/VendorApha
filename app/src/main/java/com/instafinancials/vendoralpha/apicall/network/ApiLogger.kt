@@ -1,6 +1,9 @@
 package com.instafinancials.vendoralpha.apicall.network
 
 import android.util.Log
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonParser
+import com.google.gson.JsonSyntaxException
 import okhttp3.logging.HttpLoggingInterceptor
 
 class ApiLogger : HttpLoggingInterceptor.Logger {

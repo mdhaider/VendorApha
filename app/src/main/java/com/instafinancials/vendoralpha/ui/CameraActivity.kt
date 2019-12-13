@@ -13,6 +13,7 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.instafinancials.vendoralpha.AppPreferences
+import com.instafinancials.vendoralpha.Const.LOG_TAG
 import com.instafinancials.vendoralpha.R
 import kotlinx.android.synthetic.main.activity_camera.*
 import kotlin.properties.Delegates
@@ -84,6 +85,7 @@ class CameraActivity : AppCompatActivity() {
                 tv_result.post {
                     for (i in 0 until items.size()) {
                         val item = items.valueAt(i)
+                        Log.d(LOG_TAG, "text : ${item.value}" )
                         if (item.value.length > 15) {
                             var substrings = item.value.split(" ")
                             for (i in 0 until substrings.count()) {
@@ -96,6 +98,7 @@ class CameraActivity : AppCompatActivity() {
                            // finish()
                         }
                     }
+
                 }
             }
         })
