@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.instafinancials.vendoralpha.*
 import com.instafinancials.vendoralpha.ui.CameraActivity
@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var viewPager: ViewPager
     private lateinit var tabs: TabLayout
     private lateinit var searchView: EditText
-    private lateinit var fab: FloatingActionButton
+    private lateinit var fab: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +36,6 @@ class HomeFragment : Fragment() {
         tabs = root.findViewById(R.id.tabs)
         searchView = root.findViewById(R.id.searchView)
         fab = root.findViewById(R.id.fab)
-
 
         searchView.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
