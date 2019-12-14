@@ -30,6 +30,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashScreenTheme"
             android:screenOrientation="portrait">

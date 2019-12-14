@@ -11,29 +11,35 @@
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
 
+    <activity
+        android:id="@+id/nav_login"
+        android:name="com.instafinancials.vendoralpha.ui.login.LoginActivity"
+        android:label="@string/menu_login"
+        tools:layout="@layout/activity_login" />
+
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.instafinancials.vendoralpha.ui.gallery.GalleryFragment"
+        android:name="com.instafinancials.vendoralpha.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_history"
-        android:name="com.instafinancials.vendoralpha.ui.slideshow.SlideshowFragment"
+        android:name="com.instafinancials.vendoralpha.ui.searchhistory.SearchHistoryFragment"
         android:label="@string/menu_history"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_search_history" />
 
     <fragment
         android:id="@+id/nav_bookmark"
-        android:name="com.instafinancials.vendoralpha.ui.tools.ToolsFragment"
+        android:name="com.instafinancials.vendoralpha.ui.bookmark.BookmarkFragment"
         android:label="@string/menu_bookmark"
-        tools:layout="@layout/fragment_tools" />
+        tools:layout="@layout/fragment_bookmark" />
 
     <fragment
         android:id="@+id/nav_orders"
-        android:name="com.instafinancials.vendoralpha.ui.share.ShareFragment"
+        android:name="com.instafinancials.vendoralpha.ui.orders.OrderFragment"
         android:label="@string/menu_orders"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_orders" />
 
     <fragment
         android:id="@+id/nav_refer"
@@ -42,9 +48,9 @@
         tools:layout="@layout/fragment_send" />
     <fragment
         android:id="@+id/nav_support"
-        android:name="com.instafinancials.vendoralpha.ui.share.ShareFragment"
+        android:name="com.instafinancials.vendoralpha.ui.support.SupportFragment"
         android:label="@string/menu_support"
-        tools:layout="@layout/fragment_share" />
+        tools:layout="@layout/fragment_support" />
 
     <fragment
         android:id="@+id/nav_feedback"
@@ -59,7 +65,7 @@
 
     <fragment
         android:id="@+id/nav_tou"
-        android:name="com.instafinancials.vendoralpha.ui.send.SendFragment"
+        android:name="com.instafinancials.vendoralpha.ui.tou.TermsOfUseFragment"
         android:label="@string/menu_tou"
-        tools:layout="@layout/fragment_send" />
+        tools:layout="@layout/fragment_terms_of_use" />
 </navigation>

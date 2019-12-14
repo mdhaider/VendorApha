@@ -81,5 +81,6 @@ dependencies {
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+    implementation 'com.afollestad.material-dialogs:core:3.1.1'
 
 }

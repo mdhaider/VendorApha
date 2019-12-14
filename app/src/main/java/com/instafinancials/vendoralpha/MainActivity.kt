@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_profile, R.id.nav_history,
+                R.id.nav_home,R.id.nav_login, R.id.nav_profile, R.id.nav_history,
                 R.id.nav_bookmark, R.id.nav_orders, R.id.nav_refer,
                 R.id.nav_support, R.id.nav_feedback,R.id.nav_freecredits,
                 R.id.nav_tou
