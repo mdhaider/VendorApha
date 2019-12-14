@@ -28,9 +28,9 @@ class OrdersViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(ordersData: OrdersData) {
         mCompanyName?.text = ordersData.companyName
         mOrderedReport?.text = ordersData.orderedReport
-        mOrderedDate?.text = TimeAgo.getTimeAgo(ordersData.orderedDate!!)
+        mOrderedDate?.text = TimeAgo.convertLongToTime(ordersData.orderedDate!!)
         mOrderStatus?.text = ordersData.orderedStatus
-        mDeliveredDate?.text = TimeAgo.getTimeAgo(ordersData.deliveredDate!!)
+        mDeliveredDate?.text = TimeAgo.convertLongToTime(ordersData.deliveredDate!!)
 
     }
 }

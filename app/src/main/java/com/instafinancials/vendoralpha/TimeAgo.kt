@@ -1,5 +1,8 @@
 package com.instafinancials.vendoralpha
 
+import java.text.SimpleDateFormat
+import java.util.*
+
 object TimeAgo {
     private val SECOND_MILLIS = 1000
     private val MINUTE_MILLIS = 60 * SECOND_MILLIS
@@ -34,5 +37,11 @@ object TimeAgo {
         } else {
             (diff / DAY_MILLIS).toString() + " days ago"
         }
+    }
+
+    fun convertLongToTime(time: Long): String {
+        val date = Date(time)
+        val format = SimpleDateFormat("dd-MMM-yyyy hh:mm aa", Locale.getDefault())
+        return format.format(date)
     }
 }

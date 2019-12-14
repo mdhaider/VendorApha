@@ -6,51 +6,40 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_login"
-            android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_login" />
         <item
             android:id="@+id/nav_profile"
-            android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_profile" />
         <item
             android:id="@+id/nav_history"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_history" />
         <item
             android:id="@+id/nav_bookmark"
-            android:icon="@drawable/ic_menu_manage"
             android:title="@string/menu_bookmark" />
         <item
             android:id="@+id/nav_orders"
-            android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_orders" />
     </group>
 
-    <item android:title="Others">
+    <item android:title="Other">
         <menu>
             <item
                 android:id="@+id/nav_refer"
-                android:icon="@drawable/ic_menu_share"
                 android:title="@string/menu_refer" />
             <item
                 android:id="@+id/nav_support"
-                android:icon="@drawable/ic_menu_send"
                 android:title="@string/menu_support" />
             <item
                 android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_menu_share"
                 android:title="@string/menu_feedback" />
             <item
                 android:id="@+id/nav_freecredits"
-                android:icon="@drawable/ic_menu_send"
                 android:title="@string/menu_free" />
             <item
                 android:id="@+id/nav_tou"
-                android:icon="@drawable/ic_menu_send"
                 android:title="@string/menu_tou" />
         </menu>
     </item>

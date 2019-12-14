@@ -21,7 +21,7 @@ class BookmarkViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(historyData: BookmarkData) {
         mCinNumber?.text = historyData.cin
-        mDate?.text = TimeAgo.getTimeAgo(historyData.date!!)
+        mDate?.text = TimeAgo.convertLongToTime(historyData.date!!)
 
     }
 }

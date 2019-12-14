@@ -21,7 +21,7 @@ class SearchHistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(historyData: SearchHistoryData) {
         mCinNumber?.text = historyData.cin
-        mDate?.text = TimeAgo.getTimeAgo(historyData.date!!)
+        mDate?.text = TimeAgo.convertLongToTime(historyData.date!!)
 
     }
 }
