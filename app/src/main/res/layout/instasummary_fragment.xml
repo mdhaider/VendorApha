@@ -3,7 +3,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context="com.instafinancials.vendoralpha.InstaSummaryFragment">
 
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="8dp"
         android:scrollbars="none">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -25,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
                 android:padding="8dp">
 
                 <TextView
@@ -34,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Last Update Date:"
+                    android:text="Updated on:"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -43,10 +43,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvLast"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Mar, 2010"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Mar 6, 2010"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
             </RelativeLayout>
 
             <TableLayout
@@ -55,6 +61,7 @@
                 android:layout_marginTop="12dp"
                 android:orientation="vertical"
                 android:padding="8dp"
+                android:background="@color/grey_200"
                 android:stretchColumns="*">
 
                 <TableRow
@@ -316,7 +323,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvPan"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="GAYGG908"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -344,7 +351,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvCin"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="JFD9488BFBBRNBFNF"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -373,7 +380,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvEmail"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="syst@gsgs.com"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -401,7 +408,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvAdd"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="Banaglore, India"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -430,7 +437,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvAvg"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="1345"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -457,8 +464,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvRat"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="BBB+"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="BBB+ (2018)"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -467,53 +474,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="16dp">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Bookmark"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Share"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_button"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Buy Report"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </RelativeLayout>

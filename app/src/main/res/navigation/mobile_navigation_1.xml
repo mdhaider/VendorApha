@@ -10,10 +10,28 @@
         android:name="com.instafinancials.vendoralpha.ui.home.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
+    <action
+        android:id="@+id/action_home_to_profile_home"
+        app:destination="@+id/nav_profile_home"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="false" />
+    <action
+        android:id="@+id/action_home_to_scan"
+        app:destination="@+id/nav_cam"
+        app:enterAnim="@anim/nav_default_enter_anim"
+        app:exitAnim="@anim/nav_default_exit_anim"
+        app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+        app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        app:popUpTo="@id/navigation_home"
+        app:popUpToInclusive="false" />
 
     <activity
         android:id="@+id/nav_login"
-        android:name="com.instafinancials.vendoralpha.ui.login.LoginActivity"
+        android:name="com.instafinancials.vendoralpha.ui.login.LoginActivity1"
         android:label="@string/menu_login"
         tools:layout="@layout/activity_login" />
 
@@ -68,4 +86,16 @@
         android:name="com.instafinancials.vendoralpha.ui.tou.TermsOfUseFragment"
         android:label="@string/menu_tou"
         tools:layout="@layout/fragment_terms_of_use" />
+
+    <fragment
+        android:id="@+id/nav_profile_home"
+        android:name="com.instafinancials.vendoralpha.ui.profile.ProfileHomeFragment"
+        tools:layout="@layout/profile_home_fragment" />
+
+    <activity
+        android:id="@+id/nav_cam"
+        android:name="com.instafinancials.vendoralpha.ui.CameraActivity"
+        tools:layout="@layout/activity_camera" />
+
+
 </navigation>

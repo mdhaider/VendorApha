@@ -29,39 +29,75 @@
             android:fontFamily="@font/roboto_medium"
             android:text="Sign In"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilNumber"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <!-- INPUT -->
+            <com.instafinancials.vendoralpha.ui.customfonts.EditText_Poppins_Regular
+                android:id="@+id/mNumber"
                 android:layout_width="match_parent"
-                android:layout_margin="8dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/username_icon"
+                android:background="@android:color/transparent"
+                android:hint="Phone Number"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="12sp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Email/Mobile Number"
-                    android:inputType="phone"
-                    android:maxLength="10"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <!-- ICON -->
+            <ImageView
+                android:id="@+id/username_icon"
+                android:layout_width="14.7dp"
+                android:layout_height="10.3dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/email" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilPassword"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_margin="8dp"
-            android:layout_height="wrap_content">
+        </RelativeLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/blue_border_rounded_cornwe">
+
+            <!-- INPUT -->
+            <com.instafinancials.vendoralpha.ui.customfonts.EditText_Poppins_Regular
                 android:id="@+id/mPass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password/OTP"
+                android:layout_toRightOf="@+id/icon"
+                android:background="@android:color/transparent"
+                android:hint="Password"
                 android:inputType="textPassword"
                 android:maxLength="10"
-                android:singleLine="true" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:textCursorDrawable="@drawable/cursor_color"
+                android:textSize="12sp" />
+
+            <!-- ICON -->
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="14.7dp"
+                android:layout_height="10.3dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/password" />
+
+        </RelativeLayout>
+
 
 
         <androidx.appcompat.widget.AppCompatButton

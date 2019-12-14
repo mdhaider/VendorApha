@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/white"
     tools:context="com.instafinancials.vendoralpha.InstaBasicFragment">
 
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="16dp"
         android:scrollbars="none">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
                 android:padding="8dp">
 
                 <TextView
@@ -35,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Last Update Date:"
+                    android:text="Updated on:"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -44,51 +43,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvLast"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Mar, 2010"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Mar 6, 2010"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvTradeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Trade Name:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvTradeName"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="CBL Data Science"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/circle_1" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
@@ -119,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvComType"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="Private"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -147,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvInd"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="XYZ"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -176,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvFin"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="23-09-2019"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -204,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvPaid"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="2000M"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -232,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvEligible"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="Karnataka"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -259,7 +217,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvWeb"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="www.insta.com"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -287,7 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvRev"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="100-400M"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
@@ -345,52 +303,5 @@
 
     </ScrollView>
 
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="16dp">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Bookmark"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:background="@drawable/rounded_button"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Share"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Buy Report"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </RelativeLayout>

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="16dp"
         android:scrollbars="none">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -26,52 +26,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey_200"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvTradeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Trade Name:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvTradeName"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="CBL Data Science"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <View
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/circle_1" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/tvLegalName"
+                    android:id="@+id/tvLast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Legal Name:"
+                    android:text="Updated on:"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -79,11 +43,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvLegalName"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="CBL Data"
+                    android:layout_toEndOf="@+id/tvLast"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="Mar 6, 2010"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -109,67 +79,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvLoc"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="Bangalore"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvTxPayer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Tax Payer Type:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvTxPayer"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Government"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvInst"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Institution:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvInstname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvInst"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="ISK"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -193,9 +107,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvEligible"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="No"
-                    android:textColor="@color/black"
+                    android:textColor="@color/red"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -221,9 +135,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvFilStatus"
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="Done"
-                    android:textColor="@color/black"
+                    android:textColor="@color/green"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -231,40 +145,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:padding="8dp">
+                android:layout_marginStart="8dp">
 
                 <TextView
-                    android:id="@+id/tvLast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Last Update Date:"
+                    android:text="GST Filing Status:"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvLast"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Mar, 2010"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
-            </RelativeLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="wrap_content"
@@ -299,7 +190,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
+                        android:fontFamily="@font/roboto_medium"
                         android:gravity="center"
                         android:text="GSTR-1"
                         android:textColor="@color/black"
@@ -309,7 +200,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
+                        android:fontFamily="@font/roboto_medium"
                         android:gravity="center"
                         android:text="GSTR 3B"
                         android:textColor="@color/black"
@@ -321,14 +212,15 @@
                 <TableRow
                     android:id="@+id/thirdRow"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Nov"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Nov, 2019"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -350,14 +242,15 @@
                 <TableRow
                     android:id="@+id/fourthRow"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Oct"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Oct, 2019"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -379,14 +272,15 @@
                 <TableRow
                     android:id="@+id/secRow"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Dec"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Dec, 2020"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
@@ -409,51 +303,4 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:padding="16dp">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Bookmark"
-            android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:background="@drawable/rounded_button"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Share"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:elevation="0dp"
-            android:fontFamily="@font/roboto_condensed_regular"
-            android:text="Track"
-            android:textAllCaps="false"
-            android:background="@drawable/rounded_button"
-            android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 </RelativeLayout>
