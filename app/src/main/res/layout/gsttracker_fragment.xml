@@ -28,28 +28,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:padding="8dp">
+                <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+                    <TextView
+                        android:id="@+id/tvLast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Updated on:"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/tvLast"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Updated on:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvLast"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Mar 6, 2010"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/tvLast"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Mar 6, 2010"
+                        android:textColor="@color/black"
+                        android:gravity="end"
+                        android:textSize="14sp" />
+                </LinearLayout>
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/refresh_gst_tracker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -81,6 +86,8 @@
                     android:layout_toEndOf="@+id/tvLoc"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Bangalore"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -109,6 +116,8 @@
                     android:layout_toEndOf="@+id/tvEligible"
                     android:fontFamily="@font/roboto_medium"
                     android:text="No"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/red"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -137,6 +146,8 @@
                     android:layout_toEndOf="@+id/tvFilStatus"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Done"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/green"
                     android:textSize="14sp" />
             </RelativeLayout>

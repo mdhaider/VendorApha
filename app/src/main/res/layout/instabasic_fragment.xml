@@ -46,6 +46,8 @@
                     android:fontFamily="@font/roboto_medium"
                     android:text="Mar 6, 2010"
                     android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textSize="14sp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -79,6 +81,8 @@
                     android:layout_toEndOf="@+id/tvComType"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Private"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -107,6 +111,8 @@
                     android:layout_toEndOf="@+id/tvInd"
                     android:fontFamily="@font/roboto_medium"
                     android:text="XYZ"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
 
@@ -136,6 +142,8 @@
                     android:layout_toEndOf="@+id/tvFin"
                     android:fontFamily="@font/roboto_medium"
                     android:text="23-09-2019"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -164,6 +172,8 @@
                     android:layout_toEndOf="@+id/tvPaid"
                     android:fontFamily="@font/roboto_medium"
                     android:text="2000M"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -192,6 +202,8 @@
                     android:layout_toEndOf="@+id/tvEligible"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Karnataka"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -219,6 +231,8 @@
                     android:layout_toEndOf="@+id/tvWeb"
                     android:fontFamily="@font/roboto_medium"
                     android:text="www.insta.com"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -247,6 +261,8 @@
                     android:layout_toEndOf="@+id/tvRev"
                     android:fontFamily="@font/roboto_medium"
                     android:text="100-400M"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
