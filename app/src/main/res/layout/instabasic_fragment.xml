@@ -51,12 +51,15 @@
                         android:gravity="end"
                         android:textSize="12sp" />
                 </LinearLayout>
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/refresh_gst_tracker"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/refresh_basic_tracker"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
+                    android:elevation="4dp"
+                    android:background="@drawable/rounded_button_boarderless"
+                    android:src="@drawable/ic_refresh_black_24dp"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
@@ -84,7 +87,7 @@
                     android:text="Private"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -114,7 +117,7 @@
                     android:text="XYZ"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -145,7 +148,7 @@
                     android:text="23-09-2019"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -175,7 +178,7 @@
                     android:text="2000M"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -205,7 +208,7 @@
                     android:text="Karnataka"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -231,7 +234,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvWeb"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="www.insta.com"
+                    android:textStyle="bold"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
                     android:textColor="@color/black"
@@ -264,7 +267,7 @@
                     android:text="100-400M"
                     android:layout_alignParentEnd="true"
                     android:gravity="end"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 

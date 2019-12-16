@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:text="CBL DATA SCIENCE PRIVATE LIMITED"
-                android:textColor="@color/colorTextPrimary"
+                android:textColor="@color/colorAccent"
                 android:textSize="20sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -177,9 +177,8 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
+                android:fontFamily="@font/roboto_light"
                 android:text="Bookmark"
-                android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:textSize="12sp" />
 
@@ -199,9 +198,8 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
+                android:fontFamily="@font/roboto_light"
                 android:text="Share"
-                android:textColor="@color/black"
                 android:layout_gravity="center"
                 android:textSize="12sp" />
 
@@ -221,10 +219,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_thin"
+                android:fontFamily="@font/roboto_light"
                 android:text="Advanced"
                 android:layout_gravity="center"
-                android:textColor="@color/black"
                 android:textSize="12sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
