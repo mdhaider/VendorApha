@@ -84,8 +84,8 @@ class HomeFragment : Fragment() {
                 activity!!,
                 childFragmentManager)
         adapter.addFragment(GstTrackerFragment(), "GST Tracker")
-        adapter.addFragment(InstaBasicFragment(), "InstaBasic")
-        adapter.addFragment(InstaSummaryFragment(), "InstaSummary")
+        adapter.addFragment(InstaBasicFragment(), "CompanyBasic")
+        adapter.addFragment(InstaSummaryFragment(), "CompanyFin")
         viewPager.adapter = adapter
         tabs.setupWithViewPager(viewPager)
         searchView.setText(AppPreferences.gstNum)

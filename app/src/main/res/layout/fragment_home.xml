@@ -29,7 +29,7 @@
                 android:layout_weight="5"
                 android:background="@drawable/rounded_et"
                 android:drawableStart="@drawable/ic_search_black_24dp"
-                android:drawableEnd="@android:drawable/ic_menu_camera"
+                android:drawableEnd="@drawable/ic_camera_20"
                 android:fontFamily="@font/roboto_condensed_regular"
                 android:hint="@string/enter_or_scan_gstin"
                 android:gravity="center"
@@ -45,7 +45,7 @@
                 android:layout_marginEnd="8dp"
                 android:visibility="gone"
                 android:layout_weight="0.5"
-                app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
+                app:srcCompat="@drawable/ic_camera_20" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profile"
@@ -178,7 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_bookmark_black_24dp"/>
+                app:srcCompat="@drawable/ic_bookmark_2"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -199,7 +199,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_share_black_24dp"/>
+                app:srcCompat="@drawable/ic_share"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
@@ -220,7 +220,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_local_mall_black_24dp"/>
+                app:srcCompat="@drawable/ic_advance"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"

@@ -20,7 +20,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".ui.camera.CameraActivity"
+            android:name=".ui.CameraActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.instafinancials.vendoralpha.apicall.ui.MainActivity1"
