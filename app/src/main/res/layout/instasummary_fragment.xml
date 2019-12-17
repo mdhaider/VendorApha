@@ -25,40 +25,46 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvLast"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Updated on:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:layout_centerInParent="true">
+                    <TextView
+                        android:id="@+id/tvLast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Updated on:"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvLast"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Mar 6, 2010"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/tvLast"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Mar 6, 2010"
+                        android:textColor="@color/black"
+                        android:gravity="end"
+                        android:textSize="12sp" />
+                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/refresh_summary_tracker"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
+                    android:elevation="4dp"
+                    android:background="@drawable/rounded_button_boarderless"
+                    android:src="@drawable/ic_refresh_black_24dp"
+                     />
             </RelativeLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:orientation="vertical"
                 android:padding="8dp"
                 android:background="@color/grey_200"
@@ -324,8 +330,10 @@
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvPan"
                     android:fontFamily="@font/roboto_medium"
+                    android:textStyle="bold"
                     android:text="GAYGG908"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -353,7 +361,9 @@
                     android:layout_toEndOf="@+id/tvCin"
                     android:fontFamily="@font/roboto_medium"
                     android:text="JFD9488BFBBRNBFNF"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -382,7 +392,9 @@
                     android:layout_toEndOf="@+id/tvEmail"
                     android:fontFamily="@font/roboto_medium"
                     android:text="syst@gsgs.com"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -410,7 +422,9 @@
                     android:layout_toEndOf="@+id/tvAdd"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Banaglore, India"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -439,7 +453,9 @@
                     android:layout_toEndOf="@+id/tvAvg"
                     android:fontFamily="@font/roboto_medium"
                     android:text="1345"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -466,7 +482,9 @@
                     android:layout_toEndOf="@+id/tvRat"
                     android:fontFamily="@font/roboto_medium"
                     android:text="BBB+ (2018)"
-                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textSize="14sp" />
             </RelativeLayout>
 

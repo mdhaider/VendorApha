@@ -25,40 +25,46 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvLast"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Updated on:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:layout_centerInParent="true">
+                    <TextView
+                        android:id="@+id/tvLast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Updated on:"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvLast"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Mar 6, 2010"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_toEndOf="@+id/tvLast"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Mar 6, 2010"
+                        android:textColor="@color/black"
+                        android:gravity="end"
+                        android:textSize="12sp" />
+                </LinearLayout>
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/refresh_basic_tracker"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_refresh_black_24dp" />
+                    android:elevation="4dp"
+                    android:background="@drawable/rounded_button_boarderless"
+                    android:src="@drawable/ic_refresh_black_24dp"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:background="@color/grey_200"
                 android:padding="8dp">
 
@@ -79,7 +85,9 @@
                     android:layout_toEndOf="@+id/tvComType"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Private"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -107,7 +115,9 @@
                     android:layout_toEndOf="@+id/tvInd"
                     android:fontFamily="@font/roboto_medium"
                     android:text="XYZ"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
 
             </RelativeLayout>
@@ -136,7 +146,9 @@
                     android:layout_toEndOf="@+id/tvFin"
                     android:fontFamily="@font/roboto_medium"
                     android:text="23-09-2019"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -164,7 +176,9 @@
                     android:layout_toEndOf="@+id/tvPaid"
                     android:fontFamily="@font/roboto_medium"
                     android:text="2000M"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -192,7 +206,9 @@
                     android:layout_toEndOf="@+id/tvEligible"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Karnataka"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
@@ -218,7 +234,9 @@
                     android:layout_marginStart="8dp"
                     android:layout_toEndOf="@+id/tvWeb"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="www.insta.com"
+                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
                     android:textColor="@color/black"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -247,7 +265,9 @@
                     android:layout_toEndOf="@+id/tvRev"
                     android:fontFamily="@font/roboto_medium"
                     android:text="100-400M"
-                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="end"
+                    android:textStyle="bold"
                     android:textSize="14sp" />
             </RelativeLayout>
 
