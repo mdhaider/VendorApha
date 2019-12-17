@@ -23,6 +23,10 @@
     <string name="menu_feedback">Feedback</string>
     <string name="menu_free">Free Credits</string>
     <string name="menu_tou">Terms of use</string>
+    <string name="sign_in">Enter phone number to continue</string>
+    <string name="phone_number_hint">Phone Number</string>
+    <string name="password_hint">OTP</string>
+    <string name="sign_in_text">Sign In</string>
     <string name="point_camera_at_gstin_to_scan">point camera at GSTIN to scan</string>
     <string name="enter_or_scan_gstin">Enter or Scan GSTIN</string>
 </resources>
