@@ -8,6 +8,7 @@
         android:id="@+id/searchParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/bluish_grey_300"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -30,7 +31,7 @@
                 android:drawableStart="@drawable/ic_search_black_24dp"
                 android:drawableEnd="@android:drawable/ic_menu_camera"
                 android:fontFamily="@font/roboto_condensed_regular"
-                android:hint="Enter or Scan GSTIN"
+                android:hint="@string/enter_or_scan_gstin"
                 android:gravity="center"
                 android:inputType="textCapCharacters"
                 android:padding="10dip"
@@ -61,10 +62,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="4dp">
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginVertical="28dp">
 
+            <TextView
+                android:id="@+id/tvComName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="CBL DATA SCIENCE PRIVATE LIMITED"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin"/>
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,46 +85,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rect_box"
-                    android:fontFamily="@font/roboto_light"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
+                    android:backgroundTint="@color/green_20"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="4dp"
                     android:text="Active"
                     android:textColor="@color/green"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="12dp"
                     android:background="@drawable/rect_box"
-                    android:fontFamily="@font/roboto_light"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
+                    android:backgroundTint="@color/gray_fainted"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="4dp"
                     android:text="Consti"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:textColor="@color/colorTextPrimary"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="12dp"
                     android:background="@drawable/rect_box"
-                    android:fontFamily="@font/roboto_light"
-                    android:paddingStart="4dp"
-                    android:paddingEnd="4dp"
-                    android:text="TPT"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
+                    android:backgroundTint="@color/red_20"
+                    android:fontFamily="@font/roboto_medium"
+                    android:paddingHorizontal="14dp"
+                    android:paddingVertical="4dp"
+                    android:text="Error"
+                    android:textColor="@color/red"
+                    android:textSize="14sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
-            <TextView
-                android:id="@+id/tvComName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="CBL DATA SCIENCE PRIVATE LIMITED"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -133,10 +138,11 @@
         app:tabIndicatorHeight="0dp"
         app:tabRippleColor="@null"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="@color/colorPrimary"
+        app:tabTextColor="@color/grey_500"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:elevation="2dp"
         app:tabTextAppearance="@style/TabTextAppearance"
         />
 

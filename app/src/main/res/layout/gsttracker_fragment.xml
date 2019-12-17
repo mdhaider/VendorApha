@@ -26,20 +26,20 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
                 <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true">
+                android:layout_alignParentLeft="true">
+
                     <TextView
                         android:id="@+id/tvLast"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
-                        android:fontFamily="@font/roboto_light"
+                        android:fontFamily="@font/roboto_medium"
                         android:text="Updated on:"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -48,9 +48,9 @@
                         android:layout_toEndOf="@+id/tvLast"
                         android:fontFamily="@font/roboto_medium"
                         android:text="Mar 6, 2010"
-                        android:textColor="@color/black"
+                        android:textStyle="bold"
                         android:gravity="end"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
                 <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/refresh_gst_tracker"
@@ -62,256 +62,271 @@
                     android:src="@drawable/ic_refresh_black_24dp"
                     />
             </RelativeLayout>
-
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey_200"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvLoc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Location:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/tvLocName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvLoc"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Bangalore"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvEligible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Eligible to collect:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvEligible"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="No"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textColor="@color/red"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvFilStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="GST Filing Status:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvFilStatus"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Done"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textColor="@color/green"
-                    android:textSize="14sp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="GST Filing Status:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_add_black_24dp" />
-            </RelativeLayout>
-
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@color/grey_200"
-                android:orientation="vertical"
-                android:padding="8dp"
-                android:stretchColumns="*">
-
-                <TableRow
-                    android:id="@+id/firstRow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto"
-                        android:textColor="@color/grey_500"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="GSTR-1"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:text="GSTR 3B"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-
-                </TableRow>
-
-                <TableRow
-                    android:id="@+id/thirdRow"
+                android:layout_marginVertical="8dp"
+                app:cardUseCompatPadding="true"
+                app:elevation="1dp"
+                app:cardElevation="1dp"
+                app:cardCornerRadius="1dp">
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="Nov, 2019"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
 
-                    <ImageView
-                        android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tvLoc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Location:"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvLocName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvLoc"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Bangalore"
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="end"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_clear_black_24dp" />
+                        android:padding="8dp">
 
-                    <ImageView
-                        android:layout_width="0dp"
+                        <TextView
+                            android:id="@+id/tvEligible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Eligible to collect:"
+                            android:textSize="14sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvEligible"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="No"
+                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="end"
+                            android:textColor="@color/red"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_done_black_24dp" />
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
 
+                        <TextView
+                            android:id="@+id/tvFilStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="GST Filing Status:"
+                            android:textSize="14sp" />
 
-                </TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvFilStatus"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Done"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="end"
+                            android:textStyle="bold"
+                            android:textColor="@color/green"
+                            android:textSize="14sp" />
+                    </RelativeLayout>
 
-                <TableRow
-                    android:id="@+id/fourthRow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="Oct, 2019"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp">
 
-                    <ImageView
-                        android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="GST Filing Status:"
+
+                            android:textSize="14sp" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            app:srcCompat="@drawable/ic_add_black_24dp" />
+                    </RelativeLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true"
+                app:elevation="4dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="4dp">
+                    <TableLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_done_black_24dp" />
+                        android:background="@color/grey_200"
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:stretchColumns="*">
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_clear_black_24dp" />
+                        <TableRow
+                            android:id="@+id/firstRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto"
+                                android:textColor="@color/grey_500"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:text="GSTR-1"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                android:text="GSTR 3B"
+                                android:textSize="14sp" />
 
 
-                </TableRow>
+                        </TableRow>
 
-                <TableRow
-                    android:id="@+id/secRow"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp">
+                        <TableRow
+                            android:id="@+id/thirdRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="Dec, 2020"
-                        android:textColor="@color/black"
-                        android:textSize="14sp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Nov, 2019"
+                                android:textStyle="bold"
+                                android:textSize="14sp" />
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_done_black_24dp" />
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_clear_black_24dp" />
 
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_done_black_24dp" />
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_done_black_24dp" />
 
 
-                </TableRow>
-            </TableLayout>
+                        </TableRow>
 
+                        <TableRow
+                            android:id="@+id/fourthRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Oct, 2019"
+                                android:textStyle="bold"
+                                android:textSize="14sp" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_done_black_24dp" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_clear_black_24dp" />
+
+
+                        </TableRow>
+
+                        <TableRow
+                            android:id="@+id/secRow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="8dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="Dec, 2020"
+                                android:textStyle="bold"
+                                android:textSize="14sp" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_done_black_24dp" />
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:src="@drawable/ic_done_black_24dp" />
+
+
+                        </TableRow>
+                    </TableLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>

@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#01579b</color>
+<!--    <color name="colorPrimary">#01579b</color>-->
+    <color name="colorPrimary">@color/blue</color>
     <color name="colorPrimaryDark">#002f6c</color>
-    <color name="colorAccent">#455a64</color>
+    <color name="colorAccent">@color/grey</color>
 
     <color name="white">#FFF</color>
     <color name="colorTextPrimary">#1c313a</color>
     <color name="colorTextSecondary">@android:color/tertiary_text_light</color>
+    <color name="red_fainted">#f0c6d1</color>
+    <color name="green_fainted">#bee5cc</color>
+    <color name="gray_fainted">#c9dadb</color>
+    <color name="bluish_grey_300">#edf1f5</color>
     <color name="grey_300">#E0E0E0</color>
     <color name="grey_200">#F7F7FA</color>
     <color name="grey_500">#9E9E9E</color>
-    <color name="red">#FF0000</color>
+<!--    <color name="red">#FF0000</color>-->
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorLightGray">#f1f1f1</color>
     <color name="black">#000000</color>
     <color name="back">#00ACC1</color>
     <color name="tra">#00FFFFFF</color>
-    <color name="blue">#7584DF</color>
     <color name="colorBackground">#E3DFEA</color>
-    <color name="green">#57A80A</color>
+    <color name="blue">#114fa2</color>
+    <color name="yellow">#ffd203</color>
+    <color name="green">#1fb14c</color>
+    <color name="green_20">#331fb14c</color>
+    <color name="orange">#ed8231</color>
+    <color name="red">#ee312b</color>
+    <color name="red_20">#33ee312b</color>
+    <color name="grey">#455a64</color>
 
 </resources>

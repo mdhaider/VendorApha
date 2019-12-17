@@ -94,7 +94,7 @@
 
     <activity
         android:id="@+id/nav_cam"
-        android:name="com.instafinancials.vendoralpha.ui.CameraActivity"
+        android:name="com.instafinancials.vendoralpha.ui.camera.CameraActivity"
         tools:layout="@layout/activity_camera" />
 
 
