@@ -20,4 +20,9 @@
     <color name="colorBackground">#E3DFEA</color>
     <color name="green">#57A80A</color>
 
+    <color name="blue_new">#045372</color>
+    <color name="green_new">#1fb14c</color>
+    <color name="red_new">#ee3126</color>
+
+
 </resources>
