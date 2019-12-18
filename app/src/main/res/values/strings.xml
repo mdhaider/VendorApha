@@ -29,4 +29,19 @@
     <string name="sign_in_text">Sign In</string>
     <string name="point_camera_at_gstin_to_scan">point camera at GSTIN to scan</string>
     <string name="enter_or_scan_gstin">Enter or Scan GSTIN</string>
+    <string name="gst_filing_details">GST Filing Details</string>
+    <string name="eligible_to_collect">Eligible to collect:</string>
+    <string name="lat_fin">Latest Financials:</string>
+    <string name="name">Name</string>
+    <string name="location">Location:</string>
+    <string name="cin">CIN:</string>
+    <string name="dirlist">Director &amp; Signatory List</string>
+    <string name="pot_rel_party">Potential Related Party</string>
+    <string name="updated_on">Updated on:</string>
+    <string name="gstr_1">GSTR-1</string>
+    <string name="gstr_3b">GSTR 3B</string>
+    <string name="paid_up_capital">Paid up capital:</string>
+    <string name="city_state">City(State):</string>
+    <string name="website">Website:</string>
+    <string name="revenue_range">Revenue Range:</string>
 </resources>

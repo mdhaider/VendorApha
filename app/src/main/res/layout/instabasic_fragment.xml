@@ -25,20 +25,21 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:layout_marginTop="@dimen/activity_horizontal_margin">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true">
+                    android:layout_alignParentLeft="true">
+
                     <TextView
                         android:id="@+id/tvLast"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_alignParentStart="true"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Updated on:"
-                        android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/updated_on"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -46,277 +47,474 @@
                         android:layout_marginStart="8dp"
                         android:layout_toEndOf="@+id/tvLast"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Mar 6, 2010"
-                        android:textColor="@color/black"
                         android:gravity="end"
-                        android:textSize="12sp" />
+                        android:text="Mar 6, 2010"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/refresh_basic_tracker"
+                    android:id="@+id/refresh_gst_tracker"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
-                    android:elevation="4dp"
                     android:background="@drawable/rounded_button_boarderless"
-                    android:src="@drawable/ic_refresh_black_24dp"
-                    />
+                    android:elevation="4dp"
+                    android:src="@drawable/ic_update" />
             </RelativeLayout>
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/grey_200"
-                android:padding="8dp">
+                android:layout_marginVertical="8dp"
+                app:cardCornerRadius="1dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                app:elevation="1dp">
 
-                <TextView
-                    android:id="@+id/tvComType"
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Company Type:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvComType"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Private"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
 
-            <RelativeLayout
+                        <TextView
+                            android:id="@+id/tvcIN"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/cin"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/TVCinName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvcIN"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:text="U127585940KOOI"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvlatFin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/lat_fin"
+                            android:textSize="14sp" />
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvlatFin"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:text="NA"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvFilStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/paid_up_capital"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvFilStatus"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:text="Rs. 25 Lacs"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvRevRang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/revenue_range"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvRevRang"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:text="Rs. 78 Lacs"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvState"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/city_state"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvState"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:text="Bangalore(Karnataka)"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:id="@+id/tvWeb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/website"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvWeb"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="end"
+                            android:text="www.instafin.com"
+                            android:textColor="@color/blue"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp">
+                android:layout_marginVertical="8dp"
+                app:cardCornerRadius="1dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                app:elevation="1dp">
 
-                <TextView
-                    android:id="@+id/tvInd"
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Industry:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvLocName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvInd"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="XYZ"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
 
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvDir"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/dirlist"
+                            android:textColor="@color/orange"
+                            android:textSize="14sp" />
 
-            <RelativeLayout
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:gravity="end"
+                            app:srcCompat="@drawable/ic_arrow_drop_up_black_24dp" />
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/name"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Designation(Tenure)"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Anil Kumar Singh"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="WTD(10 Yrs)"
+                            android:textSize="12sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Anil Kumar Singh"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="WTD(10 Yrs)"
+                            android:textSize="12sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
-                android:padding="8dp">
+                android:layout_marginVertical="8dp"
+                app:cardCornerRadius="1dp"
+                app:cardElevation="1dp"
+                app:cardUseCompatPadding="true"
+                app:elevation="1dp">
 
-                <TextView
-                    android:id="@+id/tvFin"
-                    android:layout_width="wrap_content"
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Latest Financial:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:orientation="vertical">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/grey_200"
+                        android:padding="8dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvFin"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="23-09-2019"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvPot"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/pot_rel_party"
+                            android:textColor="@color/blue_new"
+                            android:textSize="14sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:gravity="end"
+                            app:srcCompat="@drawable/ic_arrow_drop_down_black_24dp" />
 
-                <TextView
-                    android:id="@+id/tvPaid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Paid up capital:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tvInstname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvPaid"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="2000M"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
-                android:padding="8dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="@string/name"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tvEligible"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="City(State):"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Status"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
 
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Paid Up Capital"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvEligible"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="Karnataka"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="ABC Ltd"
+                            android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/tvWeb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Website"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Active"
+                            android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvWeb"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textStyle="bold"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Rs 5 lac"
+                            android:textSize="12sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
-                android:padding="8dp">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp">
 
-                <TextView
-                    android:id="@+id/tvRev"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Revenue Range:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="DEF Ltd"
+                            android:textSize="12sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/tvRev"
-                    android:fontFamily="@font/roboto_medium"
-                    android:text="100-400M"
-                    android:layout_alignParentEnd="true"
-                    android:gravity="end"
-                    android:textStyle="bold"
-                    android:textSize="14sp" />
-            </RelativeLayout>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Inactive"
+                            android:textSize="12sp" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:padding="8dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_toEndOf="@+id/tvName"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Rs 4 Lac"
+                            android:textSize="12sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <TextView
-                    android:id="@+id/tvDir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Director's Signaure"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/grey_200"
-                android:padding="8dp">
-
-                <TextView
-                    android:id="@+id/tvRel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="Potential Related Party:"
-                    android:textColor="@color/black"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_keyboard_arrow_down_black_24dp" />
-            </RelativeLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
