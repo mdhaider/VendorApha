@@ -3,29 +3,26 @@ package com.instafinancials.vendoralpha.ui.home
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
-import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.instafinancials.vendoralpha.*
 import com.instafinancials.vendoralpha.apicall.network.homeapi.instabasic.InstaBasicApi
 import com.instafinancials.vendoralpha.apicall.repositories.InstaRepo
+import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
 import timber.log.Timber
 
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel
-    private lateinit var viewPager: ViewPager
-    private lateinit var tabs: TabLayout
-    private lateinit var searchView: EditText
-    private lateinit var fab: ImageView
-    private lateinit var prof: ImageView
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,14 +31,9 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        viewPager = root.findViewById(R.id.view_pager)
-        tabs = root.findViewById(R.id.tabs)
-        searchView = root.findViewById(R.id.searchView)
-        fab = root.findViewById(R.id.fab)
-        prof = root.findViewById(R.id.profile)
+       binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container, false)
 
-        searchView.addTextChangedListener(object : TextWatcher {
+        binding.searchView.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
                 if (s!!.length >= 15) {
@@ -65,15 +57,15 @@ class HomeFragment : Fragment() {
             }
         })
 
-        fab.setOnClickListener {
-            goTocamera()
+        binding.fab.setOnClickListener {
+            goToCamera()
         }
 
-        prof.setOnClickListener {
+        binding.profile.setOnClickListener {
             goToProfile()
         }
 
-        return root
+        return binding.root
     }
 
 
@@ -82,20 +74,58 @@ class HomeFragment : Fragment() {
         val adapter =
             SectionsPagerAdapter(
                 activity!!,
-                childFragmentManager)
+                childFragmentManager
+            )
         adapter.addFragment(GstTrackerFragment(), "GST Tracker")
         adapter.addFragment(InstaBasicFragment(), "CompanyBasic")
         adapter.addFragment(InstaSummaryFragment(), "CompanyFin")
-        viewPager.adapter = adapter
-        tabs.setupWithViewPager(viewPager)
-        searchView.setText(AppPreferences.gstNum)
+        binding.viewPager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
+        binding.searchView.setText(AppPreferences.gstNum)
+        setItemAtBottom()
     }
 
     private fun goToProfile() {
         NavHostFragment.findNavController(this).navigate(R.id.action_home_to_profile_home)
     }
 
-    private fun goTocamera() {
+    private fun goToCamera() {
         NavHostFragment.findNavController(this).navigate(R.id.action_home_to_scan)
+    }
+
+    private fun setItemAtBottom() {
+        binding.tabs.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                val position = tab.position
+                Log.d("pos", position.toString())
+
+                when (position) {
+                    0 -> {
+                        binding.trackPar.visibility=View.VISIBLE
+                        binding.repPar.visibility=View.GONE
+                        binding.advPar.visibility=View.GONE
+
+                    }
+                    1 -> {
+                        binding.trackPar.visibility=View.GONE
+                        binding.repPar.visibility=View.VISIBLE
+                        binding.advPar.visibility=View.GONE
+
+                    }
+                    else -> {
+                        binding.trackPar.visibility=View.GONE
+                        binding.repPar.visibility=View.GONE
+                        binding.advPar.visibility=View.VISIBLE
+                    }
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab) {
+
+            }
+        })
     }
 }

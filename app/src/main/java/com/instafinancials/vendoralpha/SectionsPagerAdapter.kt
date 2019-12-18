@@ -1,6 +1,7 @@
 package com.instafinancials.vendoralpha
 
 import android.content.Context
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -21,8 +22,8 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
     override fun getItem(position: Int): Fragment {
-
-        return mFragmentList.get(position)
+        Log.d("frag1",mFragmentList[position].toString())
+        return mFragmentList[position]
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
