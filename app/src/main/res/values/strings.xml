@@ -44,4 +44,5 @@
     <string name="city_state">City(State):</string>
     <string name="website">Website:</string>
     <string name="revenue_range">Revenue Range:</string>
+    <string name="pan">PAN:</string>
 </resources>
