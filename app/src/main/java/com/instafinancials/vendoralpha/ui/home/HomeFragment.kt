@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
 
                 if (s!!.length >= 15) {
                     InstaBasicApi().fetchImageItems(
-                        "U72501KA2016PTC092387",
+                        "01AAACA6990Q1ZC",
                         object : InstaRepo.IResponseStateListener {
                             override fun onSuccess() {
                                 Timber.d("success")
@@ -89,6 +89,21 @@ class HomeFragment : Fragment() {
         binding.tabs.setupWithViewPager(binding.viewPager)
         binding.searchView.setText(AppPreferences.gstNum)
         setItemAtBottom()
+
+        getApi()
+    }
+
+    private fun getApi() {
+        InstaBasicApi().fetchImageItems(
+            "01AAACA6990Q1ZC",
+            object : InstaRepo.IResponseStateListener {
+                override fun onSuccess() {
+                    Timber.d("success")
+                }
+
+                override fun onError() {
+                }
+            })
     }
 
     private fun goToProfile() {
