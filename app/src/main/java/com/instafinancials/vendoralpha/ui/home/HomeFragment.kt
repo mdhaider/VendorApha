@@ -67,6 +67,9 @@ class HomeFragment : Fragment() {
 
         binding.bookmarkPar.setOnClickListener(OnItemClicked)
         binding.sharePar.setOnClickListener(OnItemClicked)
+        binding.trackPar.setOnClickListener(OnItemClicked)
+        binding.repPar.setOnClickListener(OnItemClicked)
+        binding.advPar.setOnClickListener(OnItemClicked)
 
         return binding.root
     }
@@ -135,13 +138,21 @@ class HomeFragment : Fragment() {
 
     private val OnItemClicked = View.OnClickListener {
 
-        when (it.id){
-             R.id.bookmarkPar -> {
+        when (it.id) {
+            R.id.bookmarkPar -> {
                 showToast("Item bookmarked")
             }
-
             R.id.sharePar -> {
                 showToast("Item Shared")
+            }
+            R.id.trackPar -> {
+                showToast("Item Tracked")
+            }
+            R.id.repPar -> {
+                showToast("Get fin report")
+            }
+            R.id.advPar -> {
+                showToast("Get advanced report")
             }
 
             else -> {
