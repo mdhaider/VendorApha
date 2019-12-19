@@ -12,7 +12,6 @@ import com.instafinancials.vendoralpha.databinding.InstabasicFragmentBinding
 
 class InstaBasicFragment : Fragment() {
     private lateinit var binding: InstabasicFragmentBinding
-
     private lateinit var viewModel: DetailViewModel
 
     override fun onCreateView(
@@ -34,7 +33,7 @@ class InstaBasicFragment : Fragment() {
 
         var expand1 = false
         var expand2 = false
-        binding.exp1.setOnClickListener {
+        binding.exp1Par.setOnClickListener {
             if (expand1) {
                 expand1 = false
                 binding.par1.visibility = View.VISIBLE
@@ -46,7 +45,7 @@ class InstaBasicFragment : Fragment() {
             }
         }
 
-        binding.exp2.setOnClickListener {
+        binding.exp2Par.setOnClickListener {
             if (expand2) {
                 expand2 = false
                 binding.par2.visibility = View.VISIBLE

@@ -8,8 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.afollestad.materialdialogs.DialogBehavior
+import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.ModalDialog
+import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
 import com.instafinancials.vendoralpha.databinding.GsttrackerFragmentBinding
 
@@ -40,8 +42,8 @@ class GstTrackerFragment : Fragment() {
             showCustomViewDialog()
         }
 
-        binding.details.setOnClickListener {
-            showCustomViewDialog1()
+        binding.detailsIcon.setOnClickListener {
+            showCustomViewDialogDetails(BottomSheet(LayoutMode.WRAP_CONTENT))
         }
     }
 
@@ -55,13 +57,10 @@ class GstTrackerFragment : Fragment() {
         }
     }
 
-    private fun showCustomViewDialog1(dialogBehavior: DialogBehavior = ModalDialog) {
+    private fun showCustomViewDialogDetails(dialogBehavior: DialogBehavior = ModalDialog) {
         MaterialDialog(activity!!, dialogBehavior).show {
-            title(R.string.filing_details)
+            title(R.string.gst_filing_details)
             customView(R.layout.custom_view_2, scrollable = true, horizontalPadding = true)
-            positiveButton(R.string.ok) { dialog ->
-                dialog.cancel()
-            }
         }
     }
 }

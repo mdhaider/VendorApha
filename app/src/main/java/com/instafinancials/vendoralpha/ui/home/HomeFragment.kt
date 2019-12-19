@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
     ): View? {
         homeViewModel =
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
-       binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         binding.searchView.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -64,6 +64,9 @@ class HomeFragment : Fragment() {
         binding.profile.setOnClickListener {
             goToProfile()
         }
+
+        binding.bookmarkPar.setOnClickListener(OnItemClicked)
+        binding.sharePar.setOnClickListener(OnItemClicked)
 
         return binding.root
     }
@@ -101,21 +104,21 @@ class HomeFragment : Fragment() {
 
                 when (position) {
                     0 -> {
-                        binding.trackPar.visibility=View.VISIBLE
-                        binding.repPar.visibility=View.GONE
-                        binding.advPar.visibility=View.GONE
+                        binding.trackPar.visibility = View.VISIBLE
+                        binding.repPar.visibility = View.GONE
+                        binding.advPar.visibility = View.GONE
 
                     }
                     1 -> {
-                        binding.trackPar.visibility=View.GONE
-                        binding.repPar.visibility=View.VISIBLE
-                        binding.advPar.visibility=View.GONE
+                        binding.trackPar.visibility = View.GONE
+                        binding.repPar.visibility = View.VISIBLE
+                        binding.advPar.visibility = View.GONE
 
                     }
                     else -> {
-                        binding.trackPar.visibility=View.GONE
-                        binding.repPar.visibility=View.GONE
-                        binding.advPar.visibility=View.VISIBLE
+                        binding.trackPar.visibility = View.GONE
+                        binding.repPar.visibility = View.GONE
+                        binding.advPar.visibility = View.VISIBLE
                     }
                 }
             }
@@ -123,9 +126,30 @@ class HomeFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab) {
 
             }
+
             override fun onTabReselected(tab: TabLayout.Tab) {
 
             }
         })
     }
+
+    private val OnItemClicked = View.OnClickListener {
+
+        when (it.id){
+             R.id.bookmarkPar -> {
+                showToast("Item bookmarked")
+            }
+
+            R.id.sharePar -> {
+                showToast("Item Shared")
+            }
+
+            else -> {
+
+            }
+        }
+
+
+    }
+
 }

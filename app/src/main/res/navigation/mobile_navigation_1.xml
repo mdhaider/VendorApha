@@ -90,11 +90,94 @@
     <fragment
         android:id="@+id/nav_profile_home"
         android:name="com.instafinancials.vendoralpha.ui.profile.ProfileHomeFragment"
-        tools:layout="@layout/profile_home_fragment" />
+        tools:layout="@layout/profile_home_fragment">
+
+        <action
+            android:id="@+id/action_prof_prof"
+            app:destination="@+id/nav_profile"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_book"
+            app:destination="@+id/nav_bookmark"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_orders"
+            app:destination="@+id/nav_orders"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_refer"
+            app:destination="@+id/nav_refer"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_support"
+            app:destination="@+id/nav_support"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_feedback"
+            app:destination="@+id/nav_feedback"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_free"
+            app:destination="@+id/nav_freecredits"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_terms"
+            app:destination="@+id/nav_tou"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_prof_login"
+            app:destination="@+id/nav_login"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="false" />
+    </fragment>
 
     <activity
         android:id="@+id/nav_cam"
-        android:name="com.instafinancials.vendoralpha.ui.camera.CameraActivity"
+        android:name="com.instafinancials.vendoralpha.ui.CameraActivity"
         tools:layout="@layout/activity_camera" />
 
 

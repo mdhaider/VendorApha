@@ -205,7 +205,7 @@
                                 android:textSize="14sp" />
 
                             <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/details"
+                                android:id="@+id/detailsIcon"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
@@ -237,7 +237,7 @@
                                     android:fontFamily="@font/roboto_medium"
                                     android:gravity="start"
                                     android:paddingStart="8dp"
-                                    android:text="Date"
+                                    android:text="@string/month"
                                     android:textSize="14sp" />
 
                                 <TextView

@@ -3,16 +3,27 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/blue_new"
+            android:fontFamily="@font/roboto_medium"
+            android:padding="16dp"
+            android:text="Profile"
+            android:textSize="18sp"
+            android:textColor="@color/white" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mEmail"
@@ -27,7 +38,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mPhone"
@@ -42,7 +55,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mState"
@@ -57,7 +72,9 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp">
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mCountry"
