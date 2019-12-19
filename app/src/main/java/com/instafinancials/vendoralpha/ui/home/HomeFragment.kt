@@ -90,6 +90,9 @@ class HomeFragment : Fragment() {
         binding.searchView.setText(AppPreferences.gstNum)
         setItemAtBottom()
 
+        binding.dataView.visibility=View.GONE
+        binding.progressBarCyclic.visibility=View.VISIBLE
+
         getApi()
     }
 
@@ -99,12 +102,18 @@ class HomeFragment : Fragment() {
             object : InstaRepo.IResponseStateListener {
                 override fun onSuccess() {
                     Timber.d("success")
+                    binding.dataView.visibility=View.VISIBLE
+                    binding.progressBarCyclic.visibility=View.GONE
+
                 }
 
                 override fun onError() {
+                    binding.progressBarCyclic.visibility=View.GONE
                 }
             })
     }
+
+
 
     private fun goToProfile() {
         NavHostFragment.findNavController(this).navigate(R.id.action_home_to_profile_home)
