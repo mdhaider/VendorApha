@@ -20,11 +20,9 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.CameraActivity"
-            android:screenOrientation="portrait" />
+            android:name=".activities.CameraActivity"/>
         <activity
             android:name=".activities.MainActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,19 +31,15 @@
         </activity>
         <activity
             android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/SplashScreenTheme" />
-
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 </manifest>
