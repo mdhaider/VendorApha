@@ -1,11 +1,13 @@
 package com.instafinancials.vendoralpha.deletellater.network.pojonew
 
-data class GSTComplianceRecord(
+import java.io.Serializable
 
-    val returnType: String,
-    val taxPeriod: String,
-    val financialYear: String,
-    val filingDate: String,
-    val filingStatus: String,
-    val dueDateForTheMonth: String
-)
+data class GSTComplianceRecord (
+
+	val returnType : String,
+	val taxPeriod : String,
+	val financialYear : String,
+	val filingDate : String,
+	val filingStatus : String,
+	val dueDateForTheMonth : String
+): Serializable

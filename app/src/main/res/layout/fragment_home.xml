@@ -31,6 +31,7 @@
                 android:gravity="center"
                 android:hint="@string/enter_or_scan_gstin"
                 android:inputType="textCapCharacters"
+                android:text="01AAACA6990Q1Z"
                 android:padding="10dip"
                 android:textSize="14sp" />
 
@@ -61,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/searchParent"
             android:layout_above="@+id/bottomView"
+            android:visibility="gone"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -76,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:padding="8dp"
-                    android:text="CBL DATA SCIENCE PRIVATE LIMITED"
+                    tools:text="CBL DATA SCIENCE PRIVATE LIMITED"
                     android:textColor="@color/green"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -88,6 +90,7 @@
                     android:padding="8dp">
 
                     <TextView
+                        android:id="@+id/tvStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/rect_box"
@@ -95,9 +98,10 @@
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="@color/green"
                         android:textSize="14sp"
-                        android:text="Active" />
+                        tools:text="Active" />
 
                     <TextView
+                        android:id="@+id/tvTaxPayerType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -106,9 +110,10 @@
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="@color/colorTextPrimary"
                         android:textSize="14sp"
-                        android:text="Consti" />
+                        tools:text="Consti" />
 
                     <TextView
+                        android:id="@+id/tvConsti"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
@@ -117,7 +122,7 @@
                         android:fontFamily="@font/roboto_medium"
                         android:textColor="@color/red"
                         android:textSize="14sp"
-                        android:text="Error" />
+                        tools:text="Error" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -165,6 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:visibility="gone"
             android:padding="8dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -286,6 +292,11 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <include layout="@layout/not_searched_layout"
+            android:id="@+id/notSearchedView"
+            android:visibility="visible">
+
+        </include>
 
         <ProgressBar
             android:id="@+id/progressBar_cyclic"

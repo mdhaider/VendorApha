@@ -1,5 +1,7 @@
 package com.instafinancials.vendoralpha.deletellater.network.pojonew
 
+import java.io.Serializable
+
 data class CompanyMasterSummary (
 
 	val lastUpdatedDateTime : String,
@@ -14,4 +16,4 @@ data class CompanyMasterSummary (
 	val companyWebSite : String,
 	val companyRevenueRange : String,
 	val companyCIN : String
-)
+):Serializable

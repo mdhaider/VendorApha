@@ -13,16 +13,20 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.ModalDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
 import com.afollestad.materialdialogs.customview.customView
-import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import com.instafinancials.vendoralpha.R
+import com.instafinancials.vendoralpha.apis.GstResponse
 import com.instafinancials.vendoralpha.databinding.GsttrackerFragmentBinding
+import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.ModelPreferences
+import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
+import timber.log.Timber
 
 
 class GstTrackerFragment : Fragment() {
 
     private lateinit var viewModel: BasicViewModel
     private lateinit var binding: GsttrackerFragmentBinding
-
+    private lateinit var data: GstResponse
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +52,12 @@ class GstTrackerFragment : Fragment() {
         binding.detailsIcon.setOnClickListener {
             showCustomViewDialogDetails(BottomSheet(LayoutMode.WRAP_CONTENT))
         }
+
+        data= ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
+        Timber.d(data.toString())
+
+        setData(data)
+
     }
 
     private fun showCustomViewDialog(dialogBehavior: DialogBehavior = ModalDialog) {
@@ -66,4 +76,12 @@ class GstTrackerFragment : Fragment() {
             customView(R.layout.custom_view_2, scrollable = true, horizontalPadding = true)
         }
     }
+
+    private fun setData(data:GstResponse){
+        binding.tvLast.text= data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime
+        binding.tvLocName.text= data.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
+
+
+    }
+
 }

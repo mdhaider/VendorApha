@@ -1,5 +1,7 @@
 package com.instafinancials.vendoralpha.deletellater.network.pojonew
 
+import java.io.Serializable
+
 data class GSTRegistrationDetails (
 
 	val lastUpdatedDateTime : String,
@@ -10,4 +12,4 @@ data class GSTRegistrationDetails (
 	val gSTNStatus : String,
 	val constitution : String,
 	val gSTComplianceLastest6Months : GSTComplianceLastest6Months
-)
+): Serializable

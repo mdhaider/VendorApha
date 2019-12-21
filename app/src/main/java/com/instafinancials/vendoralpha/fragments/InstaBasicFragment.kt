@@ -7,14 +7,19 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.instafinancials.vendoralpha.viewmodels.DetailViewModel
 import com.instafinancials.vendoralpha.R
+import com.instafinancials.vendoralpha.apis.GstResponse
 import com.instafinancials.vendoralpha.databinding.InstabasicFragmentBinding
+import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.ModelPreferences
+import com.instafinancials.vendoralpha.viewmodels.DetailViewModel
+import timber.log.Timber
 
 
 class InstaBasicFragment : Fragment() {
     private lateinit var binding: InstabasicFragmentBinding
     private lateinit var viewModel: DetailViewModel
+    private lateinit var data: GstResponse
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,12 @@ class InstaBasicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        data= ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
+
+        Timber.d(data.toString())
+
+        setData(data)
 
         var expand1 = false
         var expand2 = false
@@ -59,6 +70,16 @@ class InstaBasicFragment : Fragment() {
                 binding.exp2.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp)
             }
         }
+    }
+
+    private fun setData(data:GstResponse){
+        binding.tvLast.text= data.companyMasterSummary?.lastUpdatedDateTime
+        binding.TVCinName.text= data.companyMasterSummary?.companyCIN
+        binding.tvlatFinan.text= data.companyMasterSummary?.companyLastBsDate
+        binding.tvpaidUpCap.text= data.companyMasterSummary?.companyPaidUpCapital
+        binding.tvRevrange.text= data.companyMasterSummary?.companyRevenueRange
+        binding.tvStatCap.text= "${data.companyMasterSummary?.companyRegCity}(${data.companyMasterSummary?.companyRegState})"
+        binding.tvWebName.text= data.companyMasterSummary?.companyWebSite
     }
 
 }

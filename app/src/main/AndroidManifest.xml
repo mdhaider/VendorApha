@@ -19,8 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".activities.CameraActivity"/>
+        <activity android:name=".activities.CameraActivity" />
         <activity
             android:name=".activities.MainActivity"
             android:theme="@style/AppTheme">
@@ -29,12 +28,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".apicall.view.MuseumActivity">
+        </activity>
+        <activity android:name=".apis.MainActivity12">
+        </activity>
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/SplashScreenTheme" />
+
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />

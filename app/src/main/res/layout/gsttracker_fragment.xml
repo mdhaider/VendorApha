@@ -35,7 +35,7 @@
                         android:layout_alignParentLeft="true">
 
                         <TextView
-                            android:id="@+id/tvLast"
+                            android:id="@+id/last"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_alignParentStart="true"
@@ -44,13 +44,14 @@
                             android:textSize="14sp" />
 
                         <TextView
+                            android:id="@+id/tvLast"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_toEndOf="@+id/tvLast"
+                            android:layout_toEndOf="@+id/last"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="end"
-                            android:text="Mar 6, 2010"
+                            tools:text="Mar 6, 2010"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -103,7 +104,7 @@
                                 android:layout_toEndOf="@+id/tvLoc"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                android:text="Bangalore"
+                                tools:text="Bangalore"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
