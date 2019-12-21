@@ -26,7 +26,7 @@ class MainActivity12 : AppCompatActivity() {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()    
         val service = retrofit.create(WeatherService::class.java)    
-        val call = service.getCurrentWeatherData(lat)
+        val call = service.getGstData(lat)
         call.enqueue(object : Callback<GstResponse> {
             override fun onResponse(call: Call<GstResponse>, response: Response<GstResponse>) {
                 if (response.code() == 200) {    

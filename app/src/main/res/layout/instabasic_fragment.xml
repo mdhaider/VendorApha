@@ -9,14 +9,13 @@
         android:background="@color/white"
         tools:context="com.instafinancials.vendoralpha.fragments.InstaBasicFragment">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:scrollbars="none">
+            android:layout_marginBottom="16dp">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -131,9 +130,9 @@
                                 android:layout_toEndOf="@+id/tvlatFin"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                tools:text="NA"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="NA" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -160,9 +159,9 @@
                                 android:layout_toEndOf="@+id/tvFilStatus"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                tools:text="Rs. 25 Lacs"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="Rs. 25 Lacs" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -188,9 +187,9 @@
                                 android:layout_toEndOf="@+id/tvRevRang"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                tools:text="Rs. 78 Lacs"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="Rs. 78 Lacs" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -217,9 +216,9 @@
                                 android:layout_toEndOf="@+id/tvState"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                tools:text="Bangalore(Karnataka)"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="Bangalore(Karnataka)" />
                         </RelativeLayout>
 
                         <RelativeLayout
@@ -245,10 +244,10 @@
                                 android:layout_toEndOf="@+id/tvWeb"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                tools:text="www.instafin.com"
                                 android:textColor="@color/blue"
                                 android:textSize="14sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="www.instafin.com" />
                         </RelativeLayout>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -316,7 +315,6 @@
                                     android:textColor="@color/black"
                                     android:textSize="12sp" />
 
-
                                 <TextView
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
@@ -329,57 +327,16 @@
                                     android:textSize="12sp" />
                             </androidx.appcompat.widget.LinearLayoutCompat>
 
-                            <androidx.appcompat.widget.LinearLayoutCompat
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvDirector"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="Anil Kumar Singh"
-                                    android:textSize="12sp" />
-
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@+id/tvName"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="WTD(10 Yrs)"
-                                    android:textSize="12sp" />
-                            </androidx.appcompat.widget.LinearLayoutCompat>
-
-                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_height="wrap_content"/>
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvSignatory"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="6dp">
+                                android:layout_height="wrap_content"/>
 
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="Anil Kumar Singh"
-                                    android:textSize="12sp" />
-
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@+id/tvName"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="WTD(10 Yrs)"
-                                    android:textSize="12sp" />
-                            </androidx.appcompat.widget.LinearLayoutCompat>
                         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -433,6 +390,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:visibility="gone">
+
                             <androidx.appcompat.widget.LinearLayoutCompat
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -470,74 +428,10 @@
                                     android:textSize="12sp" />
                             </androidx.appcompat.widget.LinearLayoutCompat>
 
-                            <androidx.appcompat.widget.LinearLayoutCompat
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvPotRelParty"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="ABC Ltd"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@+id/tvName"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="Active"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@+id/tvName"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="Rs 5 lac"
-                                    android:textSize="12sp" />
-                            </androidx.appcompat.widget.LinearLayoutCompat>
-
-                            <androidx.appcompat.widget.LinearLayoutCompat
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="6dp">
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="DEF Ltd"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@+id/tvName"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="Inactive"
-                                    android:textSize="12sp" />
-
-                                <TextView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
-                                    android:layout_toEndOf="@+id/tvName"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:text="Rs 4 Lac"
-                                    android:textSize="12sp" />
-                            </androidx.appcompat.widget.LinearLayoutCompat>
-
+                                android:layout_height="wrap_content"/>
 
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -548,7 +442,7 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </RelativeLayout>

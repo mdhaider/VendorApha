@@ -20,11 +20,17 @@ import com.instafinancials.vendoralpha.apicall.di.Injection
 import com.instafinancials.vendoralpha.apicall.viewmodel.MuseumViewModel
 import com.instafinancials.vendoralpha.apicall.viewmodel.ViewModelFactory
 import com.instafinancials.vendoralpha.apis.GstResponse
+import com.instafinancials.vendoralpha.apis.WeatherService
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.ModelPreferences
 import com.instafinancials.vendoralpha.shared.hideKeyboard
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 
 class HomeFragment : Fragment() {
@@ -34,6 +40,7 @@ class HomeFragment : Fragment() {
 
     companion object {
         const val TAG = "CONSOLE"
+        var BaseUrl = "https://apps.instafinancials.com/"
     }
 
     override fun onCreateView(
@@ -69,7 +76,8 @@ class HomeFragment : Fragment() {
                 binding.progressBarCyclic.visibility = View.VISIBLE
                 binding.dataView.visibility = View.GONE
                 binding.bottomView.visibility = View.GONE
-                setupViewModel(s.toString())
+                // setupViewModel(s.toString())
+                getCurrentData(s.toString())
             }
         }
 
@@ -82,22 +90,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter =
-            SectionsPagerAdapter(
-                activity!!,
-                childFragmentManager
-            )
-        adapter.addFragment(GstTrackerFragment(), "GST Tracker")
-        adapter.addFragment(InstaBasicFragment(), "CompanyBasic")
-        adapter.addFragment(InstaSummaryFragment(), "CompanyFin")
-        binding.viewPager.adapter = adapter
-        binding.tabs.setupWithViewPager(binding.viewPager)
-
         setItemAtBottom()
     }
 
     //ui
-    private fun setupUI() {
+    private fun setupUI(res: GstResponse) {
         // adapter= MuseumAdapter(viewModel.museums.value?: emptyList())
         //recyclerView.layoutManager= LinearLayoutManager(this)
         //recyclerView.adapter= adapter
@@ -133,7 +130,7 @@ class HomeFragment : Fragment() {
         //  layoutError.visibility=View.GONE
         // layoutEmpty.visibility=View.GONE
         //adapter.update(it)
-        setupUI()
+        // setupUI()
         binding.dataView.visibility = View.VISIBLE
         binding.bottomView.visibility = View.VISIBLE
         binding.progressBarCyclic.visibility = View.GONE
@@ -228,12 +225,63 @@ class HomeFragment : Fragment() {
 
             }
         }
-
-
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun getCurrentData(cinNumber: String) {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BaseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val service = retrofit.create(WeatherService::class.java)
+        val call = service.getGstData(cinNumber)
+        call.enqueue(object : Callback<GstResponse> {
+            override fun onResponse(call: Call<GstResponse>, response: Response<GstResponse>) {
+                if (response.code() == 200 ) {
+                    val gstResponse = response.body()!!
+
+                    if(gstResponse.gSTInformationAndCompliance==null){
+                        binding.progressBarCyclic.visibility = View.GONE
+                        binding.notSearchedView.visibility==View.VISIBLE
+                        showToast("Oops, something went wrong!!")
+                        return
+                    }
+                    setDataInUi(gstResponse)
+                    binding.dataView.visibility = View.VISIBLE
+                    binding.bottomView.visibility = View.VISIBLE
+                    binding.progressBarCyclic.visibility = View.GONE
+                    ModelPreferences(activity!!).putObject(Const.SEARCH_DATA, gstResponse)
+
+                    val adapter =
+                        SectionsPagerAdapter(
+                            activity!!,
+                            childFragmentManager
+                        )
+                    adapter.addFragment(GstTrackerFragment(), "GST Tracker")
+                    adapter.addFragment(InstaBasicFragment(), "CompanyBasic")
+                    adapter.addFragment(InstaSummaryFragment(), "CompanyFin")
+                    binding.viewPager.adapter = adapter
+                    binding.tabs.setupWithViewPager(binding.viewPager)
+
+                    Log.d("data", gstResponse.toString())
+                }else{
+                    showToast("Oops, something went wrong!!")
+                }
+            }
+
+            override fun onFailure(call: Call<GstResponse>, t: Throwable) {
+
+            }
+        })
     }
 
+    private fun setDataInUi(res: GstResponse) {
+        binding.tvComName.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
+        binding.tvStatus.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus
+        binding.tvTaxPayerType.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
+        binding.tvLocat.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
+    }
 }
