@@ -22,12 +22,12 @@ class MuseumViewModel(private val repository: MuseumDataSource):ViewModel() {
     val isEmptyList:LiveData<Boolean> = _isEmptyList
 
     init {
-        loadMuseums()
+        loadGstData()
     }
 
 
 
-    fun loadMuseums(){
+    fun loadGstData(){
         _isViewLoading.postValue(true)
         repository.retrieveMuseums(object: OperationCallback {
             override fun onError(obj: Any?) {

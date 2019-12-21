@@ -108,8 +108,8 @@ class HomeFragment : Fragment() {
             viewModel.museums.value?.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus
         binding.tvTaxPayerType.text =
             viewModel.museums.value?.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
-        binding.tvConsti.text =
-            viewModel.museums.value?.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
+        binding.tvLocat.text =
+            viewModel.museums.value?.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
 
     }
 
