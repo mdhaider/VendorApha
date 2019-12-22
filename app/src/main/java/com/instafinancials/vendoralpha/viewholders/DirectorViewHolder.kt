@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.apis.Director
+import com.instafinancials.vendoralpha.models.Director
 
 class DirectorViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_director, parent, false)) {

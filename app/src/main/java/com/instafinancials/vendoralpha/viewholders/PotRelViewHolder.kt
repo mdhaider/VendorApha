@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.apis.RelatedParty
+import com.instafinancials.vendoralpha.models.RelatedParty
 
 class PotRelViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_pot_rel_party, parent, false)) {

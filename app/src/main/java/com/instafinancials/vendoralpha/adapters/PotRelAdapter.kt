@@ -3,7 +3,7 @@ package com.instafinancials.vendoralpha.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.instafinancials.vendoralpha.apis.RelatedParty
+import com.instafinancials.vendoralpha.models.RelatedParty
 import com.instafinancials.vendoralpha.viewholders.PotRelViewHolder
 
 class PotRelAdapter(private val list: ArrayList<RelatedParty>) :

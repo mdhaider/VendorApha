@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.apicall.view
+package com.instafinancials.vendoralpha.deleteitlater.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.apicall.model.Museum
+import com.instafinancials.vendoralpha.deleteitlater.model.Museum
 
 class MuseumAdapter(private var museums:List<Museum>):RecyclerView.Adapter<MuseumAdapter.MViewHolder>(){
 

@@ -1,11 +1,11 @@
-package com.instafinancials.vendoralpha.apicall.viewmodel
+package com.instafinancials.vendoralpha.deleteitlater.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.instafinancials.vendoralpha.apicall.data.OperationCallback
-import com.instafinancials.vendoralpha.apicall.model.MuseumDataSource
-import com.instafinancials.vendoralpha.apis.GstResponse
+import com.instafinancials.vendoralpha.deleteitlater.data.OperationCallback
+import com.instafinancials.vendoralpha.deleteitlater.model.MuseumDataSource
+import com.instafinancials.vendoralpha.models.GstResponse
 
 class MuseumViewModel(private val repository: MuseumDataSource):ViewModel() {
 

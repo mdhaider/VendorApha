@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.apicall.data
+package com.instafinancials.vendoralpha.deleteitlater.data
 
 interface OperationCallback {
     fun onSuccess(obj:Any?)

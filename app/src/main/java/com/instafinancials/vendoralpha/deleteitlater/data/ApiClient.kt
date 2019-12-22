@@ -1,6 +1,6 @@
-package com.instafinancials.vendoralpha.apicall.data
+package com.instafinancials.vendoralpha.deleteitlater.data
 
-import com.instafinancials.vendoralpha.apis.GstResponse
+import com.instafinancials.vendoralpha.models.GstResponse
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call

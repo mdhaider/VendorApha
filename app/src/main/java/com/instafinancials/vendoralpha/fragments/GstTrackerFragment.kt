@@ -1,6 +1,7 @@
 package com.instafinancials.vendoralpha.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,16 +20,14 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.GstFilingAdapter
 import com.instafinancials.vendoralpha.adapters.GstFilingDetailAdapter
-import com.instafinancials.vendoralpha.apis.GSTComplianceRecord
-import com.instafinancials.vendoralpha.apis.GSTSingleRecord
-import com.instafinancials.vendoralpha.apis.GstResponse
+import com.instafinancials.vendoralpha.models.GSTComplianceRecord
+import com.instafinancials.vendoralpha.models.GSTSingleRecord
+import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.databinding.GsttrackerFragmentBinding
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.ModelPreferences
 import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import kotlinx.android.synthetic.main.custom_view_2.view.*
-import timber.log.Timber
-
 
 class GstTrackerFragment : Fragment() {
 
@@ -41,7 +40,7 @@ class GstTrackerFragment : Fragment() {
     private lateinit var complList1: ArrayList<GSTComplianceRecord>
     private lateinit var complList3: ArrayList<GSTComplianceRecord>
     private lateinit var singlelList: ArrayList<GSTSingleRecord>
-    private lateinit var set: Set<String>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,7 +75,7 @@ class GstTrackerFragment : Fragment() {
         }
 
         data = ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
-        Timber.d(data.toString())
+        Log.d("gstracker",data.toString())
 
         setData(data)
 

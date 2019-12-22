@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.apis.Signatory
+import com.instafinancials.vendoralpha.models.Signatory
 
 class SignatoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_signatory, parent, false)) {

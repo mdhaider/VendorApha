@@ -1,9 +1,9 @@
-package com.instafinancials.vendoralpha.apicall.model
+package com.instafinancials.vendoralpha.deleteitlater.model
 
 import android.util.Log
-import com.instafinancials.vendoralpha.apicall.data.ApiClient
-import com.instafinancials.vendoralpha.apicall.data.OperationCallback
-import com.instafinancials.vendoralpha.apis.GstResponse
+import com.instafinancials.vendoralpha.deleteitlater.data.ApiClient
+import com.instafinancials.vendoralpha.deleteitlater.data.OperationCallback
+import com.instafinancials.vendoralpha.models.GstResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

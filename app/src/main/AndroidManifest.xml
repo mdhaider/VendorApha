@@ -28,9 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".apicall.view.MuseumActivity">
-        </activity>
-        <activity android:name=".apis.MainActivity12">
+        <activity android:name=".deleteitlater.view.MuseumActivity">
         </activity>
         <activity
             android:name=".activities.LoginActivity"

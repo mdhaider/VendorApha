@@ -7,23 +7,42 @@ import java.util.*
 
 
 object TimeUtil {
-    fun stringToDate(datesString: String) {
+    fun stringToDate(datesString: String): String {
+        var date1: Date
+        var dateTime: String? = null
         val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        val dateFormat = SimpleDateFormat("dd/MM", Locale.ENGLISH)
         try {
-           val date = format.parse(datesString)
+            date1 = format.parse(datesString)
+            dateTime = dateFormat.format(date1)
         } catch (e: ParseException) {
             e.printStackTrace()
         }
+        return dateTime!!
     }
 
-    fun dateToString(date: Date) {
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+    fun stringToDate1(datesString: String): Date {
+        var date1: Date= Date()
+        val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         try {
-            val dateTime = dateFormat.format(date)
+            date1 = format.parse(datesString)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return date1
+    }
+
+    fun dateToString(date1: Date): String {
+        var dateTime: String? = null
+        val dateFormat = SimpleDateFormat("dd/MM", Locale.ENGLISH)
+        try {
+            dateTime = dateFormat.format(date1)
             Log.d("Current Date Time", dateTime.toString())
         } catch (e: ParseException) {
             e.printStackTrace()
         }
+
+        return dateTime!!
     }
 
 

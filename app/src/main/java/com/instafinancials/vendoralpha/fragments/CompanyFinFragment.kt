@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.instafinancials.vendoralpha.viewmodels.LastViewModel
 import com.instafinancials.vendoralpha.R
+import com.instafinancials.vendoralpha.viewmodels.LastViewModel
 
 
-class InstaSummaryFragment : Fragment() {
+class CompanyFinFragment : Fragment() {
 
     companion object {
         fun newInstance() =
-            InstaSummaryFragment()
+            CompanyFinFragment()
     }
 
     private lateinit var viewModel: LastViewModel
@@ -23,7 +23,7 @@ class InstaSummaryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.instasummary_fragment, container, false)
+        return inflater.inflate(R.layout.companyfin_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

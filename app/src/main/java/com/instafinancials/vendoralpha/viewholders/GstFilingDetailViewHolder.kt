@@ -1,15 +1,15 @@
 package com.instafinancials.vendoralpha.viewholders
 
-import android.util.Log
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.apis.GSTSingleRecord
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
+import com.instafinancials.vendoralpha.models.GSTSingleRecord
+import com.instafinancials.vendoralpha.shared.TimeUtil.getDifferenceDays
+import com.instafinancials.vendoralpha.shared.TimeUtil.stringToDate
+import com.instafinancials.vendoralpha.shared.TimeUtil.stringToDate1
 
 class GstFilingDetailViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_gstfiling_detail, parent, false)) {
@@ -30,56 +30,34 @@ class GstFilingDetailViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(gstComplianceRecord: GSTSingleRecord) {
         mMonth?.text = gstComplianceRecord.taxPeriod
         mGst1Fildat?.text = stringToDate(gstComplianceRecord.gst1FilingDat!!)
-        mGst1Duedat?.text = "("+getDifferenceDays(stringToDate1(gstComplianceRecord.gst1DueDat!!),stringToDate1(gstComplianceRecord.gst1FilingDat)).toString()+")"
+        setDueData1(gstComplianceRecord)
         mGst3Fildat?.text = stringToDate(gstComplianceRecord.gst3FilingDat!!)
-        mGst3Duedat?.text = "("+getDifferenceDays(stringToDate1(gstComplianceRecord.gst3DueDat!!),stringToDate1(gstComplianceRecord.gst3FilingDat)).toString()+")"
-
+        setDueData3(gstComplianceRecord)
     }
 
-    fun stringToDate(datesString: String): String {
-        var date1: Date
-        var dateTime: String? = null
-        val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-        val dateFormat = SimpleDateFormat("dd/MM", Locale.ENGLISH)
-        try {
-            date1 = format.parse(datesString)
-            dateTime = dateFormat.format(date1)
-        } catch (e: ParseException) {
-            e.printStackTrace()
+    private fun setDueData1(rec: GSTSingleRecord) {
+        val int =
+            getDifferenceDays(stringToDate1(rec.gst1DueDat!!), stringToDate1(rec.gst1FilingDat!!))
+        if (int >= 0) {
+            mGst1Duedat?.text = "(" + int.toString() + ")"
+            mGst1Duedat?.setTextColor(Color.parseColor("#1fb14c"))
+        } else {
+            mGst1Duedat?.text = "(" + int.toString() + ")"
+            mGst1Duedat?.setTextColor(Color.parseColor("#ee312b"))
         }
-        return dateTime!!
     }
 
-    fun stringToDate1(datesString: String): Date {
-        var date1: Date= Date()
-        val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-        try {
-            date1 = format.parse(datesString)
-        } catch (e: ParseException) {
-            e.printStackTrace()
+    private fun setDueData3(rec: GSTSingleRecord) {
+        val int =
+            getDifferenceDays(stringToDate1(rec.gst3DueDat!!), stringToDate1(rec.gst3FilingDat!!))
+        if (int >= 0) {
+            mGst3Duedat?.text = "(" + int.toString() + ")"
+            mGst3Duedat?.setTextColor(Color.parseColor("#1fb14c"))
+        } else {
+            mGst3Duedat?.text = "(" + int.toString() + ")"
+            mGst3Duedat?.setTextColor(Color.parseColor("#ee312b"))
         }
-        return date1
-    }
-
-    fun dateToString(date1: Date): String {
-        var dateTime: String? = null
-        val dateFormat = SimpleDateFormat("dd/MM", Locale.ENGLISH)
-        try {
-            dateTime = dateFormat.format(date1)
-            Log.d("Current Date Time", dateTime.toString())
-        } catch (e: ParseException) {
-            e.printStackTrace()
-        }
-
-        return dateTime!!
     }
 
 
-    fun getDifferenceDays(d1: Date, d2: Date): Int {
-        var daysdiff = 0
-        val diff = d2.time - d1.time
-        val diffDays = diff / (24 * 60 * 60 * 1000) + 1
-        daysdiff = diffDays.toInt()
-        return daysdiff
-    }
 }

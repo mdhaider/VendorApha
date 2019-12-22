@@ -1,6 +1,7 @@
 package com.instafinancials.vendoralpha.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,19 +13,17 @@ import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.DirectorAdapter
 import com.instafinancials.vendoralpha.adapters.PotRelAdapter
 import com.instafinancials.vendoralpha.adapters.SignatoryAdapter
-import com.instafinancials.vendoralpha.apis.Director
-import com.instafinancials.vendoralpha.apis.GstResponse
-import com.instafinancials.vendoralpha.apis.RelatedParty
-import com.instafinancials.vendoralpha.apis.Signatory
-import com.instafinancials.vendoralpha.databinding.InstabasicFragmentBinding
+import com.instafinancials.vendoralpha.models.Director
+import com.instafinancials.vendoralpha.models.GstResponse
+import com.instafinancials.vendoralpha.models.RelatedParty
+import com.instafinancials.vendoralpha.models.Signatory
+import com.instafinancials.vendoralpha.databinding.CompanybasicFragmentBinding
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.ModelPreferences
 import com.instafinancials.vendoralpha.viewmodels.DetailViewModel
-import timber.log.Timber
 
-
-class InstaBasicFragment : Fragment() {
-    private lateinit var binding: InstabasicFragmentBinding
+class CompanyBasicFragment : Fragment() {
+    private lateinit var binding: CompanybasicFragmentBinding
     private lateinit var viewModel: DetailViewModel
     private lateinit var data: GstResponse
     private lateinit var sigList: ArrayList<Signatory>
@@ -40,7 +39,7 @@ class InstaBasicFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            R.layout.instabasic_fragment, container, false
+            R.layout.companybasic_fragment, container, false
         )
         return binding.root
     }
@@ -56,7 +55,7 @@ class InstaBasicFragment : Fragment() {
 
         data = ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
 
-        Timber.d(data.toString())
+        Log.d("gstbasic",data.toString())
         dirList = ArrayList()
         sigList = ArrayList()
         relList = ArrayList()

@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.apis
+package com.instafinancials.vendoralpha.models
 
 import com.google.gson.annotations.SerializedName
 

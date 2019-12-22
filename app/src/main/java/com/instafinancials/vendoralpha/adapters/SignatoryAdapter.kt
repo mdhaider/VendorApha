@@ -3,8 +3,7 @@ package com.instafinancials.vendoralpha.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.instafinancials.vendoralpha.apis.Director
-import com.instafinancials.vendoralpha.apis.Signatory
+import com.instafinancials.vendoralpha.models.Signatory
 import com.instafinancials.vendoralpha.viewholders.SignatoryViewHolder
 
 class SignatoryAdapter(private val list: ArrayList<Signatory>) :

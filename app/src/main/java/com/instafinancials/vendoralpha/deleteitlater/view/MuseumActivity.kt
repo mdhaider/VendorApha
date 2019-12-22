@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.apicall.view
+package com.instafinancials.vendoralpha.deleteitlater.view
 
 import android.os.Bundle
 import android.util.Log
@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.apicall.di.Injection
-import com.instafinancials.vendoralpha.apicall.viewmodel.MuseumViewModel
-import com.instafinancials.vendoralpha.apicall.viewmodel.ViewModelFactory
-import com.instafinancials.vendoralpha.apis.GstResponse
+import com.instafinancials.vendoralpha.deleteitlater.di.Injection
+import com.instafinancials.vendoralpha.deleteitlater.viewmodel.MuseumViewModel
+import com.instafinancials.vendoralpha.deleteitlater.viewmodel.ViewModelFactory
+import com.instafinancials.vendoralpha.models.GstResponse
 import kotlinx.android.synthetic.main.activity_museum.*
 import kotlinx.android.synthetic.main.layout_error.*
 

@@ -16,22 +16,20 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
-import com.instafinancials.vendoralpha.apicall.di.Injection
-import com.instafinancials.vendoralpha.apicall.viewmodel.MuseumViewModel
-import com.instafinancials.vendoralpha.apicall.viewmodel.ViewModelFactory
-import com.instafinancials.vendoralpha.apis.GstResponse
-import com.instafinancials.vendoralpha.apis.WeatherService
+import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
+import com.instafinancials.vendoralpha.deleteitlater.di.Injection
+import com.instafinancials.vendoralpha.deleteitlater.viewmodel.MuseumViewModel
+import com.instafinancials.vendoralpha.deleteitlater.viewmodel.ViewModelFactory
 import com.instafinancials.vendoralpha.extensions.showToast
+import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.ModelPreferences
 import com.instafinancials.vendoralpha.shared.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import timber.log.Timber
+
 
 class HomeFragment : Fragment() {
 
@@ -77,7 +75,7 @@ class HomeFragment : Fragment() {
                 binding.dataView.visibility = View.GONE
                 binding.bottomView.visibility = View.GONE
                 // setupViewModel(s.toString())
-                getCurrentData(s.toString())
+                callApi(s.toString())
             }
         }
 
@@ -126,7 +124,7 @@ class HomeFragment : Fragment() {
 
     //observers
     private val renderMuseums = Observer<GstResponse> {
-        Timber.d("data updated ${it.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness}")
+        Log.d("data","data updated ${it.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness}")
         //  layoutError.visibility=View.GONE
         // layoutEmpty.visibility=View.GONE
         //adapter.update(it)
@@ -138,21 +136,21 @@ class HomeFragment : Fragment() {
     }
 
     private val isViewLoadingObserver = Observer<Boolean> {
-        Timber.v("isViewLoading $it")
+        Log.d("logging","isViewLoading $it")
         val visibility = if (it) View.VISIBLE else View.GONE
         binding.progressBarCyclic.visibility = visibility
         binding.notSearchedView.visibility = View.GONE
     }
 
     private val onMessageErrorObserver = Observer<Any> {
-        Timber.v("onMessageError $it")
+        Log.v("error","onMessageError $it")
         //   layoutError.visibility=View.VISIBLE
         // layoutEmpty.visibility=View.GONE
         //textViewError.text= "Error $it"
     }
 
     private val emptyListObserver = Observer<Boolean> {
-        Timber.v("emptyListObserver $it")
+        Log.v("empoty","emptyListObserver $it")
         //    layoutEmpty.visibility=View.VISIBLE
         //  layoutError.visibility=View.GONE
     }
@@ -227,52 +225,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getCurrentData(cinNumber: String) {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BaseUrl)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val service = retrofit.create(WeatherService::class.java)
-        val call = service.getGstData(cinNumber)
-        call.enqueue(object : Callback<GstResponse> {
-            override fun onResponse(call: Call<GstResponse>, response: Response<GstResponse>) {
-                if (response.code() == 200 ) {
-                    val gstResponse = response.body()!!
-
-                    if(gstResponse.gSTInformationAndCompliance==null){
-                        binding.progressBarCyclic.visibility = View.GONE
-                        binding.notSearchedView.visibility==View.VISIBLE
-                        showToast("Oops, something went wrong!!")
-                        return
-                    }
-                    setDataInUi(gstResponse)
-                    binding.dataView.visibility = View.VISIBLE
-                    binding.bottomView.visibility = View.VISIBLE
-                    binding.progressBarCyclic.visibility = View.GONE
-                    ModelPreferences(activity!!).putObject(Const.SEARCH_DATA, gstResponse)
-
-                    val adapter =
-                        SectionsPagerAdapter(
-                            activity!!,
-                            childFragmentManager
-                        )
-                    adapter.addFragment(GstTrackerFragment(), "GST Tracker")
-                    adapter.addFragment(InstaBasicFragment(), "CompanyBasic")
-                    adapter.addFragment(InstaSummaryFragment(), "CompanyFin")
-                    binding.viewPager.adapter = adapter
-                    binding.tabs.setupWithViewPager(binding.viewPager)
-
-                    Log.d("data", gstResponse.toString())
-                }else{
-                    showToast("Oops, something went wrong!!")
-                }
-            }
-
-            override fun onFailure(call: Call<GstResponse>, t: Throwable) {
-
-            }
-        })
-    }
 
     private fun setDataInUi(res: GstResponse) {
         binding.tvComName.text =
@@ -284,4 +236,47 @@ class HomeFragment : Fragment() {
         binding.tvLocat.text =
             res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
     }
+
+    private fun callApi(cinNumber: String) {
+        RetrofitClient.INSTANCE.getGstData(cinNumber)
+            .enqueue(object : Callback<GstResponse> {
+                override fun onFailure(call: Call<GstResponse>, t: Throwable) {
+                    showToast(t.message!!)
+                }
+
+                override fun onResponse(call: Call<GstResponse>, response: Response<GstResponse>) {
+                    if (response.code() == 200) {
+                        val gstResponse = response.body()!!
+
+                        if (gstResponse.gSTInformationAndCompliance == null) {
+                            binding.progressBarCyclic.visibility = View.GONE
+                            binding.notSearchedView.visibility == View.VISIBLE
+                            showToast("Oops, something went wrong!!")
+                            return
+                        }
+                        setDataInUi(gstResponse)
+                        binding.dataView.visibility = View.VISIBLE
+                        binding.bottomView.visibility = View.VISIBLE
+                        binding.progressBarCyclic.visibility = View.GONE
+                        ModelPreferences(activity!!).putObject(Const.SEARCH_DATA, gstResponse)
+
+                        val adapter =
+                            SectionsPagerAdapter(
+                                activity!!,
+                                childFragmentManager
+                            )
+                        adapter.addFragment(GstTrackerFragment(), "GST Tracker")
+                        adapter.addFragment(CompanyBasicFragment(), "CompanyBasic")
+                        adapter.addFragment(CompanyFinFragment(), "CompanyFin")
+                        binding.viewPager.adapter = adapter
+                        binding.tabs.setupWithViewPager(binding.viewPager)
+                        Log.d("data", gstResponse.toString())
+                    } else {
+                        showToast(response.body().toString())
+                    }
+
+                }
+            })
+    }
+
 }
