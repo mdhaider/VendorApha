@@ -1,6 +1,5 @@
 package com.instafinancials.vendoralpha.activities
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -8,7 +7,10 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.google.gson.JsonObject
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.customview.customView
+import com.afollestad.materialdialogs.customview.getCustomView
+import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.ActivityLoginBinding
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.CreateAccReq
@@ -16,47 +18,60 @@ import com.instafinancials.vendoralpha.models.ReqOtpResponse
 import com.instafinancials.vendoralpha.models.UserProfileResponse
 import com.instafinancials.vendoralpha.models.VerifyOtpResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
+import com.instafinancials.vendoralpha.shared.AppPreferences
 import com.instafinancials.vendoralpha.shared.VendorApp
 import com.instafinancials.vendoralpha.shared.hideKeyboard
+import kotlinx.android.synthetic.main.dlg_progress.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-
-
-
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var progressDialog: ProgressDialog
+    private lateinit var dialog: MaterialDialog
+    private var mNumber:String?=null
+    private var isUserReg: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, com.instafinancials.vendoralpha.R.layout.activity_login)
+        binding = DataBindingUtil.setContentView(
+            this, R.layout.activity_login
+        )
 
         binding.mNumber.addTextChangedListener(numberTextChangeListener)
         binding.mOtp.addTextChangedListener(otpTextChangeListener)
+        binding.mEmail.addTextChangedListener(mEmailTextChangeListener)
 
         binding.btnReq.setOnClickListener {
             hideKeyboard()
-            // showProgress(true)
+            dialog.show()
             verifyOtp(binding.mOtp.text.toString())
         }
 
-        progressDialog =  ProgressDialog(this)
-        progressDialog.setMessage("Loading")
-        progressDialog.setCancelable(false)
+        binding.btnCreateAc.setOnClickListener {
+            dialog.show()
+            createUser()
+        }
 
-        progressDialog.show()
+        dialog = MaterialDialog(this).customView(R.layout.dlg_progress, scrollable = false)
+            .cancelable(false)
+        val customView = dialog.getCustomView()
+        customView.txtTitle.text = getString(R.string.plz_wait)
+        //   customView.txtmsg.text=getString(R.string.fetching_data)
 
-        createUser()
-
+        if (AppPreferences.isVerified!!) {
+            binding.topPar.visibility = View.GONE
+            binding.btnReq.visibility = View.GONE
+            binding.creatAccPar.visibility = View.VISIBLE
+        }
     }
 
     private val numberTextChangeListener = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if (s.toString().length >= 10) {
+                dialog.show()
                 checkUserApi(s.toString())
             }
         }
@@ -73,11 +88,31 @@ class LoginActivity : AppCompatActivity() {
             if (s.toString().length == 6) {
                 binding.btnReq.visibility = View.VISIBLE
                 binding.btnReq.isEnabled = true
-                binding.btnReq.setTextColor(resources.getColor(com.instafinancials.vendoralpha.R.color.white))
+                binding.btnReq.setTextColor(resources.getColor(R.color.white))
             } else {
                 binding.btnReq.isEnabled = false
                 binding.btnReq.visibility = View.VISIBLE
-                binding.btnReq.setTextColor(resources.getColor(com.instafinancials.vendoralpha.R.color.grey_500))
+                binding.btnReq.setTextColor(resources.getColor(R.color.grey_500))
+            }
+        }
+
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+    }
+
+    private val mEmailTextChangeListener = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            if (s.toString().length > 6) {
+                binding.btnCreateAc.visibility = View.VISIBLE
+                binding.btnCreateAc.isEnabled = true
+                binding.btnCreateAc.setTextColor(resources.getColor(R.color.white))
+            } else {
+                binding.btnCreateAc.isEnabled = false
+                binding.btnCreateAc.visibility = View.VISIBLE
+                binding.btnCreateAc.setTextColor(resources.getColor(R.color.grey_500))
             }
         }
 
@@ -94,21 +129,18 @@ class LoginActivity : AppCompatActivity() {
             .enqueue(object : Callback<UserProfileResponse> {
                 override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
                     showToast(t.message!!)
+                    dialog.dismiss()
                 }
 
                 override fun onResponse(
                     call: Call<UserProfileResponse>,
                     response: Response<UserProfileResponse>
                 ) {
+                    dialog.dismiss()
                     if (response.code() == 200) {
                         val userProfileResponse = response.body()!!
-
-                        if (userProfileResponse.response?.userProfile?.isRegistered!!) {
-                            val intent = Intent(VendorApp.instance, MainActivity::class.java)
-                            startActivity(intent)
-                        } else {
-                            reqOtp(mobNumber)
-                        }
+                        isUserReg = userProfileResponse.response?.userProfile?.isRegistered!!
+                        reqOtp(mobNumber)
 
                     } else {
                         showToast(response.body().toString())
@@ -123,15 +155,19 @@ class LoginActivity : AppCompatActivity() {
             .enqueue(object : Callback<ReqOtpResponse> {
                 override fun onFailure(call: Call<ReqOtpResponse>, t: Throwable) {
                     showToast(t.message!!)
+                    dialog.dismiss()
                 }
 
                 override fun onResponse(
                     call: Call<ReqOtpResponse>,
                     response: Response<ReqOtpResponse>
                 ) {
+                    dialog.dismiss()
                     if (response.code() == 200) {
                         val reqOtpResponse = response.body()!!
-                        binding.otpParent.visibility = View.VISIBLE
+                        if (reqOtpResponse.response?.status == "Success") {
+                            binding.otpParent.visibility = View.VISIBLE
+                        }
 
                     } else {
                         showToast(response.body().toString())
@@ -146,16 +182,31 @@ class LoginActivity : AppCompatActivity() {
             .enqueue(object : Callback<VerifyOtpResponse> {
                 override fun onFailure(call: Call<VerifyOtpResponse>, t: Throwable) {
                     showToast(t.message!!)
+                    dialog.dismiss()
                 }
 
                 override fun onResponse(
                     call: Call<VerifyOtpResponse>,
                     response: Response<VerifyOtpResponse>
                 ) {
+                    dialog.dismiss()
                     if (response.code() == 200) {
                         val verifyOtpResponse = response.body()!!
-                        startActivity(Intent(VendorApp.instance, MainActivity::class.java))
-                        finish()
+                        if (verifyOtpResponse.response?.isValid!!) {
+                            if (isUserReg) {
+                                startActivity(Intent(VendorApp.instance, MainActivity::class.java))
+                                finish()
+                            } else {
+                                binding.creatAccPar.visibility = View.VISIBLE
+                                mNumber= binding.mNumber.text.toString()
+                                binding.topPar.visibility = View.GONE
+                                binding.btnReq.visibility = View.GONE
+                                AppPreferences.isVerified = true
+                            }
+                        } else {
+                            showToast("Invalid OTP")
+                        }
+
                     } else {
                         showToast(response.body().toString())
                     }
@@ -165,31 +216,29 @@ class LoginActivity : AppCompatActivity() {
 
     private fun createUser() {
         val createAccReq = CreateAccReq()
-        createAccReq.userName = "haider"
-        createAccReq.userEmail = "nehal.hdr@gmail.com"
-        createAccReq.mobileNo = "9962232612"
+        createAccReq.userName = binding.mName.text.toString()
+        createAccReq.userEmail = binding.mEmail.text.toString()
+        createAccReq.mobileNo = mNumber
 
-        val jsonObject = JsonObject()
-        jsonObject.addProperty("userName", "haider")
-        jsonObject.addProperty("userEmail", "nehal.hdr@gmail.com")
-        jsonObject.addProperty("mobileNo", "9962232612")
-
-
-        RetrofitClient.instance.createAccount(jsonObject, "9962232612")
+        RetrofitClient.instance.createAccount(createAccReq, mNumber!!)
             .enqueue(object : Callback<UserProfileResponse> {
                 override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
+                    dialog.dismiss()
                     showToast(t.message!!)
                 }
 
                 override fun onResponse(
                     call: Call<UserProfileResponse>,
-                    response: Response<UserProfileResponse>) {
+                    response: Response<UserProfileResponse>
+                ) {
+                    dialog.dismiss()
                     if (response.code() == 200) {
-                        val verifyOtpResponse = response.body()!!
-                        startActivity(Intent(VendorApp.instance, MainActivity::class.java))
-                        finish()
+                        val userProfileResponse = response.body()!!
+                        if(userProfileResponse.response?.status=="Success"){
+                            startActivity(Intent(VendorApp.instance, MainActivity::class.java))
+                            finish()
+                        }
 
-                        progressDialog.dismiss()
                     } else {
                         showToast(response.body().toString())
                     }

@@ -26,7 +26,11 @@
     <string name="sign_in">Enter phone number to continue</string>
     <string name="phone_number_hint">Phone Number</string>
     <string name="password_hint">OTP</string>
+    <string name="name_hint">Name</string>
+    <string name="email_hint">Email</string>
     <string name="sign_in_text">Sign In</string>
+    <string name="btn_ver_otp">Verify OTP</string>
+    <string name="create_acc_text">Create Account</string>
     <string name="point_camera_at_gstin_to_scan">point camera at GSTIN to scan</string>
     <string name="enter_or_scan_gstin">Enter or Scan GSTIN</string>
     <string name="gst_filing_details">GST Filing Details</string>
@@ -66,5 +70,7 @@
     <string name="gst_filing_status">GST Filing Status:</string>
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
+    <string name="plz_wait">Please wait...</string>
+    <string name="fetching_data">Fetching data..</string>
 
 </resources>

@@ -1,10 +1,6 @@
 package com.instafinancials.vendoralpha.network
 
-import com.google.gson.JsonObject
-import com.instafinancials.vendoralpha.models.GstResponse
-import com.instafinancials.vendoralpha.models.ReqOtpResponse
-import com.instafinancials.vendoralpha.models.UserProfileResponse
-import com.instafinancials.vendoralpha.models.VerifyOtpResponse
+import com.instafinancials.vendoralpha.models.*
 import com.instafinancials.vendoralpha.shared.ApiConstants.CREATE_ACC_ENDPOINT
 import com.instafinancials.vendoralpha.shared.ApiConstants.GET_USER_ENDPOINT
 import com.instafinancials.vendoralpha.shared.ApiConstants.GST_DATA_ENDPOINT
@@ -29,6 +25,6 @@ interface ApiInterface {
 
     @Headers("Content-Type: text/plain")
     @POST(CREATE_ACC_ENDPOINT)
-    fun createAccount(@Body createAccReq: JsonObject, @Path("MobileNo") mobNo: String): Call<UserProfileResponse>
+    fun createAccount(@Body createAccReq: CreateAccReq, @Path("MobileNo") mobNo: String): Call<UserProfileResponse>
 
 }

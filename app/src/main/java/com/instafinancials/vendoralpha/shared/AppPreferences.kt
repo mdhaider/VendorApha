@@ -10,7 +10,7 @@ object AppPreferences {
     private lateinit var preferences: SharedPreferences
 
     // list of app specific preferences
-    private val GST_NUM = Pair("gst_num", "")
+    private val IS_VERIFIED = Pair("is_verified", false)
 
 
     fun init(context: Context) {
@@ -26,11 +26,11 @@ object AppPreferences {
         editor.apply()
     }
 
-    var gstNum: String?
-        get() = preferences.getString(
-            GST_NUM.first, GST_NUM.second)
+    var isVerified: Boolean?
+        get() = preferences.getBoolean(
+            IS_VERIFIED.first, IS_VERIFIED.second)
         set(value) = preferences.edit {
-            it.putString(GST_NUM.first, value)
+            it.putBoolean(IS_VERIFIED.first, value!!)
         }
 
 }
