@@ -23,7 +23,6 @@ import kotlin.properties.Delegates
 class CameraActivity : AppCompatActivity() {
     private var mCameraSource by Delegates.notNull<CameraSource>()
     private var textRecognizer by Delegates.notNull<TextRecognizer>()
-
     private val PERMISSION_REQUEST_CAMERA = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,8 +92,6 @@ class CameraActivity : AppCompatActivity() {
                             for (i in 0 until substrings.count()) {
                                 if (substrings[i].length == 15) {
                                     tv_result.text = substrings[i]
-                                   // AppPreferences.gstNum = substrings[i]
-
                                     val intent = Intent()
                                     intent.putExtra(Const.SCAN_DATA, substrings[i])
                                     setResult(Activity.RESULT_OK, intent)

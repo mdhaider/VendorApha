@@ -229,7 +229,7 @@ class HomeFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && requestCode == 111) {
             if (data?.extras?.getString(Const.SCAN_DATA) != null) {
                 val scanData = data.extras?.getString(Const.SCAN_DATA)
-                callAndFetchData(scanData!!)
+               binding.searchView.setText(scanData)
             } else {
                 showToast("Invalid GST")
             }
