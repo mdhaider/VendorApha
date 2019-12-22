@@ -1,8 +1,8 @@
 package com.instafinancials.vendoralpha.deletellater.network.homeapi
 
 import com.google.gson.Gson
-import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.deletellater.USER_KEY
+import com.instafinancials.vendoralpha.shared.Const
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient

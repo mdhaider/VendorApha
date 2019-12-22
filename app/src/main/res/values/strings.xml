@@ -47,6 +47,7 @@
     <string name="pan">PAN:</string>
     <string name="ok">Ok</string>
     <string name="info">Info</string>
+    <string name="constitution">Constitution:</string>
     <string name="filing_details">Filing Details</string>
     <string name="info_msg">This is determined by the nature of registration and the status. The following taxpayers can collect taxes on outward supplies made by them \n\n-Regular \n-SEZ \n-Non-resident taxable person \n-Person supplying online information and database access \n\nTaxpayers whose status is Active, can collect taxers. \n\nWhere the above conditions are not satisfied, the taxpayers are classified as ineligible.</string>
     <string name="filing_period">Filing Period</string>
@@ -54,5 +55,9 @@
     <string name="gst_3">GST 3</string>
     <string name="month">Month</string>
     <string name="show_profile">Show Profile</string>
+    <string name="empty_list">No se encontró museos</string>
+    <string name="an_error_occurred">Ocurrió un error</string>
+
+    <string name="type_gstin_hint">Type GSTIN in search box or\nClick the camera icon and scan the GSTIN</string>
 
 </resources>
