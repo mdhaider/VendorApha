@@ -20,12 +20,12 @@ import com.instafinancials.vendoralpha.models.Director
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.models.RelatedParty
 import com.instafinancials.vendoralpha.models.Signatory
+import com.instafinancials.vendoralpha.shared.NumberUtil
 import com.instafinancials.vendoralpha.viewmodels.DetailViewModel
 
 class CompanyBasicFragment : Fragment() {
     private lateinit var binding: CompanybasicFragmentBinding
     private lateinit var viewModel: DetailViewModel
-    //private lateinit var data: GstResponse
     private lateinit var sigList: ArrayList<Signatory>
     private lateinit var dirList: ArrayList<Director>
     private lateinit var relList: ArrayList<RelatedParty>
@@ -101,7 +101,7 @@ class CompanyBasicFragment : Fragment() {
         binding.tvLast.text = data.companyMasterSummary?.lastUpdatedDateTime
         binding.TVCinName.text = data.companyMasterSummary?.companyCIN
         binding.tvlatFinan.text = data.companyMasterSummary?.companyLastBsDate
-        binding.tvpaidUpCap.text = data.companyMasterSummary?.companyPaidUpCapital
+        binding.tvpaidUpCap.text = "Rs"+" "+NumberUtil.numberTextFormat(data.companyMasterSummary?.companyPaidUpCapital!!.toLong())
         binding.tvRevrange.text = data.companyMasterSummary?.companyRevenueRange
         binding.tvStatCap.text =
             "${data.companyMasterSummary?.companyRegCity}(${data.companyMasterSummary?.companyRegState})"
