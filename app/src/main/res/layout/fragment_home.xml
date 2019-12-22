@@ -17,33 +17,37 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin">
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/searchView"
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="16dp"
-                android:layout_weight="5"
-                android:background="@drawable/rounded_et"
-                android:drawableStart="@drawable/ic_search_black_24dp"
-                android:drawableEnd="@drawable/ic_camera_20"
-                android:fontFamily="@font/roboto_condensed_regular"
-                android:gravity="center"
-                android:hint="@string/enter_or_scan_gstin"
-                android:inputType="textCapCharacters"
-                tools:text="01AAACA6990Q1Z"
-                android:padding="10dip"
-                android:textSize="14sp" />
+                android:layout_weight="5">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/fab"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="0.5"
-                android:visibility="gone"
-                app:srcCompat="@drawable/ic_camera_20" />
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_et"
+                    android:drawableStart="@drawable/ic_search_black_24dp"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:gravity="center"
+                    android:hint="@string/enter_or_scan_gstin"
+                    android:inputType="textCapCharacters"
+                    android:padding="10dip"
+                    android:textSize="14sp"
+                    tools:text="01AAACA6990Q1Z" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/bntScan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="32dp"
+                    android:layout_alignParentEnd="true"
+                    app:srcCompat="@drawable/ic_camera_20" />
+
+            </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profile"
@@ -60,10 +64,10 @@
             android:id="@+id/dataView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/searchParent"
             android:layout_above="@+id/bottomView"
-            android:visibility="gone"
-            android:orientation="vertical">
+            android:layout_below="@+id/searchParent"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/headerView"
@@ -78,10 +82,10 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:padding="8dp"
-                    tools:text="CBL DATA SCIENCE PRIVATE LIMITED"
                     android:textColor="@color/green"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="CBL DATA SCIENCE PRIVATE LIMITED" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -170,8 +174,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:visibility="gone"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/bookmarkPar"
@@ -292,8 +296,9 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <include layout="@layout/not_searched_layout"
+        <include
             android:id="@+id/notSearchedView"
+            layout="@layout/not_searched_layout"
             android:visibility="visible">
 
         </include>

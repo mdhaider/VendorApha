@@ -1,8 +1,9 @@
 package com.instafinancials.vendoralpha.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class GstResponse {
+class GstResponse:Serializable {
 
     @SerializedName("GSTInformationAndCompliance")
     val gSTInformationAndCompliance: GSTInformationAndCompliance? = null

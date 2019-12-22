@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.models.RelatedParty
+import com.instafinancials.vendoralpha.shared.NumberUtil
 
 class PotRelViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_pot_rel_party, parent, false)) {
@@ -22,6 +23,6 @@ class PotRelViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(relatedParty: RelatedParty) {
         mComName?.text = relatedParty.companyName
         mMcaStatus?.text = relatedParty.companyMcaStatus
-        mPaidCap?.text = relatedParty.companyPaidUpCapital.toString()
+        mPaidCap?.text = "Rs"+" "+NumberUtil.numberTextFormat(relatedParty.companyPaidUpCapital!!)
     }
 }

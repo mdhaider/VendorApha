@@ -20,12 +20,10 @@ import com.afollestad.materialdialogs.customview.getCustomView
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.GstFilingAdapter
 import com.instafinancials.vendoralpha.adapters.GstFilingDetailAdapter
+import com.instafinancials.vendoralpha.databinding.GsttrackerFragmentBinding
 import com.instafinancials.vendoralpha.models.GSTComplianceRecord
 import com.instafinancials.vendoralpha.models.GSTSingleRecord
 import com.instafinancials.vendoralpha.models.GstResponse
-import com.instafinancials.vendoralpha.databinding.GsttrackerFragmentBinding
-import com.instafinancials.vendoralpha.shared.Const
-import com.instafinancials.vendoralpha.shared.ModelPreferences
 import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import kotlinx.android.synthetic.main.custom_view_2.view.*
 
@@ -33,6 +31,7 @@ class GstTrackerFragment : Fragment() {
 
     private lateinit var viewModel: BasicViewModel
     private lateinit var binding: GsttrackerFragmentBinding
+  //  private lateinit var data: GstResponse
     private lateinit var data: GstResponse
     private lateinit var adapter: GstFilingAdapter
     private lateinit var adapter1: GstFilingDetailAdapter
@@ -40,6 +39,13 @@ class GstTrackerFragment : Fragment() {
     private lateinit var complList1: ArrayList<GSTComplianceRecord>
     private lateinit var complList3: ArrayList<GSTComplianceRecord>
     private lateinit var singlelList: ArrayList<GSTSingleRecord>
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            data = it.getSerializable(ARG_PARAM2) as GstResponse
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +80,7 @@ class GstTrackerFragment : Fragment() {
             showCustomViewDialogDetails(BottomSheet(LayoutMode.WRAP_CONTENT))
         }
 
-        data = ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
+      //  data = ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
         Log.d("gstracker",data.toString())
 
         setData(data)
@@ -154,5 +160,17 @@ class GstTrackerFragment : Fragment() {
         }
 
         return singlelList
+    }
+
+    companion object {
+        private const val ARG_PARAM2 = "param2"
+
+        @JvmStatic
+        fun newInstance(param1: GstResponse) =
+            GstTrackerFragment().apply {
+                arguments = Bundle().apply {
+                    putSerializable(ARG_PARAM2, param1)
+                }
+            }
     }
 }

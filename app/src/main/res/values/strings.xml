@@ -60,4 +60,8 @@
 
     <string name="type_gstin_hint">Type GSTIN in search box or\nClick the camera icon and scan the GSTIN</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookmark_list">Bookmark List</string>
+
 </resources>

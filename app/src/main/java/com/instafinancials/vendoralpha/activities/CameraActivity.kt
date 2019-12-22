@@ -2,6 +2,8 @@ package com.instafinancials.vendoralpha.activities
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -12,21 +14,20 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
-import com.instafinancials.vendoralpha.shared.AppPreferences
+import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.Const.LOG_TAG
-import com.instafinancials.vendoralpha.R
 import kotlinx.android.synthetic.main.activity_camera.*
 import kotlin.properties.Delegates
+
 
 class CameraActivity : AppCompatActivity() {
     private var mCameraSource by Delegates.notNull<CameraSource>()
     private var textRecognizer by Delegates.notNull<TextRecognizer>()
-
     private val PERMISSION_REQUEST_CAMERA = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_camera)
+        setContentView(com.instafinancials.vendoralpha.R.layout.activity_camera)
 
         startCameraSource()
     }
@@ -85,17 +86,18 @@ class CameraActivity : AppCompatActivity() {
                 tv_result.post {
                     for (i in 0 until items.size()) {
                         val item = items.valueAt(i)
-                        Log.d(LOG_TAG, "text : ${item.value}" )
+                        Log.d(LOG_TAG, "text : ${item.value}")
                         if (item.value.length > 15) {
                             var substrings = item.value.split(" ")
                             for (i in 0 until substrings.count()) {
-                                if(substrings[i].length == 15) {
+                                if (substrings[i].length == 15) {
                                     tv_result.text = substrings[i]
-                                    AppPreferences.gstNum = substrings[i]
+                                    val intent = Intent()
+                                    intent.putExtra(Const.SCAN_DATA, substrings[i])
+                                    setResult(Activity.RESULT_OK, intent)
+                                    finish()
                                 }
                             }
-
-                           // finish()
                         }
                     }
 
