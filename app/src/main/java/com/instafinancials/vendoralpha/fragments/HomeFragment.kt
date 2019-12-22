@@ -174,7 +174,7 @@ class HomeFragment : Fragment() {
 
     private fun callApi(cinNumber: String) {
 
-        RetrofitClient.INSTANCE.getGstData(cinNumber)
+        RetrofitClient.instance.getGstData(cinNumber)
             .enqueue(object : Callback<GstResponse> {
                 override fun onFailure(call: Call<GstResponse>, t: Throwable) {
                     showToast(t.message!!)
