@@ -27,8 +27,6 @@ import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import kotlinx.android.synthetic.main.custom_view_2.view.*
 
-private const val ARG_PARAM2 = "param2"
-
 class GstTrackerFragment : Fragment() {
 
     private lateinit var viewModel: BasicViewModel
@@ -165,6 +163,8 @@ class GstTrackerFragment : Fragment() {
     }
 
     companion object {
+        private const val ARG_PARAM2 = "param2"
+
         @JvmStatic
         fun newInstance(param1: GstResponse) =
             GstTrackerFragment().apply {

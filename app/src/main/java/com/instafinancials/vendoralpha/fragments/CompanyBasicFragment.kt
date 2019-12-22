@@ -22,8 +22,6 @@ import com.instafinancials.vendoralpha.models.RelatedParty
 import com.instafinancials.vendoralpha.models.Signatory
 import com.instafinancials.vendoralpha.viewmodels.DetailViewModel
 
-private const val ARG_PARAM1 = "param1"
-
 class CompanyBasicFragment : Fragment() {
     private lateinit var binding: CompanybasicFragmentBinding
     private lateinit var viewModel: DetailViewModel
@@ -158,6 +156,7 @@ class CompanyBasicFragment : Fragment() {
     }
 
     companion object {
+        private const val ARG_PARAM1 = "param1"
         @JvmStatic
         fun newInstance(param1: GstResponse) =
             CompanyBasicFragment().apply {

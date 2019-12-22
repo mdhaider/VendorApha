@@ -49,7 +49,6 @@
 
             </RelativeLayout>
 
-
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/profile"
                 android:layout_width="0dp"
