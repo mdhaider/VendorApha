@@ -1,6 +1,9 @@
 package com.instafinancials.vendoralpha.network
 
 import com.instafinancials.vendoralpha.BuildConfig
+import com.instafinancials.vendoralpha.shared.ApiConstants
+import com.instafinancials.vendoralpha.shared.ApiConstants.ACCES_TOKEN_KEY
+import com.instafinancials.vendoralpha.shared.ApiConstants.REQUEST_TIMEOUT
 import com.instafinancials.vendoralpha.shared.Installation
 import com.instafinancials.vendoralpha.shared.VendorApp
 import okhttp3.OkHttpClient
@@ -9,17 +12,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 object RetrofitClient {
-
-    private val AUTH = "dgtrrjjr8747747474"
-    private const val BASE_URL = "https://apps.instafinancials.com/"
     private var logging = HttpLoggingInterceptor(ApiLogger())
-    private val REQUEST_TIMEOUT = 60
 
     val INSTANCE: ApiInterface by lazy {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(ApiConstants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(getOkHttpClient())
             .build()
@@ -34,7 +32,7 @@ object RetrofitClient {
             val original = chain.request()
 
             val requestBuilder = original.newBuilder()
-                .addHeader("AccessTocken", Installation.id(VendorApp.instance))
+                .addHeader(ACCES_TOKEN_KEY, Installation.id(VendorApp.instance))
                 .method(original.method, original.body)
 
             val request = requestBuilder.build()
