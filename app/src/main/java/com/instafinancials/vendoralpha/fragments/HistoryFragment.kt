@@ -10,23 +10,23 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.adapters.BookmarkAdapter
-import com.instafinancials.vendoralpha.databinding.FragmentBookmarkBinding
+import com.instafinancials.vendoralpha.adapters.HistoryAdapter
+import com.instafinancials.vendoralpha.databinding.FragmentHistoryBinding
 import com.instafinancials.vendoralpha.db.AppDatabase
-import com.instafinancials.vendoralpha.db.BookmarkDataForDb
+import com.instafinancials.vendoralpha.db.HistoryDataForDb
 import com.instafinancials.vendoralpha.shared.Const
-import com.instafinancials.vendoralpha.viewmodels.BookmarkViewModel
+import com.instafinancials.vendoralpha.viewmodels.HistoryViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class BookmarkFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private lateinit var bookmarkViewModel: BookmarkViewModel
-    private lateinit var adapter: BookmarkAdapter
-    private lateinit var bookmarkList: ArrayList<BookmarkDataForDb>
-    private lateinit var binding: FragmentBookmarkBinding
+    private lateinit var historyViewModel: HistoryViewModel
+    private lateinit var adapter: HistoryAdapter
+    private lateinit var searchHistoryList: ArrayList<HistoryDataForDb>
+    private lateinit var binding: FragmentHistoryBinding
     private var db: AppDatabase? = null
 
     override fun onCreateView(
@@ -35,7 +35,7 @@ class BookmarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_bookmark, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
 
         return binding.root
     }
@@ -44,25 +44,25 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_book_home_only)
+            findNavController().navigate(R.id.action_history_home_only)
         }
 
         val itemOnClick: (Int) -> Unit = { position ->
-            goToHome(bookmarkList[position].gstTinNo)
+            goToHome(searchHistoryList[position].gstTinNo)
         }
 
-        bookmarkViewModel =
-            ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
+        historyViewModel =
+            ViewModelProviders.of(this).get(HistoryViewModel::class.java)
 
-        bookmarkList = ArrayList()
+        searchHistoryList = ArrayList()
 
         db = AppDatabase.getAppDataBase(context = activity!!)
         Observable.fromCallable {
-            db?.bookmarkDataDao()?.getBookmark()
+            db?.historyDataDao()?.getHistory()
         }.doOnNext { list ->
 
-            for(item in list!!){
-                bookmarkList.add(item)
+            for (item in list!!) {
+                searchHistoryList.add(item)
             }
 
         }.subscribeOn(Schedulers.io())
@@ -70,21 +70,23 @@ class BookmarkFragment : Fragment() {
             .subscribe()
 
 
-        binding.rvBookmarkList.setHasFixedSize(true)
-        bookmarkList.asReversed()
-        adapter = BookmarkAdapter(
-            bookmarkList,itemClickListener = itemOnClick)
-        binding.rvBookmarkList.adapter = adapter
-        binding.rvBookmarkList.layoutManager = LinearLayoutManager(activity)
+        binding.rvHistoryList.setHasFixedSize(true)
+        searchHistoryList.asReversed()
+        adapter = HistoryAdapter(
+            searchHistoryList, itemClickListener = itemOnClick
+        )
+        binding.rvHistoryList.adapter = adapter
+        binding.rvHistoryList.layoutManager = LinearLayoutManager(activity)
+
     }
 
-    private fun goToHome(gstNo:String) {
+    private fun goToHome(gstNo: String) {
         val bundle = Bundle().apply {
             putString(Const.GST_NUMBER, gstNo)
-            putBoolean(Const.IS_COMING_FROM_BOOK, true)
+            putBoolean(Const.IS_COMING_FROM_HISTORY, true)
         }
 
-        findNavController().navigate(R.id.action_book_home, bundle)
+        findNavController().navigate(R.id.action_history_home, bundle)
     }
 
 }

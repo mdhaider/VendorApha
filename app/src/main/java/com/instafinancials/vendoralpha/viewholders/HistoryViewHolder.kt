@@ -6,11 +6,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.db.BookmarkDataForDb
+import com.instafinancials.vendoralpha.db.HistoryDataForDb
 import java.text.SimpleDateFormat
 import java.util.*
 
-class BookmarkViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
-    RecyclerView.ViewHolder(inflater.inflate(R.layout.item_bookmark, parent, false)) {
+class HistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
+    RecyclerView.ViewHolder(inflater.inflate(R.layout.item_history, parent, false)) {
     private var mCinNumber: TextView? = null
     private var mComName: TextView? = null
     private var mDate: TextView? = null
@@ -21,10 +22,10 @@ class BookmarkViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
         mDate = itemView.findViewById(R.id.tvDate)
     }
 
-    fun bind(bookmarkDataForDb: BookmarkDataForDb, itemClickListener:(Int)->Unit) {
-        mCinNumber?.text = bookmarkDataForDb.gstTinNo
-        mComName?.text = (bookmarkDataForDb.comName)
-        mDate?.text = getStringDate(bookmarkDataForDb.bookDay)
+    fun bind(historyDataForDb: HistoryDataForDb, itemClickListener:(Int)->Unit) {
+        mCinNumber?.text = historyDataForDb.gstTinNo
+        mComName?.text = (historyDataForDb.comName)
+        mDate?.text = getStringDate(historyDataForDb.searchedDay)
 
         itemView.setOnClickListener { itemClickListener(adapterPosition) }
     }

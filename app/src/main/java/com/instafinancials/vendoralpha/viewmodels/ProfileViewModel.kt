@@ -28,4 +28,5 @@ class ProfileViewModel : ViewModel() {
     val state: LiveData<String> = _state
     val country: LiveData<String> = _country
 
+
 }
