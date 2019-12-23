@@ -108,6 +108,10 @@ class GSTRegistrationDetails {
     val registeredState: String? = null
     @SerializedName("TaxpayerType")
     val taxpayerType: String? = null
+    @SerializedName("EligibleToCollect")
+    val eligibleToCollect: String? = null
+    @SerializedName("FilingStatus")
+    val filingStatus: String? = null
     @SerializedName("GSTNStatus")
     val gSTNStatus: String? = null
     @SerializedName("Constitution")

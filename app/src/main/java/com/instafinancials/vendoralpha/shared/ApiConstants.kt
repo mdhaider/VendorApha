@@ -4,7 +4,10 @@ object ApiConstants {
     const val BASE_URL = "https://apps.instafinancials.com/"
     const val REQUEST_TIMEOUT = 30
     const val RETROFIT_LOG="Retrofit"
-    const val ACCES_TOKEN_KEY= "AccessTocken"
+    const val ACCESS_TOKEN_KEY= "AccessToken"
     const val GST_DATA_ENDPOINT= "InstaGST/v1/json/GSTIN/{GSTIN}"
-
+    const val REQ_OTP_ENDPOINT= "InstaOTP/v1/json/RequestOTP/{MobileNo} "
+    const val VERIFY_OTP_ENDPOINT= "InstaOTP/v1/json/VerifyOTP/{OTP}"
+    const val GET_USER_ENDPOINT= "InstaUser/v1/json/GetUser/{MobileNo}"
+    const val CREATE_ACC_ENDPOINT= "InstaUser/v1/json/RegisterUser/{MobileNo}"
 }

@@ -118,6 +118,16 @@ class GstTrackerFragment : Fragment() {
             data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime
         binding.tvConstitu.text =
             data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
+        if(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect=="true"){
+            binding.tvEligibleText.text = getString(R.string.yes_text)
+            binding.tvEligibleText.setTextColor(resources.getColor(R.color.green))
+        } else{
+            binding.tvEligibleText.text = getString(R.string.no_text)
+            binding.tvEligibleText.setTextColor(resources.getColor(R.color.red))
+        }
+
+        binding.tvFilStatusText.text =
+            data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus
 
         binding.rvGstFiling.setHasFixedSize(true)
         adapter = GstFilingAdapter(combineDataList())

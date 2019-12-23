@@ -14,13 +14,22 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvCin"
+                    android:id="@+id/tvGst"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                    android:fontFamily="@font/roboto"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     tools:text="User Name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvComName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    tools:text="21-03-2019" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvDate"

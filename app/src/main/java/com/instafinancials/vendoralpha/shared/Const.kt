@@ -8,6 +8,7 @@ object Const {
     const val BASE_HOME_URL = " https://apps.instafinancials.com/"
     const val BASE_EWAY_URL = "https://api.e-waybill.in/"
     const val LOG_TAG = "INSTA_LOG"
-    const val SCAN_DATA = ""
+    const val GST_NUMBER = "gst_number"
+    const val SCAN_DATA = "scan_data"
 
 }
