@@ -11,16 +11,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
-import com.instafinancials.vendoralpha.db.AppDatabase
-import com.instafinancials.vendoralpha.db.BookmarkDataDao
-import com.instafinancials.vendoralpha.db.BookmarkDataForDb
+import com.instafinancials.vendoralpha.db.*
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
@@ -40,12 +38,15 @@ class HomeFragment : Fragment() {
     private lateinit var gstResponseData: GstResponse
     private var db: AppDatabase? = null
     private var bookDao: BookmarkDataDao? = null
+    private var historyDao: HistoryDataDao? = null
     private var gstNo: String? = null
+    private var isComingFromBook: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
             gstNo = getString(Const.GST_NUMBER, "")
+            isComingFromBook = getBoolean(Const.IS_COMING_FROM_BOOK, false)
         }
     }
 
@@ -108,11 +109,12 @@ class HomeFragment : Fragment() {
 
         if (gstNo != null && gstNo!!.isNotEmpty()) {
             callAndFetchData(gstNo!!)
+            binding.searchView.setText(gstNo)
         }
     }
 
     private fun goToProfile() {
-        NavHostFragment.findNavController(this)
+        findNavController()
             .navigate(R.id.action_home_to_profile_home)
     }
 
@@ -128,6 +130,11 @@ class HomeFragment : Fragment() {
 
                 when (position) {
                     0 -> {
+                        if (isComingFromBook) {
+                            binding.tbBookMark.text = "UnBookark"
+                        } else {
+                            binding.tbBookMark.text = "Bookmark"
+                        }
                         binding.trackPar.visibility = View.VISIBLE
                         binding.repPar.visibility = View.GONE
                         binding.advPar.visibility = View.GONE
@@ -161,36 +168,48 @@ class HomeFragment : Fragment() {
 
         when (it.id) {
             R.id.bookmarkPar -> {
-                showToast("Item bookmarked")
 
-                Observable.fromCallable {
-                    db = AppDatabase.getAppDataBase(context = activity!!)
-                    bookDao = db?.bookmarkDataDao()
-                    var book = BookmarkDataForDb(
-                        0,
-                        gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
-                        gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-                        Date()
-                    )
-                    with(bookDao) {
-                        this?.insertBookmark(book)
-                    }
-                }.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
+                if (isComingFromBook) {
+                    showToast("Not yet implemented")
+                    /* Observable.fromCallable {
+                         db = AppDatabase.getAppDataBase(context = activity!!)
+                         bookDao = db?.bookmarkDataDao()
+                         with(bookDao) {
+                             this?.deleteDayRoutine("bookmarkDataForDb")
+                         }
+                     }.subscribeOn(Schedulers.io())
+                         .observeOn(AndroidSchedulers.mainThread())
+                         .subscribe()*/
+                } else {
+                    showToast("Item bookmarked")
+                    Observable.fromCallable {
+                        db = AppDatabase.getAppDataBase(context = activity!!)
+                        bookDao = db?.bookmarkDataDao()
+                        var book = BookmarkDataForDb(
+                            0,
+                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
+                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
+                            Date()
+                        )
+                        with(bookDao) {
+                            this?.insertBookmark(book)
+                        }
+                    }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
 
-
+                }
             }
             R.id.sharePar -> {
                 showToast("Item Shared")
             }
-            com.instafinancials.vendoralpha.R.id.trackPar -> {
+            R.id.trackPar -> {
                 showToast("Item Tracked")
             }
-            com.instafinancials.vendoralpha.R.id.repPar -> {
+            R.id.repPar -> {
                 showToast("Get fin report")
             }
-            com.instafinancials.vendoralpha.R.id.advPar -> {
+            R.id.advPar -> {
                 showToast("Get advanced report")
             }
 
@@ -233,6 +252,7 @@ class HomeFragment : Fragment() {
                             return
                         }
                         setDataInUi(gstResponse)
+                        addDataToHistory()
                         binding.dataView.visibility = View.VISIBLE
                         binding.bottomView.visibility = View.VISIBLE
                         binding.progressBarCyclic.visibility = View.GONE
@@ -256,6 +276,9 @@ class HomeFragment : Fragment() {
                         binding.tabs.setupWithViewPager(binding.viewPager)
                         adapter.notifyDataSetChanged()
                         Log.d("data", gstResponse.toString())
+                        binding.dataView.visibility = View.VISIBLE
+                        binding.bottomView.visibility = View.VISIBLE
+                        binding.progressBarCyclic.visibility = View.GONE
                     } else {
                         showToast(response.body().toString())
                     }
@@ -275,4 +298,24 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+    private fun addDataToHistory() {
+        Observable.fromCallable {
+            db = AppDatabase.getAppDataBase(context = activity!!)
+            historyDao = db?.historyDataDao()
+            var history = HistoryDataForDb(
+                0,
+                gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
+                gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
+                Date()
+            )
+            with(historyDao) {
+                this?.insertHistory(history)
+            }
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+
+    }
+
 }

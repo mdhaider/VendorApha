@@ -8,10 +8,10 @@ interface BookmarkDataDao{
     fun insertBookmark(bookmarkDataForDb: BookmarkDataForDb)
 
     @Update
-    fun updateDayRoutine(bookmarkDataForDb: BookmarkDataForDb)
+    fun updateBookmark(bookmarkDataForDb: BookmarkDataForDb)
 
     @Delete
-    fun deleteDayRoutine(bookmarkDataForDb: BookmarkDataForDb)
+    fun deleteBookmark(bookmarkDataForDb: BookmarkDataForDb)
 
     @Query("SELECT * FROM BookmarkDataForDb")
     fun getBookmark(): List<BookmarkDataForDb>

@@ -25,7 +25,7 @@ class BookmarkFragment : Fragment() {
 
     private lateinit var bookmarkViewModel: BookmarkViewModel
     private lateinit var adapter: BookmarkAdapter
-    private lateinit var searchHistoryList: ArrayList<BookmarkDataForDb>
+    private lateinit var bookmarkList: ArrayList<BookmarkDataForDb>
     private lateinit var binding: FragmentBookmarkBinding
     private var db: AppDatabase? = null
 
@@ -44,17 +44,17 @@ class BookmarkFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnBack.setOnClickListener {
-
+            findNavController().navigate(R.id.action_book_home_only)
         }
 
         val itemOnClick: (Int) -> Unit = { position ->
-            goToHome(searchHistoryList[position].gstTinNo)
+            goToHome(bookmarkList[position].gstTinNo)
         }
 
         bookmarkViewModel =
             ViewModelProviders.of(this).get(BookmarkViewModel::class.java)
 
-        searchHistoryList = ArrayList()
+        bookmarkList = ArrayList()
 
         db = AppDatabase.getAppDataBase(context = activity!!)
         Observable.fromCallable {
@@ -62,7 +62,7 @@ class BookmarkFragment : Fragment() {
         }.doOnNext { list ->
 
             for(item in list!!){
-                searchHistoryList.add(item)
+                bookmarkList.add(item)
             }
 
         }.subscribeOn(Schedulers.io())
@@ -71,9 +71,9 @@ class BookmarkFragment : Fragment() {
 
 
         binding.rvBookmarkList.setHasFixedSize(true)
-        searchHistoryList.asReversed()
+        bookmarkList.asReversed()
         adapter = BookmarkAdapter(
-            searchHistoryList,itemClickListener = itemOnClick)
+            bookmarkList,itemClickListener = itemOnClick)
         binding.rvBookmarkList.adapter = adapter
         binding.rvBookmarkList.layoutManager = LinearLayoutManager(activity)
     }
@@ -81,6 +81,7 @@ class BookmarkFragment : Fragment() {
     private fun goToHome(gstNo:String) {
         val bundle = Bundle().apply {
             putString(Const.GST_NUMBER, gstNo)
+            putBoolean(Const.IS_COMING_FROM_BOOK, true)
         }
 
         findNavController().navigate(R.id.action_book_home, bundle)
