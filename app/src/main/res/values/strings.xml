@@ -79,6 +79,7 @@
     <string name="plz_wait">Please wait...</string>
     <string name="fetching_data">Fetching data..</string>
     <string name="bookmarked_on">Bookmarked on:</string>
+    <string name="searched_on">Searched on:</string>
     <string name="gstin">GSTIN:</string>
 
 </resources>
