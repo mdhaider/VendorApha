@@ -4,7 +4,7 @@ import android.util.Log
 import java.lang.Exception
 
 class GSTChecksumUtil {
-private val TAG = "GSTChecksum"
+
     val arr = arrayOf(60,61,62,63,64,65,66,67,70,71, 101, 102, 103, 104, 105, 106, 107, 110, 111, 112, 113, 114, 115,116, 117, 120, 121, 122, 123, 124, 125, 126, 127, 130, 131,132)
     fun checValidGST(gst : String) : Boolean {
         var isValid = false
@@ -12,16 +12,16 @@ private val TAG = "GSTChecksum"
         try {
             inputGST = gst.trim().toUpperCase()
             var z = 0
-            for(i in 0 until (inputGST.length)) {
-                z += step6(inputGST[i])
-                println("z=" + z)
+            for(i in 0 until (inputGST.length - 1)) {
+                z += step6(inputGST[i], i)
+            //    println("hashSum=" + z)
 
             }
-            val s = arr.get((36-(z/36))%36)
+            val s = arr.get(36-(z%36))
 
             val s1 = dto(inputGST[14].toInt())
 
-            println("s= " + s + " s1=" + s1)
+           // println("s= " + s + " s1=" + s1)
 
             if(s == s1) {
                 isValid = true
@@ -32,19 +32,20 @@ private val TAG = "GSTChecksum"
         return isValid
     }
 
-    private fun step6(c: Char) : Int  {
+    private fun step6(c: Char, i: Int) : Int  {
         val o = dto(c.toInt())
         val ind = arr.indexOf(o)
         var  f= 0;
-        if(ind%2==0) {
-            f = 2
-        } else {
+        if(i%2 ==0) {
             f = 1
+        } else {
+            f = 2
         }
         val a = ind*f
         val q = (a/36)
         val r = (a%36)
-        Log.d(TAG, "c=" + c + " d=" + c.toInt() + " o=" + o + " index=" + ind + " a=" + a + " a/36=" + q + " a%36=" + r)
+    //    println("c=" + c + " d=" + c.toInt() + " o=" + o + " index=" + i + " f=" + f + " a/36=" + q + " a%36=" + r)
+
         return q + r
     }
 
@@ -60,5 +61,6 @@ private val TAG = "GSTChecksum"
         }
         return o
     }
+
 
 }

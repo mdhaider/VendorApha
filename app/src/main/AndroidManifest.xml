@@ -19,9 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.CameraActivity" />
+        <activity android:name="com.instafinancials.vendoralpha.ui.activities.CameraActivity" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.instafinancials.vendoralpha.ui.activities.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,11 +30,11 @@
         </activity>
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name="com.instafinancials.vendoralpha.ui.activities.LoginActivity"
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name=".activities.SplashActivity"
+            android:name="com.instafinancials.vendoralpha.ui.activities.SplashActivity"
             android:theme="@style/SplashScreenTheme">
         </activity>
 

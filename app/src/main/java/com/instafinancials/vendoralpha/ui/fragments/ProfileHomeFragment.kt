@@ -14,8 +14,8 @@ import androidx.navigation.Navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.instafinancials.vendoralpha.BuildConfig
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.activities.LoginActivity
-import com.instafinancials.vendoralpha.activities.MainActivity
+import com.instafinancials.vendoralpha.ui.activities.LoginActivity
+import com.instafinancials.vendoralpha.ui.activities.MainActivity
 import com.instafinancials.vendoralpha.databinding.ProfileHomeFragmentBinding
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.UserProfileResponse
