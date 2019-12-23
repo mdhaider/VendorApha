@@ -24,7 +24,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
     private static Paint textPaint;
     private final TextBlock textBlock;
 
-    OcrGraphic(GraphicOverlay overlay, TextBlock text) {
+    OcrGraphic(GraphicOverlay overlay, TextBlock text, int TEXT_COLOR) {
         super(overlay);
 
         textBlock = text;
@@ -90,9 +90,9 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
         // Break the text into multiple lines and draw each one according to its own bounding box.
         List<? extends Text> textComponents = textBlock.getComponents();
         for(Text currentText : textComponents) {
-            float left = translateX(currentText.getBoundingBox().left);
-            float bottom = translateY(currentText.getBoundingBox().bottom);
-            canvas.drawText(currentText.getValue(), left, bottom, textPaint);
+                float left = translateX(currentText.getBoundingBox().left);
+                float bottom = translateY(currentText.getBoundingBox().bottom);
+                canvas.drawText(currentText.getValue(), left, bottom, textPaint);
         }
     }
 }

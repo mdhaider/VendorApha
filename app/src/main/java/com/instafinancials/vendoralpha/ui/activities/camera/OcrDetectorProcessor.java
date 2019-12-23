@@ -1,9 +1,11 @@
 package com.instafinancials.vendoralpha.ui.activities.camera;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.android.gms.vision.Detector;
+import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.instafinancials.vendoralpha.shared.Const;
 
@@ -30,15 +32,30 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
             TextBlock item = items.valueAt(i);
             if (item != null && item.getValue() != null) {
                 Log.d("OcrDetectorProcessor", "Text detected! " + item.getValue());
-                if (item.getValue().length() > 15) {
-                    String[] substrings = item.getValue().split(" ");
-                    for (int j =0; j < substrings.length; j++) {
+                for(Text currentText : item.getComponents()) {
+                   if(currentText.getValue().trim().length() >= 15) {
+                       String[] substrings = currentText.getValue().split(" ");
+                       for (int j =0; j < substrings.length; j++) {
                         if (substrings[j].length() == 15) {
-                            OcrGraphic graphic = new OcrGraphic(graphicOverlay, item);
+                            OcrGraphic graphic = new OcrGraphic(graphicOverlay, item, Color.GREEN);
+                            graphicOverlay.add(graphic);
+                        } else {
+                            OcrGraphic graphic = new OcrGraphic(graphicOverlay, item, Color.YELLOW);
                             graphicOverlay.add(graphic);
                         }
                     }
+                   }
                 }
+
+//                if (item.getValue().trim().length() >= 15) {
+//                    String[] substrings = item.getValue().split(" ");
+//                    for (int j =0; j < substrings.length; j++) {
+//                        if (substrings[j].length() == 15) {
+//                            OcrGraphic graphic = new OcrGraphic(graphicOverlay, item);
+//                            graphicOverlay.add(graphic);
+//                        }
+//                    }
+//                }
             }
         }
     }

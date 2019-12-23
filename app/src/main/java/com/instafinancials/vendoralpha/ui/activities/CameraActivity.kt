@@ -217,9 +217,7 @@ class CameraActivity : AppCompatActivity() {
      */
     override fun onPause() {
         super.onPause();
-        if (preview != null) {
-            preview.stop();
-        }
+        preview.stop()
     }
 
     /**
@@ -228,9 +226,7 @@ class CameraActivity : AppCompatActivity() {
      */
     override fun onDestroy() {
         super.onDestroy();
-        if (preview != null) {
-            preview.release();
-        }
+        preview.release()
     }
 
     override fun onRequestPermissionsResult(requestCode : Int,
@@ -350,26 +346,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
 
-//    tv_result.post {
-//        for (i in 0 until items.size()) {
-//            val item = items.valueAt(i)
-//            Log.d(LOG_TAG, "text : ${item.value}")
-//            if (item.value.length > 15) {
-//                var substrings = item.value.split(" ")
-//                for (i in 0 until substrings.count()) {
-//                    if (substrings[i].length == 15) {
-//                        tv_result.text = substrings[i]
-//                        val intent = Intent()
-//                        intent.putExtra(Const.SCAN_DATA, substrings[i])
-//                        setResult(Activity.RESULT_OK, intent)
-//                        finish()
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
-
     private fun checkValue(value : String) {
         if (value.length > 15) {
                 var substrings = value.split(" ")
@@ -390,9 +366,9 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun finishAndSendResult(gst : String) {
-        val intent = Intent()
+        val intent = getIntent()
          intent.putExtra(Const.SCAN_DATA, gst)
          setResult(Activity.RESULT_OK, intent)
-                        finish()
+            finish()
     }
 }
