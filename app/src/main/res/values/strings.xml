@@ -26,7 +26,51 @@
     <string name="sign_in">Enter phone number to continue</string>
     <string name="phone_number_hint">Phone Number</string>
     <string name="password_hint">OTP</string>
+    <string name="name_hint">Name</string>
+    <string name="email_hint">Email</string>
     <string name="sign_in_text">Sign In</string>
+    <string name="btn_ver_otp">Verify OTP</string>
+    <string name="create_acc_text">Create Account</string>
     <string name="point_camera_at_gstin_to_scan">point camera at GSTIN to scan</string>
     <string name="enter_or_scan_gstin">Enter or Scan GSTIN</string>
+    <string name="gst_filing_details">GST Filing Details</string>
+    <string name="eligible_to_collect">Eligible to collect</string>
+    <string name="lat_fin">Latest Financials:</string>
+    <string name="name">Name</string>
+    <string name="location">Location:</string>
+    <string name="cin">CIN:</string>
+    <string name="dirlist">Director &amp; Signatory List</string>
+    <string name="pot_rel_party">Potential Related Party</string>
+    <string name="updated_on">Updated on:</string>
+    <string name="gstr_1">GSTR-1</string>
+    <string name="gstr_3b">GSTR 3B</string>
+    <string name="paid_up_capital">Paid up capital:</string>
+    <string name="city_state">City(State):</string>
+    <string name="website">Website:</string>
+    <string name="revenue_range">Revenue Range:</string>
+    <string name="pan">PAN:</string>
+    <string name="ok">Ok</string>
+    <string name="info">Info</string>
+    <string name="constitution">Constitution:</string>
+    <string name="filing_details">Filing Details</string>
+    <string name="info_msg">This is determined by the nature of registration and the status. The following taxpayers can collect taxes on outward supplies made by them \n\n-Regular \n-SEZ \n-Non-resident taxable person \n-Person supplying online information and database access \n\nTaxpayers whose status is Active, can collect taxers. \n\nWhere the above conditions are not satisfied, the taxpayers are classified as ineligible.</string>
+    <string name="filing_period">Filing Period</string>
+    <string name="gst_1">GST 1</string>
+    <string name="gst_3">GST 3</string>
+    <string name="month">Month</string>
+    <string name="show_profile">Show Profile</string>
+    <string name="empty_list">No se encontró museos</string>
+    <string name="an_error_occurred">Ocurrió un error</string>
+
+    <string name="type_gstin_hint">Type GSTIN in search box or\nClick the camera icon and scan the GSTIN</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="bookmark_list">Bookmark List</string>
+    <string name="gst_filing_status">GST Filing Status:</string>
+    <string name="yes_text">Yes</string>
+    <string name="no_text">No</string>
+    <string name="plz_wait">Please wait...</string>
+    <string name="fetching_data">Fetching data..</string>
+
 </resources>
