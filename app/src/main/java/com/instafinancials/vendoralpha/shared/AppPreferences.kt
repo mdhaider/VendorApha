@@ -11,6 +11,7 @@ object AppPreferences {
 
     // list of app specific preferences
     private val IS_VERIFIED = Pair("is_verified", false)
+    private val IS_LOGGED_IN = Pair("is_logged_in", false)
 
 
     fun init(context: Context) {
@@ -31,6 +32,13 @@ object AppPreferences {
             IS_VERIFIED.first, IS_VERIFIED.second)
         set(value) = preferences.edit {
             it.putBoolean(IS_VERIFIED.first, value!!)
+        }
+
+    var isLoggedIn: Boolean
+        get() = preferences.getBoolean(
+            IS_LOGGED_IN.first, IS_LOGGED_IN.second)
+        set(value) = preferences.edit {
+            it.putBoolean(IS_LOGGED_IN.first, value)
         }
 
 }

@@ -6,14 +6,14 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
-data class BookmarkDataForDb(
+data class HistoryDataForDb(
     @PrimaryKey(autoGenerate = true)
-    val bookmarkId: Int,
+    val historyId: Int,
     val gstTinNo: String,
     @ColumnInfo(name = "com_name")
     val comName: String,
-    @ColumnInfo(name = "bookmark_day")
-    val bookDay: Date
+    @ColumnInfo(name = "searched_day")
+    val searchedDay: Date
    /* @ColumnInfo(name = "book_data")
     val bookWholeData: GstResponse*/
 )

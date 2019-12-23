@@ -17,35 +17,21 @@
         android:padding="16dp">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="Uday"
-            android:textColor="@color/white"
+            tools:text="Uday"
+            android:textStyle="bold"
+            android:textColor="@color/red"
             android:textSize="18sp" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="sudhhdh@ffjff.com"
-            android:textColor="@color/grey_200"
-            android:textSize="14sp" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="99622327772"
-            android:textColor="@color/grey_200"
-            android:textSize="14sp" />
-
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/showProfView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:visibility="gone"
             android:layout_marginTop="8dp">
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
@@ -69,6 +55,27 @@
         android:layout_below="@+id/topView"
         android:orientation="vertical">
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:padding="16dp"
+                android:text="@string/menu_history_title"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/grey_300" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -228,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:padding="16dp"
-                android:text="@string/menu_login"
+                tools:text="@string/menu_login"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 

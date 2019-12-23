@@ -18,9 +18,7 @@ import com.instafinancials.vendoralpha.models.ReqOtpResponse
 import com.instafinancials.vendoralpha.models.UserProfileResponse
 import com.instafinancials.vendoralpha.models.VerifyOtpResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
-import com.instafinancials.vendoralpha.shared.AppPreferences
-import com.instafinancials.vendoralpha.shared.VendorApp
-import com.instafinancials.vendoralpha.shared.hideKeyboard
+import com.instafinancials.vendoralpha.shared.*
 import kotlinx.android.synthetic.main.dlg_progress.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var dialog: MaterialDialog
     private var mNumber:String?=null
     private var isUserReg: Boolean = false
+    private lateinit var modelPreferences: ModelPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -140,6 +139,7 @@ class LoginActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         val userProfileResponse = response.body()!!
                         isUserReg = userProfileResponse.response?.userProfile?.isRegistered!!
+                        ModelPreferences(application).putObject(Const.PROF_USER, userProfileResponse)
                         reqOtp(mobNumber)
 
                     } else {
@@ -194,6 +194,7 @@ class LoginActivity : AppCompatActivity() {
                         val verifyOtpResponse = response.body()!!
                         if (verifyOtpResponse.response?.isValid!!) {
                             if (isUserReg) {
+                                AppPreferences.isLoggedIn=true
                                 startActivity(Intent(VendorApp.instance, MainActivity::class.java))
                                 finish()
                             } else {
@@ -235,6 +236,8 @@ class LoginActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         val userProfileResponse = response.body()!!
                         if(userProfileResponse.response?.status=="Success"){
+                            AppPreferences.isLoggedIn=true
+                            ModelPreferences(application).putObject(Const.PROF_USER, userProfileResponse)
                             AppPreferences.isVerified=false
                             startActivity(Intent(VendorApp.instance, MainActivity::class.java))
                             finish()
