@@ -14,22 +14,40 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.activities.CameraActivity
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
+import com.instafinancials.vendoralpha.db.AppDatabase
+import com.instafinancials.vendoralpha.db.BookmarkDataDao
+import com.instafinancials.vendoralpha.db.BookmarkDataForDb
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.hideKeyboard
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var gstResponseData: GstResponse
+    private var db: AppDatabase? = null
+    private var bookDao: BookmarkDataDao? = null
+    private var gstNo: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.apply {
+            gstNo = getString(Const.GST_NUMBER, "")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +56,7 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(
             inflater,
-            com.instafinancials.vendoralpha.R.layout.fragment_home,
+            R.layout.fragment_home,
             container,
             false
         )
@@ -87,11 +105,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setItemAtBottom()
+
+        if (gstNo != null && gstNo!!.isNotEmpty()) {
+            callAndFetchData(gstNo!!)
+        }
     }
 
     private fun goToProfile() {
         NavHostFragment.findNavController(this)
-            .navigate(com.instafinancials.vendoralpha.R.id.action_home_to_profile_home)
+            .navigate(R.id.action_home_to_profile_home)
     }
 
     private fun goToCamera() {
@@ -138,10 +160,28 @@ class HomeFragment : Fragment() {
     private val OnItemClicked = View.OnClickListener {
 
         when (it.id) {
-            com.instafinancials.vendoralpha.R.id.bookmarkPar -> {
+            R.id.bookmarkPar -> {
                 showToast("Item bookmarked")
+
+                Observable.fromCallable {
+                    db = AppDatabase.getAppDataBase(context = activity!!)
+                    bookDao = db?.bookmarkDataDao()
+                    var book = BookmarkDataForDb(
+                        0,
+                        gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
+                        gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
+                        Date()
+                    )
+                    with(bookDao) {
+                        this?.insertBookmark(book)
+                    }
+                }.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe()
+
+
             }
-            com.instafinancials.vendoralpha.R.id.sharePar -> {
+            R.id.sharePar -> {
                 showToast("Item Shared")
             }
             com.instafinancials.vendoralpha.R.id.trackPar -> {
@@ -229,7 +269,7 @@ class HomeFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && requestCode == 111) {
             if (data?.extras?.getString(Const.SCAN_DATA) != null) {
                 val scanData = data.extras?.getString(Const.SCAN_DATA)
-               binding.searchView.setText(scanData)
+                binding.searchView.setText(scanData)
             } else {
                 showToast("Invalid GST")
             }

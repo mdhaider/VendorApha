@@ -235,6 +235,7 @@ class LoginActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         val userProfileResponse = response.body()!!
                         if(userProfileResponse.response?.status=="Success"){
+                            AppPreferences.isVerified=false
                             startActivity(Intent(VendorApp.instance, MainActivity::class.java))
                             finish()
                         }

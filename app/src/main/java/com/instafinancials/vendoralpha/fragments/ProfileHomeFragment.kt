@@ -1,5 +1,6 @@
 package com.instafinancials.vendoralpha.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation.findNavController
+import com.instafinancials.vendoralpha.BuildConfig
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.ProfileHomeFragmentBinding
 import com.instafinancials.vendoralpha.viewmodels.ProfileHomeViewModel
@@ -58,7 +60,7 @@ class ProfileHomeFragment : Fragment() {
                 findNavController(binding.tvBook).navigate(R.id.action_prof_orders)
             }
             R.id.tvRefer -> {
-                findNavController(binding.tvBook).navigate(R.id.action_prof_orders)
+                shareApp()
             }
             R.id.tvSupport -> {
                 findNavController(binding.tvBook).navigate(R.id.action_prof_support)
@@ -75,6 +77,20 @@ class ProfileHomeFragment : Fragment() {
             R.id.tvLogin -> {
                 findNavController(binding.tvBook).navigate(R.id.action_prof_login)
             }
+        }
+    }
+
+    private fun shareApp() {
+        try {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "VendorAlpha")
+            var shareMessage = "\nWe are glad to release app! Download the VendorAlpha app to search fro company details.\n\n"
+            shareMessage =
+                shareMessage+"Click here to download app:\n"+ "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+            startActivity(Intent.createChooser(shareIntent, "Share Via"))
+        } catch (e: java.lang.Exception) { //e.toString();
         }
     }
 }
