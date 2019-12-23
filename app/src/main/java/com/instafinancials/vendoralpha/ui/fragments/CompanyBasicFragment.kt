@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.fragments
+package com.instafinancials.vendoralpha.ui.fragments
 
 import android.content.Intent
 import android.net.Uri

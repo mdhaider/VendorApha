@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.activities
+package com.instafinancials.vendoralpha.ui.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

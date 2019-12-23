@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.instafinancials.vendoralpha.fragments.HomeFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.HomeFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_home" />
     <action
@@ -31,25 +31,25 @@
 
     <activity
         android:id="@+id/nav_login"
-        android:name="com.instafinancials.vendoralpha.activities.LoginActivity"
+        android:name="com.instafinancials.vendoralpha.ui.activities.LoginActivity"
         android:label="@string/menu_login"
         tools:layout="@layout/activity_login" />
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.instafinancials.vendoralpha.fragments.ProfileFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_history"
-        android:name="com.instafinancials.vendoralpha.fragments.SearchHistoryFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.SearchHistoryFragment"
         android:label="@string/menu_history"
         tools:layout="@layout/fragment_search_history" />
 
     <fragment
         android:id="@+id/nav_bookmark"
-        android:name="com.instafinancials.vendoralpha.fragments.BookmarkFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.BookmarkFragment"
         android:label="@string/menu_bookmark"
         tools:layout="@layout/fragment_bookmark">
 
@@ -66,41 +66,41 @@
 
     <fragment
         android:id="@+id/nav_orders"
-        android:name="com.instafinancials.vendoralpha.fragments.OrderFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.OrderFragment"
         android:label="@string/menu_orders"
         tools:layout="@layout/fragment_orders" />
 
     <fragment
         android:id="@+id/nav_refer"
-        android:name="com.instafinancials.vendoralpha.fragments.SendFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.SendFragment"
         android:label="@string/menu_refer"
         tools:layout="@layout/fragment_send" />
     <fragment
         android:id="@+id/nav_support"
-        android:name="com.instafinancials.vendoralpha.fragments.SupportFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.SupportFragment"
         android:label="@string/menu_support"
         tools:layout="@layout/fragment_support" />
 
     <fragment
         android:id="@+id/nav_feedback"
-        android:name="com.instafinancials.vendoralpha.fragments.SendFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.SendFragment"
         android:label="@string/menu_feedback"
         tools:layout="@layout/fragment_send" />
     <fragment
         android:id="@+id/nav_freecredits"
-        android:name="com.instafinancials.vendoralpha.fragments.ShareFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.ShareFragment"
         android:label="@string/menu_free"
         tools:layout="@layout/fragment_share" />
 
     <fragment
         android:id="@+id/nav_tou"
-        android:name="com.instafinancials.vendoralpha.fragments.TermsOfUseFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.TermsOfUseFragment"
         android:label="@string/menu_tou"
         tools:layout="@layout/fragment_terms_of_use" />
 
     <fragment
         android:id="@+id/nav_profile_home"
-        android:name="com.instafinancials.vendoralpha.fragments.ProfileHomeFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.ProfileHomeFragment"
         tools:layout="@layout/profile_home_fragment">
 
         <action
@@ -188,7 +188,7 @@
 
     <activity
         android:id="@+id/nav_cam"
-        android:name="com.instafinancials.vendoralpha.activities.CameraActivity"
+        android:name="com.instafinancials.vendoralpha.ui.activities.CameraActivity"
         tools:layout="@layout/activity_camera" />
 
 

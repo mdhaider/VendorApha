@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.fragments
+package com.instafinancials.vendoralpha.ui.fragments
 
 import android.app.Activity
 import android.content.Intent
@@ -15,7 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.activities.CameraActivity
+import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
 import com.instafinancials.vendoralpha.db.AppDatabase

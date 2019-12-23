@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.fragments
+package com.instafinancials.vendoralpha.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,14 +10,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.databinding.FragmentTermsOfUseBinding
-import com.instafinancials.vendoralpha.viewmodels.TermsOfUseViewModel
+import com.instafinancials.vendoralpha.databinding.FragmentSupportBinding
+import com.instafinancials.vendoralpha.viewmodels.SupportViewModel
 
 
-class TermsOfUseFragment : Fragment() {
+class SupportFragment : Fragment() {
 
-    private lateinit var sendViewModel: TermsOfUseViewModel
-    private lateinit var binding:FragmentTermsOfUseBinding
+    private lateinit var sendViewModel: SupportViewModel
+    private lateinit var binding:FragmentSupportBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +25,7 @@ class TermsOfUseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_terms_of_use, container, false)
+        binding= DataBindingUtil.inflate(inflater,R.layout.fragment_support, container, false)
 
         return binding.root
     }
@@ -34,7 +34,7 @@ class TermsOfUseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sendViewModel =
-            ViewModelProviders.of(this).get(TermsOfUseViewModel::class.java)
+            ViewModelProviders.of(this).get(SupportViewModel::class.java)
 
         binding.webview.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -42,6 +42,6 @@ class TermsOfUseFragment : Fragment() {
                 return true
             }
         }
-        binding.webview.loadUrl("https://www.instafinancials.com/terms-of-use.html")
+        binding.webview.loadUrl("https://support.instafinancials.com/portal/kb")
     }
 }
