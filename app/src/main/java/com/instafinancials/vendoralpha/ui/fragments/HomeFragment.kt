@@ -25,9 +25,9 @@ import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.hideKeyboard
 import com.instafinancials.vendoralpha.ui.activities.CameraActivity
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -106,36 +106,12 @@ class HomeFragment : Fragment() {
             R.id.bookmarkPar -> {
                 if (isComingFromBook || isBookmarked) {
                     showToast(getString(R.string.already_bookmarked))
-                    /* Observable.fromCallable {
-                         db = AppDatabase.getAppDataBase(context = activity!!)
-                         bookDao = db?.bookmarkDataDao()
-                         with(bookDao) {
-                             this?.deleteDayRoutine("bookmarkDataForDb")
-                         }
-                     }.subscribeOn(Schedulers.io())
-                         .observeOn(AndroidSchedulers.mainThread())
-                         .subscribe()*/
                 } else {
                     showToast(getString(R.string.item_bookmarked))
                     isBookmarked = true
                     binding.imgBookmark.setImageResource(R.drawable.ic_bookmark_filed)
                     binding.tbBookMark.text = getString(R.string.boomarked_text)
-                    Observable.fromCallable {
-                        db = AppDatabase.getAppDataBase(context = activity!!)
-                        bookDao = db?.bookmarkDataDao()
-                        var book = BookmarkDataForDb(
-                            0,
-                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
-                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-                            Date()
-                        )
-                        with(bookDao) {
-                            this?.insertBookmark(book)
-                        }
-                    }.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-
+                    addToBookmark()
                 }
             }
             R.id.sharePar -> {
@@ -250,11 +226,10 @@ class HomeFragment : Fragment() {
                             return
                         }
                         setDataInUi(gstResponse)
-                        addDataToHistory()
+                        addToHistory()
                         binding.dataView.visibility = View.VISIBLE
                         binding.bottomView.visibility = View.VISIBLE
                         binding.progressBarCyclic.visibility = View.GONE
-                        //  ModelPreferences(activity!!).putObject(Const.SEARCH_DATA, gstResponse)
 
                         val adapter =
                             SectionsPagerAdapter(
@@ -305,22 +280,28 @@ class HomeFragment : Fragment() {
             res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
     }
 
-    private fun addDataToHistory() {
-        Observable.fromCallable {
-            db = AppDatabase.getAppDataBase(context = activity!!)
-            historyDao = db?.historyDataDao()
-            var history = HistoryDataForDb(
-                0,
-                gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
-                gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-                Date()
-            )
-            with(historyDao) {
-                this?.insertHistory(history)
-            }
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-
+    private fun addToHistory() = GlobalScope.launch(Dispatchers.IO) {
+        db = AppDatabase.getAppDataBase(context = activity!!)
+        historyDao = db?.historyDataDao()
+        val history = HistoryDataForDb(
+            0,
+            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
+            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
+            Date()
+        )
+        historyDao?.insertHistory(history)
     }
+
+    private fun addToBookmark() = GlobalScope.launch(Dispatchers.IO) {
+        db = AppDatabase.getAppDataBase(context = activity!!)
+        bookDao = db?.bookmarkDataDao()
+        val book = BookmarkDataForDb(
+            0,
+            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
+            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
+            Date())
+
+        bookDao?.insertBookmark(book)
+    }
+
 }
