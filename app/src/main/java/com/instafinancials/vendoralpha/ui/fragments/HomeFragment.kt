@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.instafinancials.vendoralpha.BuildConfig
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
@@ -115,7 +116,7 @@ class HomeFragment : Fragment() {
                 }
             }
             R.id.sharePar -> {
-                showToast("Item Shared")
+                shareSearchedData()
             }
             R.id.trackPar -> {
                 showToast("Item Tracked")
@@ -150,6 +151,23 @@ class HomeFragment : Fragment() {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        }
+    }
+
+    private fun shareSearchedData() {
+        try {
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "VendorAlpha")
+            var shareMessage =
+                "\nI searched GST details using Vendor Alpha app.\n"+"GSTIn No: "+ gstResponseData.gSTInformationAndCompliance?.
+                    gSTRegistrationDetails?.gSTIN+"\n"+
+            "Business name: "+gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
+            shareMessage =
+                shareMessage + "\n\nClick here to download app:\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n"
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
+            startActivity(Intent.createChooser(shareIntent, "Share Via"))
+        } catch (e: java.lang.Exception) {
         }
     }
 

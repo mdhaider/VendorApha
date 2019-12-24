@@ -14,8 +14,6 @@ import androidx.navigation.Navigation.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.instafinancials.vendoralpha.BuildConfig
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.ui.activities.LoginActivity
-import com.instafinancials.vendoralpha.ui.activities.MainActivity
 import com.instafinancials.vendoralpha.databinding.ProfileHomeFragmentBinding
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.UserProfileResponse
@@ -23,6 +21,8 @@ import com.instafinancials.vendoralpha.shared.AppPreferences
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.ModelPreferences
 import com.instafinancials.vendoralpha.shared.VendorApp
+import com.instafinancials.vendoralpha.ui.activities.LoginActivity
+import com.instafinancials.vendoralpha.ui.activities.MainActivity
 import com.instafinancials.vendoralpha.viewmodels.ProfileHomeViewModel
 
 class ProfileHomeFragment : Fragment() {
@@ -170,7 +170,7 @@ class ProfileHomeFragment : Fragment() {
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "VendorAlpha")
             var shareMessage =
-                "\nWe are glad to release app! Download the VendorAlpha app to search fro company details.\n\n"
+                "\nWe are glad to release app! Download the VendorAlpha app to search for company details.\n\n"
             shareMessage =
                 shareMessage + "Click here to download app:\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n"
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
