@@ -17,7 +17,8 @@
     <string name="menu_profile">Profile</string>
     <string name="menu_history">Search History</string>
     <string name="menu_bookmark">Bookmark List</string>
-    <string name="menu_history_title">History List</string>
+    <string name="menu_bookmarks">Bookmarks</string>
+    <string name="menu_history_title">All History</string>
     <string name="menu_orders">Your Orders</string>
     <string name="menu_refer">Refer</string>
     <string name="menu_support">Support</string>

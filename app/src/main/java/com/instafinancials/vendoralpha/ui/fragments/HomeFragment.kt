@@ -119,13 +119,13 @@ class HomeFragment : Fragment() {
                 shareSearchedData()
             }
             R.id.trackPar -> {
-                showToast("Item Tracked")
+                showToast("Coming soon!")
             }
             R.id.repPar -> {
-                showToast("Get fin report")
+                showToast("Coming soon!")
             }
             R.id.advPar -> {
-                showToast("Get advanced report")
+                showToast("Coming soon!")
             }
             R.id.bntScan -> {
                 goToCamera()
