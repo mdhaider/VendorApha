@@ -185,6 +185,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBookmark"
                     android:layout_width="13dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
@@ -196,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Bookmark"
+                    android:text="@string/bookmark"
                     android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

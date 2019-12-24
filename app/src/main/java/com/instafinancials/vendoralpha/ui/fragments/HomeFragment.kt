@@ -15,7 +15,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
 import com.instafinancials.vendoralpha.db.*
@@ -24,6 +23,7 @@ import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.hideKeyboard
+import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -131,9 +131,10 @@ class HomeFragment : Fragment() {
                 when (position) {
                     0 -> {
                         if (isComingFromBook) {
-                            binding.tbBookMark.text = "UnBookark"
+                            binding.tbBookMark.text = getString(R.string.boomarked_text)
+                            binding.imgBookmark.setImageResource(R.drawable.ic_bookmark_filed)
                         } else {
-                            binding.tbBookMark.text = "Bookmark"
+                            binding.tbBookMark.text = getString(R.string.bookmark_msg)
                         }
                         binding.trackPar.visibility = View.VISIBLE
                         binding.repPar.visibility = View.GONE
@@ -168,9 +169,8 @@ class HomeFragment : Fragment() {
 
         when (it.id) {
             R.id.bookmarkPar -> {
-
                 if (isComingFromBook) {
-                    showToast("Not yet implemented")
+                    showToast("Already Bookmarked")
                     /* Observable.fromCallable {
                          db = AppDatabase.getAppDataBase(context = activity!!)
                          bookDao = db?.bookmarkDataDao()
@@ -182,6 +182,8 @@ class HomeFragment : Fragment() {
                          .subscribe()*/
                 } else {
                     showToast("Item bookmarked")
+                    binding.imgBookmark.setImageResource(R.drawable.ic_bookmark_filed)
+                    binding.tbBookMark.text = getString(R.string.boomarked_text)
                     Observable.fromCallable {
                         db = AppDatabase.getAppDataBase(context = activity!!)
                         bookDao = db?.bookmarkDataDao()

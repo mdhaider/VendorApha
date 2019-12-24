@@ -54,9 +54,9 @@
 
     <fragment
         android:id="@+id/nav_history"
-        android:name="com.instafinancials.vendoralpha.ui.fragments.SearchHistoryFragment"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.HistoryFragment"
         android:label="@string/menu_history"
-        tools:layout="@layout/fragment_search_history">
+        tools:layout="@layout/fragment_history">
 
         <action
             android:id="@+id/action_history_home"
@@ -247,6 +247,5 @@
         android:id="@+id/nav_cam"
         android:name="com.instafinancials.vendoralpha.ui.activities.CameraActivity"
         tools:layout="@layout/activity_camera" />
-
 
 </navigation>
