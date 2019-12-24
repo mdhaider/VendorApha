@@ -1,5 +1,6 @@
 package com.instafinancials.vendoralpha.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -14,5 +15,5 @@ interface HistoryDataDao{
     fun deleteHistory(historyDataForDb: HistoryDataForDb)
 
     @Query("SELECT * FROM HistoryDataForDb")
-    fun getHistory(): List<HistoryDataForDb>
+    fun getHistory(): LiveData<List<HistoryDataForDb>>
 }

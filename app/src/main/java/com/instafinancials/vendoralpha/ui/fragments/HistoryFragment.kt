@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,16 +17,14 @@ import com.instafinancials.vendoralpha.db.AppDatabase
 import com.instafinancials.vendoralpha.db.HistoryDataForDb
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.viewmodels.HistoryViewModel
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import java.util.Collections.reverse
 
 
 class HistoryFragment : Fragment() {
 
     private lateinit var historyViewModel: HistoryViewModel
     private lateinit var adapter: HistoryAdapter
-    private lateinit var searchHistoryList: ArrayList<HistoryDataForDb>
+    private lateinit var searchHistoryList: List<HistoryDataForDb>
     private lateinit var binding: FragmentHistoryBinding
     private var db: AppDatabase? = null
 
@@ -35,7 +34,12 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_history, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+               R.layout.fragment_history,
+                container,
+                false
+            )
 
         return binding.root
     }
@@ -48,41 +52,35 @@ class HistoryFragment : Fragment() {
         searchHistoryList = ArrayList()
         binding.btnBack.setOnClickListener(_onItemClick)
 
-        getAllHistoryListFromDb()
-        setUpAdapter()
-    }
-
-    private fun getAllHistoryListFromDb() {
-        Observable.fromCallable {
-            db?.historyDataDao()?.getHistory()
-        }.doOnNext { list ->
-
-            for (item in list!!) {
-                searchHistoryList.add(item)
-            }
-
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+        retrieveTasks()
     }
 
     private val _onItemClick = View.OnClickListener {
         when (it.id) {
             R.id.btnBack -> {
-                findNavController().navigate(R.id.action_history_home_only)
+                findNavController().navigate(com.instafinancials.vendoralpha.R.id.action_history_home_only)
             }
         }
     }
 
-    private fun setUpAdapter() {
+    private fun retrieveTasks() {
+        db?.historyDataDao()?.getHistory()?.observe(this,
+            Observer<List<HistoryDataForDb>> { history ->
+                searchHistoryList = history
+                setUpAdapter(searchHistoryList)
+            })
+    }
+
+    private fun setUpAdapter(list: List<HistoryDataForDb>) {
         val itemOnClick: (Int) -> Unit = { position ->
-            goToHome(searchHistoryList[position].gstTinNo)
+            goToHome(list[position].gstTinNo)
         }
 
+        reverse(list)
+
         binding.rvHistoryList.setHasFixedSize(true)
-        searchHistoryList.asReversed()
         adapter = HistoryAdapter(
-            searchHistoryList, itemClickListener = itemOnClick
+            list, itemClickListener = itemOnClick
         )
         binding.rvHistoryList.adapter = adapter
         binding.rvHistoryList.layoutManager = LinearLayoutManager(activity)
@@ -93,6 +91,10 @@ class HistoryFragment : Fragment() {
             putString(Const.GST_NUMBER, gstNo)
             putBoolean(Const.IS_COMING_FROM_HISTORY, true)
         }
-        findNavController().navigate(R.id.action_history_home, bundle)
+
+        findNavController().navigate(
+            R.id.action_history_home,
+            bundle
+        )
     }
 }

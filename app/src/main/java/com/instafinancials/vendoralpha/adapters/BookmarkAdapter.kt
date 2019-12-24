@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.db.BookmarkDataForDb
 import com.instafinancials.vendoralpha.viewholders.BookmarkViewHolder
 
-class BookmarkAdapter(private val list: ArrayList<BookmarkDataForDb>, private val itemClickListener: (Int) -> Unit)
+class BookmarkAdapter(private val list: List<BookmarkDataForDb>, private val itemClickListener: (Int) -> Unit)
     : RecyclerView.Adapter<BookmarkViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookmarkViewHolder {
