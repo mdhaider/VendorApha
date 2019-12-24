@@ -9,6 +9,7 @@ object Const {
     const val BASE_EWAY_URL = "https://api.e-waybill.in/"
     const val LOG_TAG = "INSTA_LOG"
     const val GST_NUMBER = "gst_number"
+    const val GST_HISTORY = "gst_history"
     const val IS_COMING_FROM_BOOKMARK = "is_gcoming_from_book"
     const val IS_COMING_FROM_HISTORY = "is_gcoming_from_history"
     const val SCAN_DATA = "scan_data"

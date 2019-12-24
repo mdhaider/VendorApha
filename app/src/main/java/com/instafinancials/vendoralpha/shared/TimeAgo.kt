@@ -23,7 +23,7 @@ object TimeAgo {
 
         val diff = now - time
         return if (diff < MINUTE_MILLIS) {
-            "just now"
+            "Just now"
         } else if (diff < 2 * MINUTE_MILLIS) {
             "a minute ago"
         } else if (diff < 50 * MINUTE_MILLIS) {

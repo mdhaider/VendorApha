@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
-import com.instafinancials.vendoralpha.db.BookmarkDataForDb
 import com.instafinancials.vendoralpha.db.HistoryDataForDb
+import com.instafinancials.vendoralpha.shared.TimeAgo
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,7 +25,7 @@ class HistoryViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(historyDataForDb: HistoryDataForDb, itemClickListener:(Int)->Unit) {
         mCinNumber?.text = historyDataForDb.gstTinNo
         mComName?.text = (historyDataForDb.comName)
-        mDate?.text = getStringDate(historyDataForDb.searchedDay)
+        mDate?.text = TimeAgo.getTimeAgo(historyDataForDb.searchedDay.time)
 
         itemView.setOnClickListener { itemClickListener(adapterPosition) }
     }

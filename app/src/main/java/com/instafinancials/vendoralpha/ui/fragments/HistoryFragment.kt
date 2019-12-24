@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.GsonBuilder
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.HistoryAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHistoryBinding
@@ -27,6 +28,7 @@ class HistoryFragment : Fragment() {
     private lateinit var searchHistoryList: List<HistoryDataForDb>
     private lateinit var binding: FragmentHistoryBinding
     private var db: AppDatabase? = null
+    private val gson = GsonBuilder().create()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +60,7 @@ class HistoryFragment : Fragment() {
     private val _onItemClick = View.OnClickListener {
         when (it.id) {
             R.id.btnBack -> {
-                findNavController().navigate(com.instafinancials.vendoralpha.R.id.action_history_home_only)
+                findNavController().navigate(R.id.action_history_home_only)
             }
         }
     }
@@ -73,7 +75,7 @@ class HistoryFragment : Fragment() {
 
     private fun setUpAdapter(list: List<HistoryDataForDb>) {
         val itemOnClick: (Int) -> Unit = { position ->
-            goToHome(list[position].gstTinNo)
+            goToHome(list[position].gstTinNo, list[position])
         }
 
         reverse(list)
@@ -86,9 +88,11 @@ class HistoryFragment : Fragment() {
         binding.rvHistoryList.layoutManager = LinearLayoutManager(activity)
     }
 
-    private fun goToHome(gstNo: String) {
+    private fun goToHome(gstTin: String,historyDataForDb: HistoryDataForDb) {
+        val historyData = gson.toJson(historyDataForDb.fullHistoryData)
         val bundle = Bundle().apply {
-            putString(Const.GST_NUMBER, gstNo)
+            putString(Const.GST_NUMBER, gstTin)
+            putString(Const.GST_HISTORY, historyData)
             putBoolean(Const.IS_COMING_FROM_HISTORY, true)
         }
 

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.google.gson.GsonBuilder
 import com.instafinancials.vendoralpha.BuildConfig
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
@@ -41,14 +42,17 @@ class HomeFragment : Fragment() {
     private var bookDao: BookmarkDataDao? = null
     private var historyDao: HistoryDataDao? = null
     private var gstNo: String? = null
+    private var gstData: String? = null
     private var isComingFromBook: Boolean = false
     private var isBookmarked: Boolean = false
+    private val gson = GsonBuilder().create()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
             gstNo = getString(Const.GST_NUMBER, "")
+            gstData = getString(Const.GST_HISTORY, "")
             isComingFromBook = getBoolean(Const.IS_COMING_FROM_BOOKMARK, false)
         }
     }
@@ -84,7 +88,10 @@ class HomeFragment : Fragment() {
         setItemAtBottom()
 
         if (!TextUtils.isEmpty(gstNo)) {
-            callAndFetchData(gstNo!!)
+            Log.d("data", gstData!!)
+            setInitialView()
+            gstResponseData = gson.fromJson(gstData, GstResponse::class.java)
+            setDataAfterApiCall(gstResponseData)
             binding.searchView.setText(gstNo)
         }
     }
@@ -143,7 +150,11 @@ class HomeFragment : Fragment() {
     private val textChangeListener = object : TextWatcher {
         override fun afterTextChanged(s: Editable?) {
             if (s!!.length >= 15) {
-                callAndFetchData(s.toString())
+                if (TextUtils.isEmpty(gstNo)) {
+                    callAndFetchData(s.toString())
+                } else {
+                    gstNo = ""
+                }
             }
         }
 
@@ -160,9 +171,8 @@ class HomeFragment : Fragment() {
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "VendorAlpha")
             var shareMessage =
-                "\nI searched GST details using Vendor Alpha app.\n"+"GSTIn No: "+ gstResponseData.gSTInformationAndCompliance?.
-                    gSTRegistrationDetails?.gSTIN+"\n"+
-            "Business name: "+gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
+                "\nI searched GST details using Vendor Alpha app.\n" + "GSTIn No: " + gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN + "\n" +
+                        "Business name: " + gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
             shareMessage =
                 shareMessage + "\n\nClick here to download app:\n" + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID + "\n\n"
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage)
@@ -215,12 +225,16 @@ class HomeFragment : Fragment() {
     }
 
     private fun callAndFetchData(gstNo: String) {
+        setInitialView()
+        callApi(gstNo)
+    }
+
+    private fun setInitialView() {
         hideKeyboard()
         binding.notSearchedView.visibility = View.GONE
         binding.progressBarCyclic.visibility = View.VISIBLE
         binding.dataView.visibility = View.GONE
         binding.bottomView.visibility = View.GONE
-        callApi(gstNo)
     }
 
     private fun callApi(cinNumber: String) {
@@ -234,48 +248,50 @@ class HomeFragment : Fragment() {
                 override fun onResponse(call: Call<GstResponse>, response: Response<GstResponse>) {
                     if (response.code() == 200) {
                         val gstResponse = response.body()!!
-
                         gstResponseData = gstResponse
-
-                        if (gstResponse.gSTInformationAndCompliance == null) {
-                            binding.progressBarCyclic.visibility = View.GONE
-                            binding.notSearchedView.visibility == View.VISIBLE
-                            showToast("Oops, something went wrong!!")
-                            return
-                        }
-                        setDataInUi(gstResponse)
-                        addToHistory()
-                        binding.dataView.visibility = View.VISIBLE
-                        binding.bottomView.visibility = View.VISIBLE
-                        binding.progressBarCyclic.visibility = View.GONE
-
-                        val adapter =
-                            SectionsPagerAdapter(
-                                activity!!,
-                                childFragmentManager
-                            )
-                        adapter.addFragment(
-                            GstTrackerFragment.newInstance(gstResponseData),
-                            "GST Tracker"
-                        )
-                        adapter.addFragment(
-                            CompanyBasicFragment.newInstance(gstResponseData),
-                            "CompanyBasic"
-                        )
-                        adapter.addFragment(CompanyFinFragment(), "CompanyFin")
-                        binding.viewPager.adapter = adapter
-                        binding.tabs.setupWithViewPager(binding.viewPager)
-                        adapter.notifyDataSetChanged()
-                        Log.d("data", gstResponse.toString())
-                        binding.dataView.visibility = View.VISIBLE
-                        binding.bottomView.visibility = View.VISIBLE
-                        binding.progressBarCyclic.visibility = View.GONE
+                        setDataAfterApiCall(gstResponse)
                     } else {
                         showToast(response.body().toString())
                     }
 
                 }
             })
+    }
+
+    private fun setDataAfterApiCall(gstResponse: GstResponse) {
+        if (gstResponse.gSTInformationAndCompliance == null) {
+            binding.progressBarCyclic.visibility = View.GONE
+            binding.notSearchedView.visibility == View.VISIBLE
+            showToast("Oops, something went wrong!!")
+            return
+        }
+        setDataInUi(gstResponse)
+        addToHistory()
+        binding.dataView.visibility = View.VISIBLE
+        binding.bottomView.visibility = View.VISIBLE
+        binding.progressBarCyclic.visibility = View.GONE
+
+        val adapter =
+            SectionsPagerAdapter(
+                activity!!,
+                childFragmentManager
+            )
+        adapter.addFragment(
+            GstTrackerFragment.newInstance(gstResponseData),
+            "GST Tracker"
+        )
+        adapter.addFragment(
+            CompanyBasicFragment.newInstance(gstResponseData),
+            "CompanyBasic"
+        )
+        adapter.addFragment(CompanyFinFragment(), "CompanyFin")
+        binding.viewPager.adapter = adapter
+        binding.tabs.setupWithViewPager(binding.viewPager)
+        adapter.notifyDataSetChanged()
+        Log.d("data", gstResponse.toString())
+        binding.dataView.visibility = View.VISIBLE
+        binding.bottomView.visibility = View.VISIBLE
+        binding.progressBarCyclic.visibility = View.GONE
     }
 
     private fun goToProfile() {
@@ -305,7 +321,7 @@ class HomeFragment : Fragment() {
             0,
             gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
             gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-            Date()
+            Date(), gstResponseData
         )
         historyDao?.insertHistory(history)
     }
@@ -317,7 +333,7 @@ class HomeFragment : Fragment() {
             0,
             gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
             gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-            Date())
+            Date(), gstResponseData)
 
         bookDao?.insertBookmark(book)
     }

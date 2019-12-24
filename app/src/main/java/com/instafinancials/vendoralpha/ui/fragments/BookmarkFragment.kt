@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.GsonBuilder
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.adapters.BookmarkAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentBookmarkBinding
@@ -27,6 +28,7 @@ class BookmarkFragment : Fragment() {
     private lateinit var bookmarkList: List<BookmarkDataForDb>
     private lateinit var binding: FragmentBookmarkBinding
     private var db: AppDatabase? = null
+    private val gson = GsonBuilder().create()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,7 +71,7 @@ class BookmarkFragment : Fragment() {
 
     private fun setUpAdapter(list: List<BookmarkDataForDb>) {
         val itemOnClick: (Int) -> Unit = { position ->
-            goToHome(list[position].gstTinNo)
+            goToHome(list[position].gstTinNo, list[position])
         }
 
         reverse(list)
@@ -83,9 +85,11 @@ class BookmarkFragment : Fragment() {
     }
 
 
-    private fun goToHome(gstNo: String) {
+    private fun goToHome(gstNo: String,bookmarkDataForDb: BookmarkDataForDb) {
+        val bookmarkData = gson.toJson(bookmarkDataForDb.fullBookmarkData)
         val bundle = Bundle().apply {
             putString(Const.GST_NUMBER, gstNo)
+            putString(Const.GST_HISTORY, bookmarkData)
             putBoolean(Const.IS_COMING_FROM_BOOKMARK, true)
         }
 
