@@ -31,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var dialog: MaterialDialog
     private var mNumber:String?=null
     private var isUserReg: Boolean = false
-    private lateinit var modelPreferences: ModelPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -205,7 +204,7 @@ class LoginActivity : AppCompatActivity() {
                                 AppPreferences.isVerified = true
                             }
                         } else {
-                            showToast("Invalid OTP")
+                            showToast(getString(R.string.invalid_otp))
                         }
 
                     } else {

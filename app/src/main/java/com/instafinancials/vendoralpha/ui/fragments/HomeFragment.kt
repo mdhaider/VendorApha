@@ -323,5 +323,4 @@ class HomeFragment : Fragment() {
             .subscribe()
 
     }
-
 }

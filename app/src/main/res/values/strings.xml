@@ -99,5 +99,6 @@
     <string name="bookmark_msg">Bookmark</string>
     <string name="already_bookmarked">Already Bookmarked</string>
     <string name="item_bookmarked">Item bookmarked</string>
+    <string name="invalid_otp">Invalid OTP</string>
 
 </resources>

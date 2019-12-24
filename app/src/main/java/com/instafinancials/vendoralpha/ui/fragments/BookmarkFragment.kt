@@ -48,7 +48,7 @@ class BookmarkFragment : Fragment() {
 
         binding.btnBack.setOnClickListener(_onItemClick)
 
-        retrieveTasks()
+        retrieveBookmarkList()
     }
 
     private val _onItemClick = View.OnClickListener {
@@ -59,7 +59,7 @@ class BookmarkFragment : Fragment() {
         }
     }
 
-    private fun retrieveTasks() {
+    private fun retrieveBookmarkList() {
         db?.bookmarkDataDao()?.getBookmark()?.observe(this,
             Observer<List<BookmarkDataForDb>> { bookmark ->
                 bookmarkList = bookmark

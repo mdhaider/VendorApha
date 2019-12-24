@@ -1,7 +1,4 @@
-package com.instafinancials.vendoralpha.utils
-
-import android.util.Log
-import java.lang.Exception
+package com.instafinancials.vendoralpha.shared
 
 class GSTChecksumUtil {
 

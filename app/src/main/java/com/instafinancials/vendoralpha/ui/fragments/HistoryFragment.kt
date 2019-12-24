@@ -52,7 +52,7 @@ class HistoryFragment : Fragment() {
         searchHistoryList = ArrayList()
         binding.btnBack.setOnClickListener(_onItemClick)
 
-        retrieveTasks()
+        retrieveHistoryList()
     }
 
     private val _onItemClick = View.OnClickListener {
@@ -63,7 +63,7 @@ class HistoryFragment : Fragment() {
         }
     }
 
-    private fun retrieveTasks() {
+    private fun retrieveHistoryList() {
         db?.historyDataDao()?.getHistory()?.observe(this,
             Observer<List<HistoryDataForDb>> { history ->
                 searchHistoryList = history

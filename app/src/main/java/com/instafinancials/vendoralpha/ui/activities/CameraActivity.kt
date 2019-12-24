@@ -4,11 +4,9 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.hardware.Camera
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
@@ -27,7 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.ui.activities.camera.*
-import com.instafinancials.vendoralpha.utils.GSTChecksumUtil
+import com.instafinancials.vendoralpha.shared.GSTChecksumUtil
 import java.io.IOException
 import kotlin.properties.Delegates
 
