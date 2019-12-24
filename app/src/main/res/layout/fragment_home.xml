@@ -45,7 +45,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="32dp"
                     android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_camera_20" />
+                    app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
             </RelativeLayout>
 

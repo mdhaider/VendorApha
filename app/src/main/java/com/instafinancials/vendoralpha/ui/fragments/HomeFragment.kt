@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -33,7 +34,6 @@ import retrofit2.Response
 import java.util.*
 
 class HomeFragment : Fragment() {
-
     private lateinit var binding: FragmentHomeBinding
     private lateinit var gstResponseData: GstResponse
     private var db: AppDatabase? = null
@@ -41,12 +41,14 @@ class HomeFragment : Fragment() {
     private var historyDao: HistoryDataDao? = null
     private var gstNo: String? = null
     private var isComingFromBook: Boolean = false
+    private var isBookmarked: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
             gstNo = getString(Const.GST_NUMBER, "")
-            isComingFromBook = getBoolean(Const.IS_COMING_FROM_BOOK, false)
+            isComingFromBook = getBoolean(Const.IS_COMING_FROM_BOOKMARK, false)
         }
     }
 
@@ -62,22 +64,103 @@ class HomeFragment : Fragment() {
             false
         )
 
-        binding.bntScan.setOnClickListener {
-            goToCamera()
-        }
-
-        binding.profile.setOnClickListener {
-            goToProfile()
-        }
+        binding.bntScan.setOnClickListener(_onItemClicked)
+        binding.profile.setOnClickListener(_onItemClicked)
+        binding.bookmarkPar.setOnClickListener(_onItemClicked)
+        binding.sharePar.setOnClickListener(_onItemClicked)
+        binding.trackPar.setOnClickListener(_onItemClicked)
+        binding.repPar.setOnClickListener(_onItemClicked)
+        binding.advPar.setOnClickListener(_onItemClicked)
 
         binding.searchView.addTextChangedListener(textChangeListener)
-        binding.bookmarkPar.setOnClickListener(OnItemClicked)
-        binding.sharePar.setOnClickListener(OnItemClicked)
-        binding.trackPar.setOnClickListener(OnItemClicked)
-        binding.repPar.setOnClickListener(OnItemClicked)
-        binding.advPar.setOnClickListener(OnItemClicked)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setItemAtBottom()
+
+        if (!TextUtils.isEmpty(gstNo)) {
+            callAndFetchData(gstNo!!)
+            binding.searchView.setText(gstNo)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == 111) {
+            if (data?.extras?.getString(Const.SCAN_DATA) != null) {
+                val scanData = data.extras?.getString(Const.SCAN_DATA)
+                binding.searchView.setText(scanData)
+            } else {
+                showToast("Invalid GST")
+            }
+        }
+    }
+
+    private val _onItemClicked = View.OnClickListener {
+
+        when (it.id) {
+            R.id.bookmarkPar -> {
+                if (isComingFromBook || isBookmarked) {
+                    showToast(getString(R.string.already_bookmarked))
+                    /* Observable.fromCallable {
+                         db = AppDatabase.getAppDataBase(context = activity!!)
+                         bookDao = db?.bookmarkDataDao()
+                         with(bookDao) {
+                             this?.deleteDayRoutine("bookmarkDataForDb")
+                         }
+                     }.subscribeOn(Schedulers.io())
+                         .observeOn(AndroidSchedulers.mainThread())
+                         .subscribe()*/
+                } else {
+                    showToast(getString(R.string.item_bookmarked))
+                    isBookmarked = true
+                    binding.imgBookmark.setImageResource(R.drawable.ic_bookmark_filed)
+                    binding.tbBookMark.text = getString(R.string.boomarked_text)
+                    Observable.fromCallable {
+                        db = AppDatabase.getAppDataBase(context = activity!!)
+                        bookDao = db?.bookmarkDataDao()
+                        var book = BookmarkDataForDb(
+                            0,
+                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
+                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
+                            Date()
+                        )
+                        with(bookDao) {
+                            this?.insertBookmark(book)
+                        }
+                    }.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe()
+
+                }
+            }
+            R.id.sharePar -> {
+                showToast("Item Shared")
+            }
+            R.id.trackPar -> {
+                showToast("Item Tracked")
+            }
+            R.id.repPar -> {
+                showToast("Get fin report")
+            }
+            R.id.advPar -> {
+                showToast("Get advanced report")
+            }
+            R.id.bntScan -> {
+                goToCamera()
+            }
+            R.id.profile -> {
+                goToProfile()
+            }
+
+            else -> {
+
+            }
+        }
     }
 
     private val textChangeListener = object : TextWatcher {
@@ -92,34 +175,6 @@ class HomeFragment : Fragment() {
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
-    }
-
-    private fun callAndFetchData(gstNo: String) {
-        hideKeyboard()
-        binding.notSearchedView.visibility = View.GONE
-        binding.progressBarCyclic.visibility = View.VISIBLE
-        binding.dataView.visibility = View.GONE
-        binding.bottomView.visibility = View.GONE
-        callApi(gstNo)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setItemAtBottom()
-
-        if (gstNo != null && gstNo!!.isNotEmpty()) {
-            callAndFetchData(gstNo!!)
-            binding.searchView.setText(gstNo)
-        }
-    }
-
-    private fun goToProfile() {
-        findNavController()
-            .navigate(R.id.action_home_to_profile_home)
-    }
-
-    private fun goToCamera() {
-        startActivityForResult(Intent(context, CameraActivity::class.java), 111)
     }
 
     private fun setItemAtBottom() {
@@ -165,72 +220,13 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private val OnItemClicked = View.OnClickListener {
-
-        when (it.id) {
-            R.id.bookmarkPar -> {
-                if (isComingFromBook) {
-                    showToast("Already Bookmarked")
-                    /* Observable.fromCallable {
-                         db = AppDatabase.getAppDataBase(context = activity!!)
-                         bookDao = db?.bookmarkDataDao()
-                         with(bookDao) {
-                             this?.deleteDayRoutine("bookmarkDataForDb")
-                         }
-                     }.subscribeOn(Schedulers.io())
-                         .observeOn(AndroidSchedulers.mainThread())
-                         .subscribe()*/
-                } else {
-                    showToast("Item bookmarked")
-                    binding.imgBookmark.setImageResource(R.drawable.ic_bookmark_filed)
-                    binding.tbBookMark.text = getString(R.string.boomarked_text)
-                    Observable.fromCallable {
-                        db = AppDatabase.getAppDataBase(context = activity!!)
-                        bookDao = db?.bookmarkDataDao()
-                        var book = BookmarkDataForDb(
-                            0,
-                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
-                            gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-                            Date()
-                        )
-                        with(bookDao) {
-                            this?.insertBookmark(book)
-                        }
-                    }.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe()
-
-                }
-            }
-            R.id.sharePar -> {
-                showToast("Item Shared")
-            }
-            R.id.trackPar -> {
-                showToast("Item Tracked")
-            }
-            R.id.repPar -> {
-                showToast("Get fin report")
-            }
-            R.id.advPar -> {
-                showToast("Get advanced report")
-            }
-
-            else -> {
-
-            }
-        }
-    }
-
-
-    private fun setDataInUi(res: GstResponse) {
-        binding.tvComName.text =
-            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
-        binding.tvStatus.text =
-            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus
-        binding.tvTaxPayerType.text =
-            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
-        binding.tvLocat.text =
-            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
+    private fun callAndFetchData(gstNo: String) {
+        hideKeyboard()
+        binding.notSearchedView.visibility = View.GONE
+        binding.progressBarCyclic.visibility = View.VISIBLE
+        binding.dataView.visibility = View.GONE
+        binding.bottomView.visibility = View.GONE
+        callApi(gstNo)
     }
 
     private fun callApi(cinNumber: String) {
@@ -289,16 +285,24 @@ class HomeFragment : Fragment() {
             })
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == 111) {
-            if (data?.extras?.getString(Const.SCAN_DATA) != null) {
-                val scanData = data.extras?.getString(Const.SCAN_DATA)
-                binding.searchView.setText(scanData)
-            } else {
-                showToast("Invalid GST")
-            }
-        }
+    private fun goToProfile() {
+        findNavController()
+            .navigate(R.id.action_home_to_profile_home)
+    }
+
+    private fun goToCamera() {
+        startActivityForResult(Intent(context, CameraActivity::class.java), 111)
+    }
+
+    private fun setDataInUi(res: GstResponse) {
+        binding.tvComName.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
+        binding.tvStatus.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus
+        binding.tvTaxPayerType.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
+        binding.tvLocat.text =
+            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
     }
 
     private fun addDataToHistory() {

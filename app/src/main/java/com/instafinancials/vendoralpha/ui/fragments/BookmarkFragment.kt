@@ -81,7 +81,7 @@ class BookmarkFragment : Fragment() {
     private fun goToHome(gstNo:String) {
         val bundle = Bundle().apply {
             putString(Const.GST_NUMBER, gstNo)
-            putBoolean(Const.IS_COMING_FROM_BOOK, true)
+            putBoolean(Const.IS_COMING_FROM_BOOKMARK, true)
         }
 
         findNavController().navigate(R.id.action_book_home, bundle)

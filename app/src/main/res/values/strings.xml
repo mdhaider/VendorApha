@@ -97,5 +97,7 @@
     <string name="bookmark">Bookmark</string>
     <string name="boomarked_text">Bookmarked</string>
     <string name="bookmark_msg">Bookmark</string>
+    <string name="already_bookmarked">Already Bookmarked</string>
+    <string name="item_bookmarked">Item bookmarked</string>
 
 </resources>

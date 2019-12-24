@@ -43,20 +43,16 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_history_home_only)
-        }
-
-        val itemOnClick: (Int) -> Unit = { position ->
-            goToHome(searchHistoryList[position].gstTinNo)
-        }
-
-        historyViewModel =
-            ViewModelProviders.of(this).get(HistoryViewModel::class.java)
-
-        searchHistoryList = ArrayList()
-
+        historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel::class.java)
         db = AppDatabase.getAppDataBase(context = activity!!)
+        searchHistoryList = ArrayList()
+        binding.btnBack.setOnClickListener(_onItemClick)
+
+        getAllHistoryListFromDb()
+        setUpAdapter()
+    }
+
+    private fun getAllHistoryListFromDb() {
         Observable.fromCallable {
             db?.historyDataDao()?.getHistory()
         }.doOnNext { list ->
@@ -68,7 +64,20 @@ class HistoryFragment : Fragment() {
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
+    }
 
+    private val _onItemClick = View.OnClickListener {
+        when (it.id) {
+            R.id.btnBack -> {
+                findNavController().navigate(R.id.action_history_home_only)
+            }
+        }
+    }
+
+    private fun setUpAdapter() {
+        val itemOnClick: (Int) -> Unit = { position ->
+            goToHome(searchHistoryList[position].gstTinNo)
+        }
 
         binding.rvHistoryList.setHasFixedSize(true)
         searchHistoryList.asReversed()
@@ -77,7 +86,6 @@ class HistoryFragment : Fragment() {
         )
         binding.rvHistoryList.adapter = adapter
         binding.rvHistoryList.layoutManager = LinearLayoutManager(activity)
-
     }
 
     private fun goToHome(gstNo: String) {
@@ -85,8 +93,6 @@ class HistoryFragment : Fragment() {
             putString(Const.GST_NUMBER, gstNo)
             putBoolean(Const.IS_COMING_FROM_HISTORY, true)
         }
-
         findNavController().navigate(R.id.action_history_home, bundle)
     }
-
 }
