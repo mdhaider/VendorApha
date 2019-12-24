@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.models.GSTSingleRecord
 import com.instafinancials.vendoralpha.shared.TimeUtil.getDifferenceDays
+import com.instafinancials.vendoralpha.shared.TimeUtil.stringToString
 import com.instafinancials.vendoralpha.shared.TimeUtil.stringToDate
-import com.instafinancials.vendoralpha.shared.TimeUtil.stringToDate1
 
 class GstFilingDetailViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_gstfiling_detail, parent, false)) {
@@ -29,15 +29,15 @@ class GstFilingDetailViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(gstComplianceRecord: GSTSingleRecord) {
         mMonth?.text = gstComplianceRecord.taxPeriod
-        mGst1Fildat?.text = stringToDate(gstComplianceRecord.gst1FilingDat!!)
+        mGst1Fildat?.text = stringToString(gstComplianceRecord.gst1FilingDat!!)
         setDueData1(gstComplianceRecord)
-        mGst3Fildat?.text = stringToDate(gstComplianceRecord.gst3FilingDat!!)
+        mGst3Fildat?.text = stringToString(gstComplianceRecord.gst3FilingDat!!)
         setDueData3(gstComplianceRecord)
     }
 
     private fun setDueData1(rec: GSTSingleRecord) {
         val int =
-            getDifferenceDays(stringToDate1(rec.gst1DueDat!!), stringToDate1(rec.gst1FilingDat!!))
+            getDifferenceDays(stringToDate(rec.gst1DueDat!!), stringToDate(rec.gst1FilingDat!!))
         if (int >= 0) {
             mGst1Duedat?.text = "(" + int.toString() + ")"
             mGst1Duedat?.setTextColor(Color.parseColor("#1fb14c"))
@@ -49,7 +49,7 @@ class GstFilingDetailViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     private fun setDueData3(rec: GSTSingleRecord) {
         val int =
-            getDifferenceDays(stringToDate1(rec.gst3DueDat!!), stringToDate1(rec.gst3FilingDat!!))
+            getDifferenceDays(stringToDate(rec.gst3DueDat!!), stringToDate(rec.gst3FilingDat!!))
         if (int >= 0) {
             mGst3Duedat?.text = "(" + int.toString() + ")"
             mGst3Duedat?.setTextColor(Color.parseColor("#1fb14c"))

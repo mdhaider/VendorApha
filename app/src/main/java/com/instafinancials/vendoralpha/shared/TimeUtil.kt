@@ -7,7 +7,7 @@ import java.util.*
 
 
 object TimeUtil {
-    fun stringToDate(datesString: String): String {
+    fun stringToString(datesString: String): String {
         var date1: Date
         var dateTime: String? = null
         val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -21,7 +21,23 @@ object TimeUtil {
         return dateTime!!
     }
 
-    fun stringToDate1(datesString: String): Date {
+    fun stringToString1(datesString: String): String {
+        var date1: Date
+        var dateTime: String? = null
+        val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH)
+        try {
+            date1 = format.parse(datesString)
+            dateTime = dateFormat.format(date1)
+        } catch (e: ParseException) {
+            e.printStackTrace()
+        }
+        return dateTime!!
+    }
+
+
+
+    fun stringToDate(datesString: String): Date {
         var date1: Date= Date()
         val format = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         try {

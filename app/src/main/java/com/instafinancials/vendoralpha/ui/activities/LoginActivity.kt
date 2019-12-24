@@ -2,6 +2,7 @@ package com.instafinancials.vendoralpha.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -10,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
-import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.ActivityLoginBinding
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.CreateAccReq
@@ -29,13 +29,13 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var dialog: MaterialDialog
-    private var mNumber:String?=null
+    private var mNumber: String? = null
     private var isUserReg: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(
-            this, R.layout.activity_login
+            this, com.instafinancials.vendoralpha.R.layout.activity_login
         )
 
         binding.mNumber.addTextChangedListener(numberTextChangeListener)
@@ -53,10 +53,17 @@ class LoginActivity : AppCompatActivity() {
             createUser()
         }
 
-        dialog = MaterialDialog(this).customView(R.layout.dlg_progress, scrollable = false)
+        binding.resendOtp.setOnClickListener {
+            reqOtp(mNumber!!)
+        }
+
+        dialog = MaterialDialog(this).customView(
+            com.instafinancials.vendoralpha.R.layout.dlg_progress,
+            scrollable = false
+        )
             .cancelable(false)
         val customView = dialog.getCustomView()
-        customView.txtTitle.text = getString(R.string.plz_wait)
+        customView.txtTitle.text = getString(com.instafinancials.vendoralpha.R.string.plz_wait)
         //   customView.txtmsg.text=getString(R.string.fetching_data)
 
         if (AppPreferences.isVerified!!) {
@@ -86,11 +93,11 @@ class LoginActivity : AppCompatActivity() {
             if (s.toString().length == 6) {
                 binding.btnReq.visibility = View.VISIBLE
                 binding.btnReq.isEnabled = true
-                binding.btnReq.setTextColor(resources.getColor(R.color.white))
+                binding.btnReq.setTextColor(resources.getColor(com.instafinancials.vendoralpha.R.color.white))
             } else {
                 binding.btnReq.isEnabled = false
                 binding.btnReq.visibility = View.VISIBLE
-                binding.btnReq.setTextColor(resources.getColor(R.color.grey_500))
+                binding.btnReq.setTextColor(resources.getColor(com.instafinancials.vendoralpha.R.color.grey_500))
             }
         }
 
@@ -106,11 +113,11 @@ class LoginActivity : AppCompatActivity() {
             if (s.toString().length > 6) {
                 binding.btnCreateAc.visibility = View.VISIBLE
                 binding.btnCreateAc.isEnabled = true
-                binding.btnCreateAc.setTextColor(resources.getColor(R.color.white))
+                binding.btnCreateAc.setTextColor(resources.getColor(com.instafinancials.vendoralpha.R.color.white))
             } else {
                 binding.btnCreateAc.isEnabled = false
                 binding.btnCreateAc.visibility = View.VISIBLE
-                binding.btnCreateAc.setTextColor(resources.getColor(R.color.grey_500))
+                binding.btnCreateAc.setTextColor(resources.getColor(com.instafinancials.vendoralpha.R.color.grey_500))
             }
         }
 
@@ -138,7 +145,10 @@ class LoginActivity : AppCompatActivity() {
                     if (response.code() == 200) {
                         val userProfileResponse = response.body()!!
                         isUserReg = userProfileResponse.response?.userProfile?.isRegistered!!
-                        ModelPreferences(application).putObject(Const.PROF_USER, userProfileResponse)
+                        ModelPreferences(application).putObject(
+                            Const.PROF_USER,
+                            userProfileResponse
+                        )
                         reqOtp(mobNumber)
 
                     } else {
@@ -166,6 +176,23 @@ class LoginActivity : AppCompatActivity() {
                         val reqOtpResponse = response.body()!!
                         if (reqOtpResponse.response?.status == "Success") {
                             binding.otpParent.visibility = View.VISIBLE
+                            mNumber = binding.mNumber.text.toString()
+
+                            object : CountDownTimer(60000, 1000) {
+
+                                override fun onTick(millisUntilFinished: Long) {
+                                    binding.resendOtp.text =
+                                        "Resend Otp in: " + millisUntilFinished / 1000+" "+"sec"
+                                    binding.resendOtp.isEnabled = false
+
+                                }
+
+                                override fun onFinish() {
+                                    binding.resendOtp.text = "Resend OTP"
+                                    binding.resendOtp.isEnabled = true
+                                }
+
+                            }.start()
                         }
 
                     } else {
@@ -193,18 +220,19 @@ class LoginActivity : AppCompatActivity() {
                         val verifyOtpResponse = response.body()!!
                         if (verifyOtpResponse.response?.isValid!!) {
                             if (isUserReg) {
-                                AppPreferences.isLoggedIn=true
+                                AppPreferences.isLoggedIn = true
                                 startActivity(Intent(VendorApp.instance, MainActivity::class.java))
                                 finish()
                             } else {
                                 binding.creatAccPar.visibility = View.VISIBLE
-                                mNumber= binding.mNumber.text.toString()
+                                mNumber = binding.mNumber.text.toString()
                                 binding.topPar.visibility = View.GONE
                                 binding.btnReq.visibility = View.GONE
                                 AppPreferences.isVerified = true
+                                binding.tvRegMsg.text="Enter below details to register with us"
                             }
                         } else {
-                            showToast(getString(R.string.invalid_otp))
+                            showToast(getString(com.instafinancials.vendoralpha.R.string.invalid_otp))
                         }
 
                     } else {
@@ -234,10 +262,13 @@ class LoginActivity : AppCompatActivity() {
                     dialog.dismiss()
                     if (response.code() == 200) {
                         val userProfileResponse = response.body()!!
-                        if(userProfileResponse.response?.status=="Success"){
-                            AppPreferences.isLoggedIn=true
-                            ModelPreferences(application).putObject(Const.PROF_USER, userProfileResponse)
-                            AppPreferences.isVerified=false
+                        if (userProfileResponse.response?.status == "Success") {
+                            AppPreferences.isLoggedIn = true
+                            ModelPreferences(application).putObject(
+                                Const.PROF_USER,
+                                userProfileResponse
+                            )
+                            AppPreferences.isVerified = false
                             startActivity(Intent(VendorApp.instance, MainActivity::class.java))
                             finish()
                         }

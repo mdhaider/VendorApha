@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.DialogBehavior
@@ -24,6 +25,8 @@ import com.instafinancials.vendoralpha.databinding.GsttrackerFragmentBinding
 import com.instafinancials.vendoralpha.models.GSTComplianceRecord
 import com.instafinancials.vendoralpha.models.GSTSingleRecord
 import com.instafinancials.vendoralpha.models.GstResponse
+import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.TimeUtil
 import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import kotlinx.android.synthetic.main.custom_view_2.view.*
 
@@ -80,7 +83,10 @@ class GstTrackerFragment : Fragment() {
             showCustomViewDialogDetails(BottomSheet(LayoutMode.WRAP_CONTENT))
         }
 
-      //  data = ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
+        binding.imgRefresh.setOnClickListener {
+          //  goToHome(binding.imgRefresh,data.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!)
+        }
+
         Log.d("gstracker",data.toString())
 
         setData(data)
@@ -115,7 +121,7 @@ class GstTrackerFragment : Fragment() {
 
     private fun setData(data: GstResponse) {
         binding.tvLast.text =
-            data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime
+            TimeUtil.stringToString1(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime!!)
         binding.tvConstitu.text =
             data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
         if(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect=="true"){
@@ -182,5 +188,12 @@ class GstTrackerFragment : Fragment() {
                     putSerializable(ARG_PARAM2, param1)
                 }
             }
+    }
+    private fun goToHome(img: View,gstNo: String) {
+        val bundle = Bundle().apply {
+            putString(Const.GST_NUMBER, gstNo)
+        }
+
+        Navigation.findNavController(img).navigate(R.id.action_gsttracker_home, bundle)
     }
 }

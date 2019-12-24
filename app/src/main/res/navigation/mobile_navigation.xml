@@ -248,4 +248,21 @@
         android:name="com.instafinancials.vendoralpha.ui.activities.CameraActivity"
         tools:layout="@layout/activity_camera" />
 
+    <fragment
+        android:id="@+id/nav_gst"
+        android:name="com.instafinancials.vendoralpha.ui.fragments.GstTrackerFragment"
+        tools:layout="@layout/gsttracker_fragment">
+
+        <action
+            android:id="@+id/action_gsttracker_home"
+            app:destination="@+id/nav_home"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/navigation_home"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
 </navigation>

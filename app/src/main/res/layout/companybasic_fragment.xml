@@ -48,19 +48,18 @@
                             android:layout_toEndOf="@+id/tvLast"
                             android:fontFamily="@font/roboto_medium"
                             android:gravity="end"
-                            android:text="Mar 6, 2010"
+                            tools:text="Mar 6, 2010"
                             android:textSize="14sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <androidx.appcompat.widget.AppCompatImageButton
-                        android:id="@+id/refresh_gst_tracker"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/imgRefresh"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentEnd="true"
-                        android:background="@drawable/rounded_button_boarderless"
-                        android:elevation="4dp"
-                        android:src="@drawable/ic_update" />
+                        android:src="@drawable/ic_refresh_black_24dp" />
+
                 </RelativeLayout>
 
                 <androidx.cardview.widget.CardView

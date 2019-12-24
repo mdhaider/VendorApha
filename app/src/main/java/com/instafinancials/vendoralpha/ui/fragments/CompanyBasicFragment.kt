@@ -21,6 +21,7 @@ import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.models.RelatedParty
 import com.instafinancials.vendoralpha.models.Signatory
 import com.instafinancials.vendoralpha.shared.NumberUtil
+import com.instafinancials.vendoralpha.shared.TimeUtil
 import com.instafinancials.vendoralpha.viewmodels.DetailViewModel
 
 class CompanyBasicFragment : Fragment() {
@@ -61,8 +62,6 @@ class CompanyBasicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-      //  data = ModelPreferences(activity!!).getObject(Const.SEARCH_DATA, GstResponse::class.java)!!
-
         Log.d("gstbasic", data.toString())
         dirList = ArrayList()
         sigList = ArrayList()
@@ -98,7 +97,7 @@ class CompanyBasicFragment : Fragment() {
     }
 
     private fun setData(data: GstResponse) {
-        binding.tvLast.text = data.companyMasterSummary?.lastUpdatedDateTime
+        binding.tvLast.text =  TimeUtil.stringToString1(data.companyMasterSummary?.lastUpdatedDateTime!!)
         binding.TVCinName.text = data.companyMasterSummary?.companyCIN
         binding.tvlatFinan.text = data.companyMasterSummary?.companyLastBsDate
         binding.tvpaidUpCap.text = "Rs"+" "+NumberUtil.numberTextFormat(data.companyMasterSummary?.companyPaidUpCapital!!.toLong())
