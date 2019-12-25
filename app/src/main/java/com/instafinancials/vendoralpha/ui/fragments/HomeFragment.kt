@@ -272,19 +272,14 @@ class HomeFragment : Fragment() {
         binding.progressBarCyclic.visibility = View.GONE
 
         val adapter =
-            SectionsPagerAdapter(
-                activity!!,
-                childFragmentManager
-            )
-        adapter.addFragment(
-            GstTrackerFragment.newInstance(gstResponseData),
-            "GST Tracker"
-        )
-        adapter.addFragment(
-            CompanyBasicFragment.newInstance(gstResponseData),
-            "CompanyBasic"
-        )
-        adapter.addFragment(CompanyFinFragment(), "CompanyFin")
+            SectionsPagerAdapter(activity!!, childFragmentManager)
+        adapter.addFragment(GstTrackerFragment.newInstance(gstResponseData), "GST Tracker")
+
+        if (gstResponseData.companyMasterSummary?.companyCIN !=null) {
+            adapter.addFragment(CompanyBasicFragment.newInstance(gstResponseData), "CompanyBasic")
+            adapter.addFragment(CompanyFinFragment(), "CompanyFin")
+        }
+
         binding.viewPager.adapter = adapter
         binding.tabs.setupWithViewPager(binding.viewPager)
         adapter.notifyDataSetChanged()
@@ -333,7 +328,8 @@ class HomeFragment : Fragment() {
             0,
             gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!,
             gstResponseData.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness!!,
-            Date(), gstResponseData)
+            Date(), gstResponseData
+        )
 
         bookDao?.insertBookmark(book)
     }

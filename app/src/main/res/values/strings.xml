@@ -101,5 +101,7 @@
     <string name="already_bookmarked">Already Bookmarked</string>
     <string name="item_bookmarked">Item bookmarked</string>
     <string name="invalid_otp">Invalid OTP</string>
+    <string name="worried_about">Worried about GST Credit Issue?</string>
+    <string name="verify_gstin">Verify GSTIN &amp; Filing Status\nbefore making payment</string>
 
 </resources>

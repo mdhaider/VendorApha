@@ -145,6 +145,7 @@
                 android:elevation="2dp"
                 app:tabBackground="@drawable/tab_layout_selector"
                 app:tabGravity="fill"
+                app:tabMaxWidth="2000dp"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"

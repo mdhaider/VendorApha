@@ -60,6 +60,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentEnd="true"
+                        android:visibility="invisible"
                        android:src="@drawable/ic_refresh_black_24dp" />
                 </RelativeLayout>
 

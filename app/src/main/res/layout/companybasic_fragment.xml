@@ -58,6 +58,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_alignParentEnd="true"
+                        android:visibility="invisible"
                         android:src="@drawable/ic_refresh_black_24dp" />
 
                 </RelativeLayout>
@@ -100,7 +101,7 @@
                                 android:layout_toEndOf="@+id/tvcIN"
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
-                                android:text="U127585940KOOI"
+                                tools:text="U127585940KOOI"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
 
@@ -187,6 +188,7 @@
                                 android:fontFamily="@font/roboto_medium"
                                 android:gravity="end"
                                 android:textSize="14sp"
+                                android:textColor="@color/blue"
                                 android:textStyle="bold"
                                 tools:text="Rs. 78 Lacs" />
                         </RelativeLayout>

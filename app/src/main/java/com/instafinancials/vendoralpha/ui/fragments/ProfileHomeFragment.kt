@@ -50,11 +50,13 @@ class ProfileHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if(AppPreferences.isLoggedIn){
-            binding.tvLogin.setText("Log out")
+            binding.tvLogin.text = "Log out"
             binding.topView.setOnClickListener(onItemClicked)
         } else{
-            binding.tvLogin.setText("Log In")
+            binding.tvLogin.text = "Log In"
         }
+
+        binding.appVersion.text = "v"+BuildConfig.VERSION_NAME
 
         binding.tvHistory.setOnClickListener(onItemClicked)
         binding.tvBook.setOnClickListener(onItemClicked)

@@ -3,8 +3,9 @@ package com.instafinancials.vendoralpha.models
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class GstResponse:Serializable {
-
+class GstResponse : Serializable {
+    @SerializedName("Response")
+    val response: Response? = null
     @SerializedName("GSTInformationAndCompliance")
     val gSTInformationAndCompliance: GSTInformationAndCompliance? = null
     @SerializedName("CompanyMasterSummary")
@@ -15,9 +16,27 @@ class GstResponse:Serializable {
     val potentialRelatedPartyMasterBasic: PotentialRelatedPartyMasterBasic? = null
 }
 
+class Response {
+    @SerializedName("Status")
+    val status: String? = null
+    @SerializedName("Message")
+    val message: String? = null
+}
+
 class GSTInformationAndCompliance {
+    @SerializedName("MetaInfo")
+    val metaInfo: MetaInfo? = null
     @SerializedName("GSTRegistrationDetails")
     val gSTRegistrationDetails: GSTRegistrationDetails? = null
+}
+
+class MetaInfo {
+    @SerializedName("Input")
+    val input: String? = null
+    @SerializedName("OrderedDateTime")
+    val orderedDateTime: String? = null
+    @SerializedName("DeliveredDateTime")
+    val deliveredDateTime: String? = null
 }
 
 class CompanyMasterSummary {
@@ -78,7 +97,6 @@ class Signatory {
     val signatoryDateOfAppnt: String? = null
 }
 
-
 class Director {
     @SerializedName("DirectorName")
     val directorName: String? = null
@@ -126,7 +144,6 @@ class GSTComplianceLastest6Months {
 }
 
 class GSTComplianceRecord {
-
     @SerializedName("ReturnType")
     val returnType: String? = null
     @SerializedName("TaxPeriod")

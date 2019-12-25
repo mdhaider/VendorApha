@@ -37,8 +37,9 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/parViewProf"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
+            android:background="@color/bluish_grey_300"
             android:visibility="gone">
 
             <com.google.android.material.textfield.TextInputLayout

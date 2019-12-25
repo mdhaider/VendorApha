@@ -64,8 +64,8 @@ object TimeUtil {
 
     fun getDifferenceDays(d1: Date, d2: Date): Int {
         var daysdiff = 0
-        val diff = d2.time - d1.time
-        val diffDays = diff / (24 * 60 * 60 * 1000) + 1
+        val diff = d1.time - d2.time
+        val diffDays = diff / (24 * 60 * 60 * 1000)
         daysdiff = diffDays.toInt()
         return daysdiff
     }

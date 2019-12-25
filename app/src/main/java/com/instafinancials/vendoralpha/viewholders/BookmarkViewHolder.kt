@@ -13,17 +13,20 @@ class BookmarkViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     RecyclerView.ViewHolder(inflater.inflate(R.layout.item_bookmark, parent, false)) {
     private var mCinNumber: TextView? = null
     private var mComName: TextView? = null
+    private var mComStatus: TextView? = null
     private var mDate: TextView? = null
 
     init {
         mCinNumber = itemView.findViewById(R.id.tvGst)
         mComName = itemView.findViewById(R.id.tvComName)
         mDate = itemView.findViewById(R.id.tvDate)
+        mComStatus = itemView.findViewById(R.id.tvComStatus)
     }
 
     fun bind(bookmarkDataForDb: BookmarkDataForDb, itemClickListener:(Int)->Unit) {
         mCinNumber?.text = bookmarkDataForDb.gstTinNo
         mComName?.text = (bookmarkDataForDb.comName)
+        mComStatus?.text = (bookmarkDataForDb.fullBookmarkData.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus)
         mDate?.text = getStringDate(bookmarkDataForDb.bookDay)
 
         itemView.setOnClickListener { itemClickListener(adapterPosition) }
