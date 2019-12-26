@@ -21,13 +21,12 @@ import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.vision.text.Text
-import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.google.android.material.snackbar.Snackbar
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.shared.Const
-import com.instafinancials.vendoralpha.ui.activities.camera.*
 import com.instafinancials.vendoralpha.shared.GSTChecksumUtil
+import com.instafinancials.vendoralpha.ui.activities.camera.*
 import java.io.IOException
 import kotlin.properties.Delegates
 
@@ -362,7 +361,7 @@ class CameraActivity : AppCompatActivity() {
             //    for (i in 0 until substrings.count()) {
                     if (value.length == 15) {
                         tv_result.post() {
-                            tv_result.text = "veryfying GST for $value}"
+                            tv_result.text = "Verifying GST for $value}"
                         }
                         Log.d(TAG, "GSTChecksum for ${value}")
                         if(GSTChecksumUtil().checValidGST(value)) {
