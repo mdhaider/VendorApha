@@ -1,14 +1,15 @@
 package com.instafinancials.vendoralpha.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 
-class UserProfileResponse {
+class UserProfileResponse : Serializable {
     @SerializedName("Response")
     val response: ResponseGetUser? = null
 }
 
-class ResponseGetUser {
+class ResponseGetUser : Serializable {
     @SerializedName("Status")
     val status: String? = null
     @SerializedName("Message")
@@ -17,7 +18,7 @@ class ResponseGetUser {
     val userProfile: UserProfile? = null
 }
 
-class UserProfile {
+class UserProfile : Serializable {
     @SerializedName("UserName")
     val userName: String? = null
     @SerializedName("UserEmail")
