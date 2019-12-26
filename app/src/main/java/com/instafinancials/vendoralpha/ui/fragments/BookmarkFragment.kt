@@ -82,6 +82,15 @@ class BookmarkFragment : Fragment() {
         )
         binding.rvBookmarkList.adapter = adapter
         binding.rvBookmarkList.layoutManager = LinearLayoutManager(activity)
+
+        binding.tvBookHeader.text
+
+        if(list.isEmpty()){
+            binding.tvBookHeader.text= getString(R.string.bookmark_list)
+        } else{
+            binding.tvBookHeader.text= getString(R.string.bookmark_list)+"("+list.size+")"
+        }
+
     }
 
 
