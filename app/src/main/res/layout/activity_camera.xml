@@ -8,9 +8,16 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:gravity="center"
+        android:text="Center camera around GSTIN number and tab the box once it appears around GSTIN."
+        android:textSize="16sp" />
     <com.instafinancials.vendoralpha.ui.activities.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
@@ -24,15 +31,6 @@
 
     </com.instafinancials.vendoralpha.ui.activities.camera.CameraSourcePreview>
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:visibility="gone"
-        android:gravity="center"
-        android:text="Center camera around GSTIN number"
-        android:textSize="18sp" />
 
 </LinearLayout>
     <ProgressBar

@@ -109,5 +109,5 @@
     <string name="gstin_hint">Enter GSTIN</string>
     <string name="proceed">Proceed</string>
     <string name="retry">Retry</string>
-    <string name="confirm_gst_title">Please verify GSTIN number below and proceed</string>
+    <string name="confirm_gst_title">GSTIN number : </string>
 </resources>
