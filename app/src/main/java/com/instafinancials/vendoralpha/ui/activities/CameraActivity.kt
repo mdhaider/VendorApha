@@ -13,12 +13,14 @@ import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.vision.text.Text
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.google.android.material.snackbar.Snackbar
@@ -31,12 +33,16 @@ import kotlin.properties.Delegates
 
 
 class CameraActivity : AppCompatActivity() {
+
     private val autoFocus = Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO
     private val useFlash = null; // Camera.Parameters.FLASH_MODE_TORCH
     lateinit var mCameraSource : CameraSource
     lateinit var preview : CameraSourcePreview
     lateinit var tv_result : TextView
+    lateinit var progress : ProgressBar
+
     private var textRecognizer by Delegates.notNull<TextRecognizer>()
+   // private lateinit var textRecognizer : GSTTextRecognizer
     private lateinit var graphicOverlay: GraphicOverlay<OcrGraphic>
 
     private lateinit var scaleGestureDetector: ScaleGestureDetector
@@ -54,6 +60,7 @@ class CameraActivity : AppCompatActivity() {
         preview = findViewById(R.id.preview);
         graphicOverlay = findViewById(R.id.graphicOverlay);
         tv_result = findViewById(R.id.tv_result)
+        progress = findViewById(R.id.progressBar_cyclic)
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -67,6 +74,7 @@ class CameraActivity : AppCompatActivity() {
         }
         gestureDetector =  GestureDetector(this,  CaptureGestureListener());
         scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+        showProgress(false)
     }
 
     /**
@@ -124,7 +132,8 @@ class CameraActivity : AppCompatActivity() {
         // is set to receive the text recognition results, track the text, and maintain
         // graphics for each text block on screen.  The factory is used by the multi-processor to
         // create a separate tracker instance for each text block.
-        val textRecognizer =  TextRecognizer.Builder(context).build();
+        textRecognizer =  TextRecognizer.Builder(context).build();
+       // textRecognizer =  GSTTextRecognizer(graphicOverlay)
         textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay));
 
         if (!textRecognizer.isOperational()) {
@@ -153,8 +162,9 @@ class CameraActivity : AppCompatActivity() {
         //  Init camera source to use high resolution and auto focus
         mCameraSource = CameraSource.Builder(applicationContext, textRecognizer)
             .setFacing(CameraSource.CAMERA_FACING_BACK)
-            .setRequestedPreviewSize(1280, 1024)
-            .setRequestedFps(15.0f)
+            //.setRequestedPreviewSize(1280, 1024)
+            .setRequestedPreviewSize(640, 480)
+            .setRequestedFps(2.0f)
             .setFlashMode(useFlash)
             .setFocusMode(autoFocus)
             .build()
@@ -318,14 +328,16 @@ class CameraActivity : AppCompatActivity() {
 
     private fun onTap(rawX: Float, rawY: Float): Boolean {
         val graphic = graphicOverlay.getGraphicAtLocation(rawX, rawY)
-        var text: TextBlock? = null
+        var text: Text? = null
         if (graphic != null) {
             text = graphic.textBlock
             if (text != null && text.value != null) {
                 Log.d(TAG, "text data is being spoken! " + text.value)
                 // Speak the string.
                 //tts.speak(text.value, TextToSpeech.QUEUE_ADD, null, "DEFAULT")
+                showProgress(true)
                 checkValue(text.value)
+                showProgress(false)
             } else {
                 Log.d(TAG, "text data is null")
             }
@@ -344,23 +356,25 @@ class CameraActivity : AppCompatActivity() {
     }
 
 
-    private fun checkValue(value : String) {
-        if (value.length > 15) {
-                var substrings = value.split(" ")
-                for (i in 0 until substrings.count()) {
-                    if (substrings[i].length == 15) {
+    private fun checkValue(value : String) : Boolean {
+      //  if (value.length > 15) {
+             //   var substrings = value.split(" ")
+            //    for (i in 0 until substrings.count()) {
+                    if (value.length == 15) {
                         tv_result.post() {
-                            tv_result.text = substrings[i]
+                            tv_result.text = "veryfying GST for $value}"
                         }
-                        Log.d(TAG, "GSTChecksum for ${substrings[i]}")
-                        if(GSTChecksumUtil().checValidGST(substrings[i])) {
-                            Log.d(TAG, "GSTChecksum for ${substrings[i]} is Valid")
-                            finishAndSendResult(substrings[i])
-                            return
+                        Log.d(TAG, "GSTChecksum for ${value}")
+                        if(GSTChecksumUtil().checValidGST(value)) {
+                            Log.d(TAG, "GSTChecksum for ${value} is Valid")
+                            finishAndSendResult(value)
+                            return true
                         }
                     }
-                }
-        }
+                    return false
+
+               // }
+    //    }
     }
 
     private fun finishAndSendResult(gst : String) {
@@ -368,5 +382,13 @@ class CameraActivity : AppCompatActivity() {
          intent.putExtra(Const.SCAN_DATA, gst)
          setResult(Activity.RESULT_OK, intent)
             finish()
+    }
+
+    private fun showProgress(shouldShow : Boolean) {
+        if(shouldShow) {
+            progress.visibility =  View.VISIBLE
+        } else {
+            progress.visibility = View.GONE
+        }
     }
 }
