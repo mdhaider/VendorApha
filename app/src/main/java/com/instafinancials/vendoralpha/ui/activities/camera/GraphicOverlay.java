@@ -32,7 +32,7 @@ import java.util.Set;
 public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
     private final Object lock = new Object();
     private int previewWidth;
-    private float widthScaleFactor = 1.5f;
+    private float widthScaleFactor = 2.0f;
     private int previewHeight;
     private float heightScaleFactor = 3.5f;
     private int facing = CameraSource.CAMERA_FACING_BACK;
@@ -208,4 +208,5 @@ public class GraphicOverlay<T extends GraphicOverlay.Graphic> extends View {
             }
         }
     }
+
 }
