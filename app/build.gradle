@@ -88,6 +88,7 @@ dependencies {
     //dialogs
     implementation 'com.afollestad.material-dialogs:core:3.1.1'
     implementation 'com.afollestad.material-dialogs:bottomsheets:3.1.1'
+    implementation 'com.afollestad.material-dialogs:input:3.1.1'
 
     //room
     implementation "android.arch.persistence.room:runtime:$room_version"

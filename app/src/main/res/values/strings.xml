@@ -106,4 +106,8 @@
     <string name="press_again">Press back again to exit</string>
     <string name="no_internet_msg">No Internet connection, check your settings</string>
     <string name="no_data_msg">No data yet</string>
+    <string name="gstin_hint">Enter GSTIN</string>
+    <string name="proceed">Proceed</string>
+    <string name="retry">Retry</string>
+    <string name="confirm_gst_title">Please verify GSTIN number below and proceed</string>
 </resources>
