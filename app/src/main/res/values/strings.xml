@@ -103,5 +103,7 @@
     <string name="invalid_otp">Invalid OTP</string>
     <string name="worried_about">Worried about GST Credit Issue?</string>
     <string name="verify_gstin">Verify GSTIN &amp; Filing Status\nbefore making payment</string>
+    <string name="press_again">Press back again to exit</string>
+    <string name="no_internet_msg">No Internet connection, check your settings</string>
 
 </resources>
