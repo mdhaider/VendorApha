@@ -86,6 +86,12 @@ class HistoryFragment : Fragment() {
         )
         binding.rvHistoryList.adapter = adapter
         binding.rvHistoryList.layoutManager = LinearLayoutManager(activity)
+
+        if(list.isEmpty()){
+            binding.tvHistoryHeader.text= getString(R.string.history_list)
+        } else{
+            binding.tvHistoryHeader.text= getString(R.string.history_list)+"("+list.size+")"
+        }
     }
 
     private fun goToHome(gstTin: String,historyDataForDb: HistoryDataForDb) {

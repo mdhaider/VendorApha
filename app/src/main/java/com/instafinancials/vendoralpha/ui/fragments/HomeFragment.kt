@@ -25,7 +25,9 @@ import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.NoConnectivityException
 import com.instafinancials.vendoralpha.shared.hideKeyboard
+import com.instafinancials.vendoralpha.shared.snack
 import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -48,15 +50,6 @@ class HomeFragment : Fragment() {
     private val gson = GsonBuilder().create()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.apply {
-            gstNo = getString(Const.GST_NUMBER, "")
-            gstData = getString(Const.GST_HISTORY, "")
-            isComingFromBook = getBoolean(Const.IS_COMING_FROM_BOOKMARK, false)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,6 +71,12 @@ class HomeFragment : Fragment() {
         binding.advPar.setOnClickListener(_onItemClicked)
 
         binding.searchView.addTextChangedListener(textChangeListener)
+
+        arguments?.apply {
+            gstNo = getString(Const.GST_NUMBER, "")
+            gstData = getString(Const.GST_HISTORY, "")
+            isComingFromBook = getBoolean(Const.IS_COMING_FROM_BOOKMARK, false)
+        }
 
         return binding.root
     }
@@ -242,7 +241,11 @@ class HomeFragment : Fragment() {
         RetrofitClient.instance.getGstData(cinNumber)
             .enqueue(object : Callback<GstResponse> {
                 override fun onFailure(call: Call<GstResponse>, t: Throwable) {
-                    showToast(t.message!!)
+                    if(t is NoConnectivityException) {
+                      binding.root.snack(R.string.no_internet_msg){}
+                    } else{
+                        showToast(t.message!!)
+                    }
                 }
 
                 override fun onResponse(call: Call<GstResponse>, response: Response<GstResponse>) {

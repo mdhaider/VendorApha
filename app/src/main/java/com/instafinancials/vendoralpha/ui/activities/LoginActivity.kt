@@ -3,14 +3,17 @@ package com.instafinancials.vendoralpha.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
+import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.ActivityLoginBinding
 import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.models.CreateAccReq
@@ -37,6 +40,19 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(
             this, com.instafinancials.vendoralpha.R.layout.activity_login
         )
+
+        NetworkLiveData.observe(this, Observer {
+            if (it) {
+                //connected
+            } else {
+                binding.root.snack(getString(R.string.no_internet_msg)) {
+                    action("Settings", color = R.color.white) {
+                        val intent = Intent(Settings.ACTION_DATA_ROAMING_SETTINGS)
+                        context.startActivity(intent)
+                    }
+                }
+            }
+        })
 
         binding.mNumber.addTextChangedListener(numberTextChangeListener)
         binding.mOtp.addTextChangedListener(otpTextChangeListener)

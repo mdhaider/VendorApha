@@ -7,6 +7,7 @@ class VendorApp:Application() {
     override fun onCreate() {
         super.onCreate()
         AppPreferences.init(this)
+        NetworkLiveData.init(this)
         instance = this
 
     }
