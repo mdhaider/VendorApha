@@ -1,5 +1,6 @@
 package com.instafinancials.vendoralpha.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -14,5 +15,5 @@ interface BookmarkDataDao{
     fun deleteBookmark(bookmarkDataForDb: BookmarkDataForDb)
 
     @Query("SELECT * FROM BookmarkDataForDb")
-    fun getBookmark(): List<BookmarkDataForDb>
+    fun getBookmark(): LiveData<List<BookmarkDataForDb>>
 }

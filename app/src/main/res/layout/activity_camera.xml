@@ -4,13 +4,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.MainActivity">
+    tools:context=".ui.activities.MainActivity">
 
-    <SurfaceView
-        android:id="@+id/surface_camera_preview"
+    <com.instafinancials.vendoralpha.ui.activities.camera.CameraSourcePreview
+        android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4" />
+        android:layout_weight="4">
+
+        <com.instafinancials.vendoralpha.ui.activities.camera.GraphicOverlay
+            android:id="@+id/graphicOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.instafinancials.vendoralpha.ui.activities.camera.CameraSourcePreview>
 
     <TextView
         android:id="@+id/tv_result"

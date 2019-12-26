@@ -45,7 +45,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="32dp"
                     android:layout_alignParentEnd="true"
-                    app:srcCompat="@drawable/ic_camera_20" />
+                    app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
             </RelativeLayout>
 
@@ -145,6 +145,7 @@
                 android:elevation="2dp"
                 app:tabBackground="@drawable/tab_layout_selector"
                 app:tabGravity="fill"
+                app:tabMaxWidth="2000dp"
                 app:tabIndicatorHeight="0dp"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"
@@ -185,6 +186,7 @@
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgBookmark"
                     android:layout_width="13dp"
                     android:layout_height="16dp"
                     android:layout_gravity="center"
@@ -196,7 +198,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Bookmark"
+                    android:text="@string/bookmark"
                     android:textSize="12sp" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>

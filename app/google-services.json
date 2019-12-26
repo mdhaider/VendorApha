@@ -1,0 +1,85 @@
+{
+  "project_info": {
+    "project_number": "918999942764",
+    "firebase_url": "https://vendoralpha1.firebaseio.com",
+    "project_id": "vendoralpha1",
+    "storage_bucket": "vendoralpha1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918999942764:android:e8c051ddd0cd1f23d93a49",
+        "android_client_info": {
+          "package_name": "com.instafinancials.vendoralpha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918999942764-bfkcdum5n5eh3k05fj4ir7jrmescsia9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.instafinancials.vendoralpha",
+            "certificate_hash": "7244629264f14fc7f711c6619ac7728f058ac971"
+          }
+        },
+        {
+          "client_id": "918999942764-hnioiemdn8i7qih4el7dib56psvm8m3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA67oyHCxfS1bJ7X73MFvvjBVl0MfoEudg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918999942764-hnioiemdn8i7qih4el7dib56psvm8m3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918999942764:android:41bed759aca21c9cd93a49",
+        "android_client_info": {
+          "package_name": "com.instafinancials.vendoralpha.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918999942764-ek59brr745een6gsgg827d7a5rg0i419.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.instafinancials.vendoralpha.debug",
+            "certificate_hash": "7244629264f14fc7f711c6619ac7728f058ac971"
+          }
+        },
+        {
+          "client_id": "918999942764-hnioiemdn8i7qih4el7dib56psvm8m3m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA67oyHCxfS1bJ7X73MFvvjBVl0MfoEudg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918999942764-hnioiemdn8i7qih4el7dib56psvm8m3m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

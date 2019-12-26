@@ -8,9 +8,9 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:background="@color/blue_new"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/blue_new">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btnBack"
@@ -22,12 +22,12 @@
                 app:srcCompat="@drawable/ic_chevron_left_black_24dp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvHistoryHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/roboto_medium"
                 android:padding="16dp"
-                android:text="@string/history_list"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
@@ -36,20 +36,20 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvHistoryList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:visibility="visible"/>
+            android:layout_height="match_parent"
+            android:paddingTop="8dp"
+            android:background="@color/bluish_grey_300"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/noResView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textColor="@color/grey_500"
-            android:padding="16dp"
-            android:textSize="22sp"
-            android:visibility="gone"
             android:fontFamily="@font/roboto"
-            android:text="@string/list_empty_search"/>
+            android:gravity="center"
+            android:padding="16dp"
+            android:text="@string/list_empty_search"
+            android:textColor="@color/grey_500"
+            android:textSize="22sp"
+            android:visibility="gone" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

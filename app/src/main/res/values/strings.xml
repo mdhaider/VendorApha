@@ -17,7 +17,8 @@
     <string name="menu_profile">Profile</string>
     <string name="menu_history">Search History</string>
     <string name="menu_bookmark">Bookmark List</string>
-    <string name="menu_history_title">History List</string>
+    <string name="menu_bookmarks">Bookmarks</string>
+    <string name="menu_history_title">All History</string>
     <string name="menu_orders">Your Orders</string>
     <string name="menu_refer">Refer</string>
     <string name="menu_support">Support</string>
@@ -71,8 +72,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="bookmark_list">Bookmark List</string>
-    <string name="history_list">History List</string>
+    <string name="bookmark_list">Bookmark</string>
+    <string name="history_list">History</string>
     <string name="gst_filing_status">GST Filing Status:</string>
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
@@ -82,4 +83,27 @@
     <string name="searched_on">Searched on:</string>
     <string name="gstin">GSTIN:</string>
 
+
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="low_storage_error">Ocr dependencies cannot be downloaded due to low device storage</string>
+    <string name="title_activity_main">Ocr Detector Sample</string>
+    <string name="ocr_header">Click &quot;Detect Text&quot; to detect text</string>
+    <string name="read_text">Detect Text</string>
+    <string name="auto_focus">Auto Focus</string>
+    <string name="use_flash">Use Flash</string>
+    <string name="ocr_success">Text read successfully</string>
+    <string name="ocr_failure">No text captured</string>
+    <string name="ocr_error">"Error reading text: %1$s"</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="boomarked_text">Bookmarked</string>
+    <string name="bookmark_msg">Bookmark</string>
+    <string name="already_bookmarked">Already Bookmarked</string>
+    <string name="item_bookmarked">Item bookmarked</string>
+    <string name="invalid_otp">Invalid OTP</string>
+    <string name="worried_about">Worried about GST Credit Issue?</string>
+    <string name="verify_gstin">Verify GSTIN &amp; Filing Status\nbefore making payment</string>
+    <string name="press_again">Press back again to exit</string>
+    <string name="no_internet_msg">No Internet connection, check your settings</string>
+    <string name="no_data_msg">No data yet</string>
 </resources>

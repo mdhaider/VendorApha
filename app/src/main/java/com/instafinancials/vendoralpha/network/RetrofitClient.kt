@@ -3,8 +3,12 @@ package com.instafinancials.vendoralpha.network
 import com.instafinancials.vendoralpha.BuildConfig
 import com.instafinancials.vendoralpha.shared.ApiConstants
 import com.instafinancials.vendoralpha.shared.ApiConstants.ACCESS_TOKEN_KEY
+import com.instafinancials.vendoralpha.shared.ApiConstants.APP_VERSION
+import com.instafinancials.vendoralpha.shared.ApiConstants.DEV_OS_VERSION
 import com.instafinancials.vendoralpha.shared.ApiConstants.REQUEST_TIMEOUT
+import com.instafinancials.vendoralpha.shared.ApiConstants.SOURCE
 import com.instafinancials.vendoralpha.shared.Installation
+import com.instafinancials.vendoralpha.shared.NetworkConnectionInterceptor
 import com.instafinancials.vendoralpha.shared.VendorApp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +37,9 @@ object RetrofitClient {
 
             val requestBuilder = original.newBuilder()
                 .addHeader(ACCESS_TOKEN_KEY, Installation.id(VendorApp.instance))
+                .addHeader(APP_VERSION, BuildConfig.VERSION_NAME)
+                .addHeader(SOURCE, "Mobile-Android")
+                .addHeader(DEV_OS_VERSION, (android.os.Build.VERSION.RELEASE).toString())
                 .method(original.method, original.body)
 
             val request = requestBuilder.build()
@@ -46,6 +53,7 @@ object RetrofitClient {
         httpClient.readTimeout(REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
         httpClient.writeTimeout(REQUEST_TIMEOUT.toLong(), TimeUnit.SECONDS)
         httpClient.addInterceptor(logging)
+        httpClient.addNetworkInterceptor(NetworkConnectionInterceptor(VendorApp.instance))
 
         return httpClient.build()
     }

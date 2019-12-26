@@ -6,8 +6,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="4dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -16,19 +18,38 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical"
                 android:padding="8dp">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvComName"
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_medium"
-                    android:textColor="@color/green"
-                    android:textSize="14sp"
-                    tools:text="Huhdfddffdfdfdf" />
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvComName"
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="@color/green"
+                        android:textSize="14sp"
+                        tools:text="Huhdfdffdfdfdfdfdfdf" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvComStatus"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textSize="14sp"
+                        android:visibility="gone"
+                        tools:text="Huhfdfdfdf" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -82,9 +103,9 @@
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
-                android:layout_weight=".2"
-               android:gravity="center"
                 android:layout_height="match_parent"
+                android:layout_weight=".2"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <View
@@ -97,7 +118,7 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                 app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
+                    app:srcCompat="@drawable/ic_chevron_right_black_24dp" />
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
