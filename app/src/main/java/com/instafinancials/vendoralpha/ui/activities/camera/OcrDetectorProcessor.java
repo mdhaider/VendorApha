@@ -29,22 +29,21 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
         graphicOverlay.clear();
         SparseArray<TextBlock> items = detections.getDetectedItems();
         for (int i = 0; i < items.size(); ++i) {
-            TextBlock item = items.valueAt(i);
+            TextBlock item = items.valueAt(i);  // complete block
             if (item != null && item.getValue() != null) {
                 Log.d("OcrDetectorProcessor", "Text detected! " + item.getValue());
-                for(Text currentText : item.getComponents()) {
-                   if(currentText.getValue().trim().length() >= 15) {
-                       String[] substrings = currentText.getValue().split(" ");
-                       for (int j =0; j < substrings.length; j++) {
-                        if (substrings[j].length() == 15) {
-                            OcrGraphic graphic = new OcrGraphic(graphicOverlay, item, Color.GREEN);
-                            graphicOverlay.add(graphic);
-                        } else {
-                            OcrGraphic graphic = new OcrGraphic(graphicOverlay, item, Color.YELLOW);
-                            graphicOverlay.add(graphic);
-                        }
+                for(Text currentText : item.getComponents()) { // lines
+                   if(currentText.getValue().length() >= 15) {
+                       for (Text word : currentText.getComponents()) {
+                           if (word.getValue().length() == 15) {
+                               OcrGraphic graphic = new OcrGraphic(graphicOverlay, word, Color.GREEN);
+                               graphicOverlay.add(graphic);
+                           } else if(word.getValue().length() >= 15 && word.getValue().length() < 25){
+                               OcrGraphic graphic = new OcrGraphic(graphicOverlay, word, Color.YELLOW);
+                               graphicOverlay.add(graphic);
+                           }
+                       }
                     }
-                   }
                 }
 
 //                if (item.getValue().trim().length() >= 15) {

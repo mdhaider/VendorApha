@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.vision.text.Text
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.google.android.material.snackbar.Snackbar
@@ -37,6 +38,7 @@ class CameraActivity : AppCompatActivity() {
     lateinit var preview : CameraSourcePreview
     lateinit var tv_result : TextView
     private var textRecognizer by Delegates.notNull<TextRecognizer>()
+   // private lateinit var textRecognizer : GSTTextRecognizer
     private lateinit var graphicOverlay: GraphicOverlay<OcrGraphic>
 
     private lateinit var scaleGestureDetector: ScaleGestureDetector
@@ -124,7 +126,8 @@ class CameraActivity : AppCompatActivity() {
         // is set to receive the text recognition results, track the text, and maintain
         // graphics for each text block on screen.  The factory is used by the multi-processor to
         // create a separate tracker instance for each text block.
-        val textRecognizer =  TextRecognizer.Builder(context).build();
+        textRecognizer =  TextRecognizer.Builder(context).build();
+       // textRecognizer =  GSTTextRecognizer(graphicOverlay)
         textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay));
 
         if (!textRecognizer.isOperational()) {
@@ -153,8 +156,9 @@ class CameraActivity : AppCompatActivity() {
         //  Init camera source to use high resolution and auto focus
         mCameraSource = CameraSource.Builder(applicationContext, textRecognizer)
             .setFacing(CameraSource.CAMERA_FACING_BACK)
-            .setRequestedPreviewSize(1280, 1024)
-            .setRequestedFps(15.0f)
+            //.setRequestedPreviewSize(1280, 1024)
+            .setRequestedPreviewSize(640, 480)
+            .setRequestedFps(2.0f)
             .setFlashMode(useFlash)
             .setFocusMode(autoFocus)
             .build()
@@ -318,7 +322,7 @@ class CameraActivity : AppCompatActivity() {
 
     private fun onTap(rawX: Float, rawY: Float): Boolean {
         val graphic = graphicOverlay.getGraphicAtLocation(rawX, rawY)
-        var text: TextBlock? = null
+        var text: Text? = null
         if (graphic != null) {
             text = graphic.textBlock
             if (text != null && text.value != null) {
@@ -345,22 +349,22 @@ class CameraActivity : AppCompatActivity() {
 
 
     private fun checkValue(value : String) {
-        if (value.length > 15) {
-                var substrings = value.split(" ")
-                for (i in 0 until substrings.count()) {
-                    if (substrings[i].length == 15) {
+      //  if (value.length > 15) {
+             //   var substrings = value.split(" ")
+            //    for (i in 0 until substrings.count()) {
+                    if (value.length == 15) {
                         tv_result.post() {
-                            tv_result.text = substrings[i]
+                            tv_result.text = "veryfying GST for $value}"
                         }
-                        Log.d(TAG, "GSTChecksum for ${substrings[i]}")
-                        if(GSTChecksumUtil().checValidGST(substrings[i])) {
-                            Log.d(TAG, "GSTChecksum for ${substrings[i]} is Valid")
-                            finishAndSendResult(substrings[i])
+                        Log.d(TAG, "GSTChecksum for ${value}")
+                        if(GSTChecksumUtil().checValidGST(value)) {
+                            Log.d(TAG, "GSTChecksum for ${value} is Valid")
+                            finishAndSendResult(value)
                             return
                         }
                     }
-                }
-        }
+               // }
+    //    }
     }
 
     private fun finishAndSendResult(gst : String) {
