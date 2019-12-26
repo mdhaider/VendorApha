@@ -27,7 +27,7 @@ import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.NoConnectivityException
 import com.instafinancials.vendoralpha.shared.hideKeyboard
-import com.instafinancials.vendoralpha.shared.snack
+import com.instafinancials.vendoralpha.extensions.snack
 import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

@@ -15,7 +15,9 @@ import com.afollestad.materialdialogs.customview.customView
 import com.afollestad.materialdialogs.customview.getCustomView
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.ActivityLoginBinding
+import com.instafinancials.vendoralpha.extensions.action
 import com.instafinancials.vendoralpha.extensions.showToast
+import com.instafinancials.vendoralpha.extensions.snack
 import com.instafinancials.vendoralpha.models.CreateAccReq
 import com.instafinancials.vendoralpha.models.ReqOtpResponse
 import com.instafinancials.vendoralpha.models.UserProfileResponse

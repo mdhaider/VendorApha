@@ -12,8 +12,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.ActivityMainBinding
 import com.instafinancials.vendoralpha.shared.NetworkLiveData
-import com.instafinancials.vendoralpha.shared.action
-import com.instafinancials.vendoralpha.shared.snack
+import com.instafinancials.vendoralpha.extensions.action
+import com.instafinancials.vendoralpha.extensions.snack
 import eu.dkaratzas.android.inapp.update.Constants
 import eu.dkaratzas.android.inapp.update.InAppUpdateManager
 
