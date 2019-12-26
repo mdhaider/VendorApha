@@ -16,21 +16,21 @@ class GstResponse : Serializable {
     val potentialRelatedPartyMasterBasic: PotentialRelatedPartyMasterBasic? = null
 }
 
-class Response {
+class Response : Serializable {
     @SerializedName("Status")
     val status: String? = null
     @SerializedName("Message")
     val message: String? = null
 }
 
-class GSTInformationAndCompliance {
+class GSTInformationAndCompliance : Serializable {
     @SerializedName("MetaInfo")
     val metaInfo: MetaInfo? = null
     @SerializedName("GSTRegistrationDetails")
     val gSTRegistrationDetails: GSTRegistrationDetails? = null
 }
 
-class MetaInfo {
+class MetaInfo : Serializable {
     @SerializedName("Input")
     val input: String? = null
     @SerializedName("OrderedDateTime")
@@ -39,7 +39,7 @@ class MetaInfo {
     val deliveredDateTime: String? = null
 }
 
-class CompanyMasterSummary {
+class CompanyMasterSummary : Serializable {
     @SerializedName("LastUpdatedDateTime")
     val lastUpdatedDateTime: String? = null
     @SerializedName("CompanyName")
@@ -66,29 +66,29 @@ class CompanyMasterSummary {
     val companyCIN: String? = null
 }
 
-class DirectorSignatoryMasterBasic {
+class DirectorSignatoryMasterBasic : Serializable {
     @SerializedName("DirectorCurrentMasterBasic")
     val directorCurrentMasterBasic: DirectorCurrentMasterBasic? = null
     @SerializedName("SignatoryCurrentMasterBasic")
     val signatoryCurrentMasterBasic: SignatoryCurrentMasterBasic? = null
 }
 
-class PotentialRelatedPartyMasterBasic {
+class PotentialRelatedPartyMasterBasic : Serializable {
     @SerializedName("RelatedParty")
     val relatedParty: List<RelatedParty>? = null
 }
 
-class DirectorCurrentMasterBasic {
+class DirectorCurrentMasterBasic : Serializable {
     @SerializedName("Director")
     val director: List<Director>? = null
 }
 
-class SignatoryCurrentMasterBasic {
+class SignatoryCurrentMasterBasic : Serializable {
     @SerializedName("Signatory")
     val signatory: List<Signatory>? = null
 }
 
-class Signatory {
+class Signatory : Serializable {
     @SerializedName("SignatoryName")
     val signatoryName: String? = null
     @SerializedName("SignatoryDesignation")
@@ -97,7 +97,7 @@ class Signatory {
     val signatoryDateOfAppnt: String? = null
 }
 
-class Director {
+class Director : Serializable {
     @SerializedName("DirectorName")
     val directorName: String? = null
     @SerializedName("DirectorDesignation")
@@ -106,7 +106,7 @@ class Director {
     val directorDateOfAppnt: String? = null
 }
 
-class RelatedParty {
+class RelatedParty : Serializable {
     @SerializedName("CompanyName")
     val companyName: String? = null
     @SerializedName("CompanyMcaStatus")
@@ -115,7 +115,7 @@ class RelatedParty {
     val companyPaidUpCapital: Long? = 0L
 }
 
-class GSTRegistrationDetails {
+class GSTRegistrationDetails : Serializable {
     @SerializedName("LastUpdatedDateTime")
     val lastUpdatedDateTime: String? = null
     @SerializedName("GSTIN")
@@ -138,12 +138,12 @@ class GSTRegistrationDetails {
     val gSTComplianceLastest6Months: GSTComplianceLastest6Months? = null
 }
 
-class GSTComplianceLastest6Months {
+class GSTComplianceLastest6Months : Serializable {
     @SerializedName("GSTComplianceRecord")
     val gSTComplianceRecord: List<GSTComplianceRecord>? = null
 }
 
-class GSTComplianceRecord {
+class GSTComplianceRecord : Serializable {
     @SerializedName("ReturnType")
     val returnType: String? = null
     @SerializedName("TaxPeriod")
