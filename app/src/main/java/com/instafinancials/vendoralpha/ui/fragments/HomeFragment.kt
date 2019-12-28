@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,12 +23,14 @@ import com.instafinancials.vendoralpha.adapters.SectionsPagerAdapter
 import com.instafinancials.vendoralpha.databinding.FragmentHomeBinding
 import com.instafinancials.vendoralpha.db.*
 import com.instafinancials.vendoralpha.extensions.showToast
+import com.instafinancials.vendoralpha.extensions.snack
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
 import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.Const.STATUS_ACTIVE
 import com.instafinancials.vendoralpha.shared.NoConnectivityException
+import com.instafinancials.vendoralpha.shared.VendorApp
 import com.instafinancials.vendoralpha.shared.hideKeyboard
-import com.instafinancials.vendoralpha.extensions.snack
 import com.instafinancials.vendoralpha.ui.activities.CameraActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -241,9 +244,9 @@ class HomeFragment : Fragment() {
         RetrofitClient.instance.getGstData(cinNumber)
             .enqueue(object : Callback<GstResponse> {
                 override fun onFailure(call: Call<GstResponse>, t: Throwable) {
-                    if(t is NoConnectivityException) {
-                      binding.root.snack(R.string.no_internet_msg){}
-                    } else{
+                    if (t is NoConnectivityException) {
+                        binding.root.snack(R.string.no_internet_msg) {}
+                    } else {
                         showToast(t.message!!)
                     }
                 }
@@ -278,7 +281,7 @@ class HomeFragment : Fragment() {
             SectionsPagerAdapter(activity!!, childFragmentManager)
         adapter.addFragment(GstTrackerFragment.newInstance(gstResponseData), "GST Tracker")
 
-        if (gstResponseData.companyMasterSummary?.companyCIN !=null) {
+        if (gstResponseData.companyMasterSummary?.companyCIN != null) {
             adapter.addFragment(CompanyBasicFragment.newInstance(gstResponseData), "CompanyBasic")
             adapter.addFragment(CompanyFinFragment(), "CompanyFin")
         }
@@ -302,14 +305,32 @@ class HomeFragment : Fragment() {
     }
 
     private fun setDataInUi(res: GstResponse) {
+        val status = res.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus!!
+        binding.tvStatus.text = status
+        if (status != STATUS_ACTIVE) {
+            binding.tvStatus.setTextColor(resources.getColor(R.color.red))
+            binding.tvStatus.backgroundTintList =
+                ContextCompat.getColorStateList(VendorApp.instance, R.color.red_20)
+        }
         binding.tvComName.text =
             res.gSTInformationAndCompliance?.gSTRegistrationDetails?.legalNameOfBusiness
-        binding.tvStatus.text =
-            res.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus
         binding.tvTaxPayerType.text =
             res.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
         binding.tvLocat.text =
             res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState
+
+        binding.tvStatus.setOnClickListener {
+            showToast(res.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTNStatus!!)
+        }
+
+        binding.tvTaxPayerType.setOnClickListener {
+            showToast(res.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType!!)
+        }
+
+        binding.tvLocat.setOnClickListener {
+            showToast(res.gSTInformationAndCompliance?.gSTRegistrationDetails?.registeredState!!)
+        }
+
     }
 
     private fun addToHistory() = GlobalScope.launch(Dispatchers.IO) {

@@ -15,5 +15,6 @@ object Const {
     const val SCAN_DATA = "scan_data"
     const val PROF_USER = "user_data"
     const val MOB_NO = "mob_no"
+    const val STATUS_ACTIVE = "Active"
 
 }
