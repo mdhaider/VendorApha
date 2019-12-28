@@ -22,7 +22,7 @@
         <activity android:name="com.instafinancials.vendoralpha.ui.activities.CameraActivity" />
         <activity
             android:name="com.instafinancials.vendoralpha.ui.activities.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,8 +34,7 @@
             android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="com.instafinancials.vendoralpha.ui.activities.SplashActivity"
-            android:theme="@style/SplashScreenTheme">
+            android:name="com.instafinancials.vendoralpha.ui.activities.SplashActivity">
         </activity>
 
         <meta-data

@@ -37,7 +37,7 @@
                     android:inputType="textCapCharacters"
                     android:textStyle="bold"
                     android:padding="10dip"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     tools:text="01AAACA6990Q1Z" />
 
                 <androidx.appcompat.widget.AppCompatImageView
