@@ -16,5 +16,7 @@ object Const {
     const val PROF_USER = "user_data"
     const val MOB_NO = "mob_no"
     const val STATUS_ACTIVE = "Active"
+    const val SUPPORT_URL="https://www.instafinancials.com/mobile/supportInsta.html"
+    const val TOU_URL="https://www.instafinancials.com/mobile/terms_and_conditions.html"
 
 }
