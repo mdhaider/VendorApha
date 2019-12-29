@@ -26,12 +26,9 @@ import com.instafinancials.vendoralpha.extensions.showToast
 import com.instafinancials.vendoralpha.extensions.snack
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.network.RetrofitClient
-import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.*
 import com.instafinancials.vendoralpha.shared.Const.STATUS_ACTIVE
-import com.instafinancials.vendoralpha.shared.NoConnectivityException
-import com.instafinancials.vendoralpha.shared.VendorApp
-import com.instafinancials.vendoralpha.shared.hideKeyboard
-import com.instafinancials.vendoralpha.ui.activities.CameraActivity
+import com.instafinancials.vendoralpha.ui.activities.camera.CameraActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -227,8 +224,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun callAndFetchData(gstNo: String) {
-        setInitialView()
-        callApi(gstNo)
+        if(GSTChecksumUtil().checValidGST(gstNo)) {
+            setInitialView()
+            callApi(gstNo)
+        } else {
+            showToast("Looks like you entered wrong GSTN. Try Again!!")
+        }
     }
 
     private fun setInitialView() {

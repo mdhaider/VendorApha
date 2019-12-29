@@ -19,4 +19,6 @@ object Const {
     const val SUPPORT_URL="https://www.instafinancials.com/mobile/supportInsta.html"
     const val TOU_URL="https://www.instafinancials.com/mobile/terms_and_conditions.html"
 
+    const val GSTIN_SCAN_DATA = 2131
+
 }

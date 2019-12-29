@@ -265,7 +265,7 @@
 
     <activity
         android:id="@+id/nav_cam"
-        android:name="com.instafinancials.vendoralpha.ui.activities.CameraActivity"
+        android:name="com.instafinancials.vendoralpha.ui.activities.camera.CameraActivity"
         tools:layout="@layout/activity_camera" />
 
     <fragment

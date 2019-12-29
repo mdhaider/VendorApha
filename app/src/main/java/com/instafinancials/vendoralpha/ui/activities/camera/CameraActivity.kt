@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.ui.activities
+package com.instafinancials.vendoralpha.ui.activities.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -7,6 +7,9 @@ import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.hardware.Camera
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.text.InputType
 import android.util.Log
 import android.view.GestureDetector
@@ -32,7 +35,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.shared.GSTChecksumUtil
-import com.instafinancials.vendoralpha.ui.activities.camera.*
 import java.io.IOException
 import kotlin.properties.Delegates
 
@@ -45,6 +47,7 @@ class CameraActivity : AppCompatActivity() {
     lateinit var preview: CameraSourcePreview
     lateinit var tv_result: TextView
     lateinit var progress: ProgressBar
+    //lateinit var mainHandler: Handler
 
     private var textRecognizer by Delegates.notNull<TextRecognizer>()
     // private lateinit var textRecognizer : GSTTextRecognizer
@@ -138,7 +141,7 @@ class CameraActivity : AppCompatActivity() {
         // create a separate tracker instance for each text block.
         textRecognizer = TextRecognizer.Builder(context).build();
         // textRecognizer =  GSTTextRecognizer(graphicOverlay)
-        textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay));
+        textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay, mainHandler));
 
         if (!textRecognizer.isOperational()) {
             // Note: The first time that an app using a Vision API is installed on a
@@ -166,9 +169,9 @@ class CameraActivity : AppCompatActivity() {
         //  Init camera source to use high resolution and auto focus
         mCameraSource = CameraSource.Builder(applicationContext, textRecognizer)
             .setFacing(CameraSource.CAMERA_FACING_BACK)
-            //.setRequestedPreviewSize(1280, 1024)
+           // .setRequestedPreviewSize(1280, 1024)
             .setRequestedPreviewSize(640, 480)
-            .setRequestedFps(2.0f)
+            .setRequestedFps(15.0f)
             .setFlashMode(useFlash)
             .setFocusMode(autoFocus)
             .build()
@@ -201,6 +204,7 @@ class CameraActivity : AppCompatActivity() {
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
+
             preview.start(mCameraSource, graphicOverlay)
         } catch (e: IOException) {
             Log.e(TAG, "Unable to start camera source.", e)
@@ -382,6 +386,16 @@ class CameraActivity : AppCompatActivity() {
 
         // }
         //    }
+    }
+
+    private val mainHandler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            if(msg.what == Const.GSTIN_SCAN_DATA) {
+                var gstin = msg.obj as String
+                tv_result.text = "Detecting and validatig checksum. Please keep the camera still..\n GST : $gstin"
+                finishAndSendResult(gstin)
+            }
+        }
     }
 
     private fun finishAndSendResult(gst: String) {

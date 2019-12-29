@@ -39,7 +39,7 @@ public class OcrGraphic extends GraphicOverlay.Graphic {
         if (textPaint == null) {
             textPaint = new Paint();
             textPaint.setColor(TEXT_COLOR);
-            textPaint.setTextSize(50.0f);
+            textPaint.setTextSize(45.0f);
         }
         // Redraw the overlay, as this graphic has been added.
         postInvalidate();
