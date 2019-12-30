@@ -69,6 +69,7 @@ class MainActivity : AppCompatActivity() {
                     mSnackbar!!.show()
                 }
             }
+
             else -> {
                 onSupportNavigateUp()
             }

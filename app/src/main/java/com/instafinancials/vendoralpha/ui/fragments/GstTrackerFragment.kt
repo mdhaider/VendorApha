@@ -1,6 +1,7 @@
 package com.instafinancials.vendoralpha.ui.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,6 @@ class GstTrackerFragment : Fragment() {
 
     private lateinit var viewModel: BasicViewModel
     private lateinit var binding: GsttrackerFragmentBinding
-  //  private lateinit var data: GstResponse
     private lateinit var data: GstResponse
     private lateinit var adapter: GstFilingAdapter
     private lateinit var adapter1: GstFilingDetailAdapter
@@ -84,10 +84,10 @@ class GstTrackerFragment : Fragment() {
         }
 
         binding.imgRefresh.setOnClickListener {
-          //  goToHome(binding.imgRefresh,data.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!)
+            //  goToHome(binding.imgRefresh,data.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!)
         }
 
-        Log.d("gstracker",data.toString())
+        Log.d("gstracker", data.toString())
 
         setData(data)
 
@@ -120,23 +120,62 @@ class GstTrackerFragment : Fragment() {
     }
 
     private fun setData(data: GstResponse) {
-        binding.tvLast.text =
-            TimeUtil.stringToString1(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime!!)
-        binding.tvConstitu.text =
-            data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
-        if(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect=="true"){
-            binding.tvEligibleText.text = getString(R.string.yes_text)
-            binding.tvEligibleText.setTextColor(resources.getColor(R.color.green))
-        } else{
-            binding.tvEligibleText.text = getString(R.string.no_text)
-            binding.tvEligibleText.setTextColor(resources.getColor(R.color.red))
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime)) {
+            binding.tvLast.text =
+                TimeUtil.stringToString1(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime!!)
+        } else {
+            binding.tvLast.text = getString(R.string.na)
         }
 
-        binding.tvFilStatusText.text =
-            data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution)) {
+            binding.tvConstitu.text =
+                data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
+        } else {
+            binding.tvConstitu.text = getString(R.string.na)
+        }
 
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect)) {
+            if (data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect == "true") {
+                binding.tvEligibleText.text = getString(R.string.yes_text)
+                binding.tvEligibleText.setTextColor(resources.getColor(R.color.green))
+            } else {
+                binding.tvEligibleText.text = getString(R.string.no_text)
+                binding.tvEligibleText.setTextColor(resources.getColor(R.color.red))
+            }
+
+        } else {
+            binding.tvEligibleText.text = getString(R.string.na)
+        }
+
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus)) {
+            binding.tvFilStatusText.text =
+                data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus
+        } else {
+            binding.tvFilStatusText.text = getString(R.string.na)
+        }
+
+        setGstFilingDetails(data)
+    }
+
+    private fun setGstFilingDetails(data: GstResponse) {
+        val taxPayerTypeList = listOf("Regular", "SEZ Unit", "SEZ Developer")
+        var type = false
+
+        for (item in taxPayerTypeList) {
+            if((data.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType) == item){
+                type=true
+                break
+            }
+        }
+
+        if (type) {
+            adapter = GstFilingAdapter(combineDataList())
+            binding.tvGst1.text = "GST1"
+            binding.tvGst3.text = "GST 3B"
+        } else {
+            adapter = GstFilingAdapter(combineDataList1())
+        }
         binding.rvGstFiling.setHasFixedSize(true)
-        adapter = GstFilingAdapter(combineDataList())
         binding.rvGstFiling.adapter = adapter
         binding.rvGstFiling.layoutManager = LinearLayoutManager(activity)
     }
@@ -156,6 +195,37 @@ class GstTrackerFragment : Fragment() {
         }
     }
 
+    private fun getGstTyepWiseList1() {
+        val taxpayertype= data.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType!!
+        var returntype=""
+        if(taxpayertype.contains("Composition", true)){
+            returntype ="GSTR4"
+        } else if(taxpayertype.contains("Distributor", true)){
+            returntype ="GSTR6"
+        } else if(taxpayertype.contains("collector", true)){
+            returntype ="GSTR8"
+        } else if(taxpayertype.contains("deductor", true)){
+            returntype ="GSTR7"
+        } else if(taxpayertype.contains("Nonresident ", true)){
+            returntype ="GSTR5"
+        } else if(taxpayertype.contains("Diplomatic ", true)){
+            returntype ="GSTR11"
+        } else if(taxpayertype.contains("Other", true)){
+            returntype ="GSTR5A"
+        } else if(taxpayertype.contains("Casual ", true)){
+            returntype ="GSTR3b"
+        }
+
+        binding.tvGst1.text =returntype
+        binding.tvGst3.visibility = View.GONE
+
+        for (item in complList) {
+            if (item.returnType == returntype) {
+                complList1.add(item)
+            }
+        }
+    }
+
     private fun combineDataList(): ArrayList<GSTSingleRecord> {
         getGstFilingList()
         getGstTyepWiseList()
@@ -164,15 +234,40 @@ class GstTrackerFragment : Fragment() {
                 if (item.taxPeriod == item1.taxPeriod) {
                     singlelList.add(
                         GSTSingleRecord(
+                            "",
                             item1.taxPeriod,
+                            item1.financialYear,
                             item.filingStatus,
+                            item.filingDate,
+                            item.dueDateForTheMonth,
                             item1.filingStatus,
-                            item.filingDate, item.dueDateForTheMonth,
                             item1.filingDate, item1.dueDateForTheMonth
                         )
                     )
                 }
             }
+        }
+
+        return singlelList
+    }
+
+
+    private fun combineDataList1(): ArrayList<GSTSingleRecord> {
+        getGstFilingList()
+        getGstTyepWiseList1()
+        for (item in complList1) {
+            singlelList.add(
+                GSTSingleRecord(
+                    "",
+                    item.taxPeriod,
+                    item.financialYear,
+                    item.filingStatus,
+                    item.filingDate,
+                    item.dueDateForTheMonth,
+                    "",
+                    "", ""
+                )
+            )
         }
 
         return singlelList
@@ -189,7 +284,8 @@ class GstTrackerFragment : Fragment() {
                 }
             }
     }
-    private fun goToHome(img: View,gstNo: String) {
+
+    private fun goToHome(img: View, gstNo: String) {
         val bundle = Bundle().apply {
             putString(Const.GST_NUMBER, gstNo)
         }
