@@ -1,7 +1,8 @@
 package com.instafinancials.vendoralpha.models
 
 class GSTSingleRecord(
-    val returnType: String?,
+    val noOfCol: Int?,
+    val retType: String?,
     val taxPeriod: String?,
     val financialYear: String?,
     val gst1FilingStatus: String?,

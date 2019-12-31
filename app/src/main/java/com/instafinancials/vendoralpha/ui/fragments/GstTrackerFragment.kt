@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -27,6 +28,7 @@ import com.instafinancials.vendoralpha.models.GSTComplianceRecord
 import com.instafinancials.vendoralpha.models.GSTSingleRecord
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.TaxPayerEnum
 import com.instafinancials.vendoralpha.shared.TimeUtil
 import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import kotlinx.android.synthetic.main.custom_view_2.view.*
@@ -42,6 +44,8 @@ class GstTrackerFragment : Fragment() {
     private lateinit var complList1: ArrayList<GSTComplianceRecord>
     private lateinit var complList3: ArrayList<GSTComplianceRecord>
     private lateinit var singlelList: ArrayList<GSTSingleRecord>
+    private var retType3: String? = null
+    private var noOfCol = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,6 +115,16 @@ class GstTrackerFragment : Fragment() {
 
         val customView = dialog.getCustomView()
         val rvDetail: RecyclerView = customView.findViewById(R.id.rvGstDetail)
+        val gsttxt1: TextView = customView.findViewById(R.id.cstvgst1)
+        val gsttxt3: TextView = customView.findViewById(R.id.cstvgst3)
+
+        if (noOfCol == 2) {
+            gsttxt1.text = "GSTR1"
+            gsttxt3.text = "GSTR3B"
+        } else {
+            gsttxt1.text = retType3
+            gsttxt3.visibility = View.INVISIBLE
+        }
 
         rvDetail.setHasFixedSize(true)
         adapter1 = GstFilingDetailAdapter(singlelList)
@@ -158,26 +172,40 @@ class GstTrackerFragment : Fragment() {
     }
 
     private fun setGstFilingDetails(data: GstResponse) {
-        val taxPayerTypeList = listOf("Regular", "SEZ Unit", "SEZ Developer")
-        var type = false
+        val taxType = data.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
 
-        for (item in taxPayerTypeList) {
-            if((data.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType) == item){
-                type=true
-                break
+        if (!TextUtils.isEmpty(taxType)) {
+            for (item in TaxPayerEnum.values()) {
+                if (taxType!!.contains(item.taxType, true)) {
+                    retType3 = item.retType
+                    noOfCol = item.noOfCol
+                    break
+                }
             }
+        } else {
+            return
         }
 
-        if (type) {
+        if (noOfCol == 2) {
+            binding.tvGst1.text = "GSTR1"
+            binding.tvGst3.text = "GSTR3B"
             adapter = GstFilingAdapter(combineDataList())
-            binding.tvGst1.text = "GST1"
-            binding.tvGst3.text = "GST 3B"
         } else {
-            adapter = GstFilingAdapter(combineDataList1())
+            binding.tvGst1.text = retType3
+            adapter = GstFilingAdapter(combineDataList1(retType3!!))
+            binding.tvGst3.visibility = View.INVISIBLE
         }
+
         binding.rvGstFiling.setHasFixedSize(true)
         binding.rvGstFiling.adapter = adapter
         binding.rvGstFiling.layoutManager = LinearLayoutManager(activity)
+
+        if (singlelList.isEmpty()) {
+            binding.firstRow.visibility = View.GONE
+            binding.detailsIcon.visibility = View.INVISIBLE
+            binding.rvGstFiling.visibility = View.GONE
+            binding.tvNA.visibility = View.VISIBLE
+        }
     }
 
     private fun getGstFilingList() {
@@ -189,38 +217,15 @@ class GstTrackerFragment : Fragment() {
         for (item in complList) {
             if (item.returnType == "GSTR1") {
                 complList1.add(item)
-            } else {
+            } else if (item.returnType == "GSTR3B") {
                 complList3.add(item)
             }
         }
     }
 
-    private fun getGstTyepWiseList1() {
-        val taxpayertype= data.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType!!
-        var returntype=""
-        if(taxpayertype.contains("Composition", true)){
-            returntype ="GSTR4"
-        } else if(taxpayertype.contains("Distributor", true)){
-            returntype ="GSTR6"
-        } else if(taxpayertype.contains("collector", true)){
-            returntype ="GSTR8"
-        } else if(taxpayertype.contains("deductor", true)){
-            returntype ="GSTR7"
-        } else if(taxpayertype.contains("Nonresident ", true)){
-            returntype ="GSTR5"
-        } else if(taxpayertype.contains("Diplomatic ", true)){
-            returntype ="GSTR11"
-        } else if(taxpayertype.contains("Other", true)){
-            returntype ="GSTR5A"
-        } else if(taxpayertype.contains("Casual ", true)){
-            returntype ="GSTR3b"
-        }
-
-        binding.tvGst1.text =returntype
-        binding.tvGst3.visibility = View.GONE
-
+    private fun getGstTyepWiseList2(retType1: String) {
         for (item in complList) {
-            if (item.returnType == returntype) {
+            if (item.returnType == retType1) {
                 complList1.add(item)
             }
         }
@@ -234,7 +239,8 @@ class GstTrackerFragment : Fragment() {
                 if (item.taxPeriod == item1.taxPeriod) {
                     singlelList.add(
                         GSTSingleRecord(
-                            "",
+                            2,
+                            retType3,
                             item1.taxPeriod,
                             item1.financialYear,
                             item.filingStatus,
@@ -252,13 +258,14 @@ class GstTrackerFragment : Fragment() {
     }
 
 
-    private fun combineDataList1(): ArrayList<GSTSingleRecord> {
+    private fun combineDataList1(retType: String): ArrayList<GSTSingleRecord> {
         getGstFilingList()
-        getGstTyepWiseList1()
+        getGstTyepWiseList2(retType)
         for (item in complList1) {
             singlelList.add(
                 GSTSingleRecord(
-                    "",
+                    1,
+                    retType3,
                     item.taxPeriod,
                     item.financialYear,
                     item.filingStatus,

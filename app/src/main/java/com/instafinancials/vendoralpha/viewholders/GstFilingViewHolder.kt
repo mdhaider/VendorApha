@@ -27,7 +27,7 @@ class GstFilingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
     fun bind(gstComplianceRecord: GSTSingleRecord) {
 
         if(!TextUtils.isEmpty(gstComplianceRecord.taxPeriod)){
-            mMonth?.text = gstComplianceRecord.taxPeriod+", "+gstComplianceRecord.financialYear?.substring(2,4)
+            mMonth?.text = gstComplianceRecord.taxPeriod?.substring(0,3)+", "+gstComplianceRecord.financialYear?.substring(2,4)
         } else{
             mMonth?.text="NA"
         }
@@ -45,7 +45,7 @@ class GstFilingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
                 mGst3!!.setImageResource(R.drawable.ic_group_8)
             }
         } else {
-            mGst3?.visibility==View.INVISIBLE
+            mGst3?.visibility==View.GONE
         }
 
     }
