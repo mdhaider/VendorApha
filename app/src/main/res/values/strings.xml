@@ -24,7 +24,7 @@
     <string name="menu_support">Support</string>
     <string name="menu_feedback">Feedback</string>
     <string name="menu_free">Free Credits</string>
-    <string name="menu_tou">Terms of use</string>
+    <string name="menu_tou">Terms &amp; Conditions</string>
     <string name="sign_in">Enter phone number to continue</string>
     <string name="phone_number_hint">Phone Number</string>
     <string name="password_hint">OTP</string>
@@ -106,4 +106,10 @@
     <string name="press_again">Press back again to exit</string>
     <string name="no_internet_msg">No Internet connection, check your settings</string>
     <string name="no_data_msg">No data yet</string>
+    <string name="gstin_hint">Enter GSTIN</string>
+    <string name="proceed">Proceed</string>
+    <string name="retry">Retry</string>
+    <string name="confirm_gst_title">GSTIN number : </string>
+    <string name="powered_by">Powered by</string>
+    <string name="na">NA</string>
 </resources>

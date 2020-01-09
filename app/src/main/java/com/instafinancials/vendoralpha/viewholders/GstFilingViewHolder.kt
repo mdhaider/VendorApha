@@ -1,6 +1,8 @@
 package com.instafinancials.vendoralpha.viewholders
 
+import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -24,7 +26,11 @@ class GstFilingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
 
     fun bind(gstComplianceRecord: GSTSingleRecord) {
 
-        mMonth?.text = gstComplianceRecord.taxPeriod
+        if(!TextUtils.isEmpty(gstComplianceRecord.taxPeriod)){
+            mMonth?.text = gstComplianceRecord.taxPeriod?.substring(0,3)+", "+gstComplianceRecord.financialYear?.substring(2,4)
+        } else{
+            mMonth?.text="NA"
+        }
 
         if (gstComplianceRecord.gst1FilingStatus == "Filed") {
             mGst1!!.setImageResource(R.drawable.ic_checked)
@@ -32,10 +38,15 @@ class GstFilingViewHolder(inflater: LayoutInflater, parent: ViewGroup) :
             mGst1!!.setImageResource(R.drawable.ic_group_8)
         }
 
-        if (gstComplianceRecord.gst3FilingStatus == "Filed") {
-            mGst3!!.setImageResource(R.drawable.ic_checked)
+        if(!TextUtils.isEmpty(gstComplianceRecord.gst3FilingStatus)){
+            if (gstComplianceRecord.gst3FilingStatus == "Filed") {
+                mGst3!!.setImageResource(R.drawable.ic_checked)
+            } else {
+                mGst3!!.setImageResource(R.drawable.ic_group_8)
+            }
         } else {
-            mGst3!!.setImageResource(R.drawable.ic_group_8)
+            mGst3?.visibility==View.GONE
         }
+
     }
 }

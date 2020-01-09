@@ -9,8 +9,10 @@ import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.FragmentTermsOfUseBinding
+import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.viewmodels.TermsOfUseViewModel
 
 
@@ -33,6 +35,11 @@ class TermsOfUseFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_tou_profilehome)
+        }
+
+
         sendViewModel =
             ViewModelProviders.of(this).get(TermsOfUseViewModel::class.java)
 
@@ -42,6 +49,6 @@ class TermsOfUseFragment : Fragment() {
                 return true
             }
         }
-        binding.webview.loadUrl("https://www.instafinancials.com/terms-of-use.html")
+        binding.webview.loadUrl(Const.TOU_URL)
     }
 }
