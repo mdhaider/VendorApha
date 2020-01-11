@@ -112,4 +112,14 @@
     <string name="confirm_gst_title">GSTIN number : </string>
     <string name="powered_by">Powered by</string>
     <string name="na">NA</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="menu_gallery">History</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_gallery_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_slideshow_second">Hello HomeSecondFragment. Arg: %1$s</string>
 </resources>

@@ -3,6 +3,7 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-kapt"
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
     compileSdkVersion 29
@@ -43,9 +44,12 @@ android {
         targetCompatibility = 1.8
     }
 
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
+// To inline the bytecode built with JVM target 1.8 into
+// bytecode that is being built with JVM target 1.6. (e.g. navArgs)
 }
 
 dependencies {
@@ -66,6 +70,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
