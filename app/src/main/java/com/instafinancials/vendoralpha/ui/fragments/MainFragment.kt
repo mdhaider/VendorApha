@@ -31,11 +31,14 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sectionsPagerAdapter = SectionsPagerAdapter1(activity!!, childFragmentManager)
+
+        sectionsPagerAdapter.addFragment(HistoryFragment(), "Verify")
+        sectionsPagerAdapter.addFragment(HistoryFragment(), "History")
+        sectionsPagerAdapter.addFragment(BookmarkFragment(), "Bookmarks")
+
         val viewPager: ViewPager = binding.viewPager
         viewPager.adapter = sectionsPagerAdapter
         val tabs: TabLayout =binding.tabs
         tabs.setupWithViewPager(viewPager)
-
-
     }
 }
