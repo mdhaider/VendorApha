@@ -8,15 +8,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_n_verify" />
         <item
             android:id="@+id/nav_history"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_n_history" />
         <item
             android:id="@+id/nav_bookmarks"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_n_bookmarks" />
     </group>
 
     <group android:checkableBehavior="single"
@@ -24,21 +24,36 @@
         <item
             android:id="@+id/nav_refers"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_refer" />
+            android:title="@string/menu_n_refer" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_credits"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_n_credits" />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/group3">
         <item
             android:id="@+id/nav_kyc"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_refer" />
+            android:title="@string/menu_n_kyc" />
         <item
-            android:id="@+id/nav_fin_repo"
+            android:id="@+id/nav_fin"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_n_fin" />
+    </group>
+    <group android:checkableBehavior="none"
+        android:id="@+id/group4">
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/menu_n_help" />
+        <item
+            android:id="@+id/nav_tou"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_n_tou" />
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_n_contact" />
     </group>
 </menu>

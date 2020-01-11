@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.activities.HomeActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_rate"
+        android:icon="@drawable/ic_menu_gallery"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/menu_s_rate"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_report"
+        android:icon="@drawable/ic_menu_gallery"
+        android:orderInCategory="101"
+        android:title="@string/menu_s_report"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_feedback"
+        android:icon="@drawable/ic_menu_gallery"
+        android:orderInCategory="102"
+        android:title="@string/menu_s_feedback"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_help"
+        android:icon="@drawable/ic_menu_gallery"
+        android:orderInCategory="103"
+        android:title="@string/menu_s_help"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_refer"
+        android:icon="@drawable/ic_menu_gallery"
+        android:orderInCategory="104"
+        android:title="@string/menu_s_refer"
         app:showAsAction="never" />
 </menu>

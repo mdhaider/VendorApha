@@ -122,4 +122,22 @@
     <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
     <string name="hello_gallery_second">Hello HomeSecondFragment. Arg: %1$s</string>
     <string name="hello_slideshow_second">Hello HomeSecondFragment. Arg: %1$s</string>
+
+    <string name="menu_n_verify">Verify GSTIN</string>
+    <string name="menu_n_history">History</string>
+    <string name="menu_n_bookmarks">Bookmarks</string>
+    <string name="menu_n_refer">Refer &amp; Earn Free Credits</string>
+    <string name="menu_n_credits">Your Credits</string>
+    <string name="menu_n_kyc">KYC Report</string>
+    <string name="menu_n_fin">Financial Report</string>
+    <string name="menu_n_help">Help</string>
+    <string name="menu_n_tou">Terms of Use</string>
+    <string name="menu_n_contact">Contact Us</string>
+
+    <string name="menu_s_rate">Rate Us</string>
+    <string name="menu_s_report">Report Bug</string>
+    <string name="menu_s_feedback">Feedback</string>
+    <string name="menu_s_help">Help</string>
+    <string name="menu_s_refer">Refer &amp; Earn</string>
+
 </resources>

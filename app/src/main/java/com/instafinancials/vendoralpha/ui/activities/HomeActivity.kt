@@ -2,6 +2,7 @@ package com.instafinancials.vendoralpha.ui.activities
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -30,7 +31,7 @@ class HomeActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_history, R.id.nav_bookmarks
+                R.id.nav_home1,R.id.nav_home, R.id.nav_history, R.id.nav_bookmarks
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -41,6 +42,21 @@ class HomeActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.main_menu, menu)
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_rate -> {
+              //  newGame()
+                true
+            }
+            R.id.action_report -> {
+              //  showHelp()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+
     }
 
 
