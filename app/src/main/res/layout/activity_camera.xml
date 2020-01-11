@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.activities.MainActivity">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="visible"
+        android:gravity="center"
+        android:text="Center camera around GSTIN number and tab the box once it appears around GSTIN."
+        android:textSize="16sp" />
     <com.instafinancials.vendoralpha.ui.activities.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
@@ -19,13 +31,15 @@
 
     </com.instafinancials.vendoralpha.ui.activities.camera.CameraSourcePreview>
 
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:text="Center camera around GSTIN number"
-        android:textSize="18sp" />
 
 </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar_cyclic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:visibility="visible" />
+</RelativeLayout>

@@ -9,8 +9,10 @@ import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.databinding.FragmentSupportBinding
+import com.instafinancials.vendoralpha.shared.Const
 import com.instafinancials.vendoralpha.viewmodels.SupportViewModel
 
 
@@ -33,6 +35,10 @@ class SupportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_support_profilehome)
+        }
+
         sendViewModel =
             ViewModelProviders.of(this).get(SupportViewModel::class.java)
 
@@ -42,6 +48,6 @@ class SupportFragment : Fragment() {
                 return true
             }
         }
-        binding.webview.loadUrl("https://support.instafinancials.com/portal/kb")
+        binding.webview.loadUrl(Const.SUPPORT_URL)
     }
 }

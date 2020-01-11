@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [BookmarkDataForDb::class, HistoryDataForDb::class], version = 1)
+@Database(entities = [BookmarkDataForDb::class, HistoryDataForDb::class], version = 1, exportSchema = false)
 @TypeConverters(DateTypeConverter::class, ListConverter::class, JsonObjectConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 

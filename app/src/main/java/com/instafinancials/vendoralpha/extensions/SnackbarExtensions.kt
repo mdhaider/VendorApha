@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.shared
+package com.instafinancials.vendoralpha.extensions
 
 import android.view.View
 import androidx.annotation.StringRes

@@ -35,16 +35,18 @@
                     android:hint="@string/enter_or_scan_gstin"
                     android:inputType="textCapCharacters"
                     android:padding="10dip"
-                    android:textSize="14sp"
+                    android:textAlignment="gravity"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     tools:text="01AAACA6990Q1Z" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/bntScan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="32dp"
-                    android:layout_alignParentEnd="true"
                     app:srcCompat="@drawable/ic_camera_alt_black_24dp" />
 
             </RelativeLayout>
@@ -95,8 +97,12 @@
 
                     <TextView
                         android:id="@+id/tvStatus"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:layout_weight="1"
+                        android:gravity="center"
                         android:background="@drawable/rect_box"
                         android:backgroundTint="@color/green_20"
                         android:fontFamily="@font/roboto_medium"
@@ -106,25 +112,33 @@
 
                     <TextView
                         android:id="@+id/tvTaxPayerType"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="center"
                         android:layout_marginStart="12dp"
+                        android:layout_weight="1"
                         android:background="@drawable/rect_box"
                         android:backgroundTint="@color/gray_fainted"
                         android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/colorTextPrimary"
+                        android:textColor="@color/gray"
                         android:textSize="14sp"
                         tools:text="Consti" />
 
                     <TextView
                         android:id="@+id/tvLocat"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:gravity="center"
                         android:layout_marginStart="12dp"
+                        android:layout_weight="1"
                         android:background="@drawable/rect_box"
-                        android:backgroundTint="@color/red_20"
+                        android:backgroundTint="@color/orange_20"
                         android:fontFamily="@font/roboto_medium"
-                        android:textColor="@color/red"
+                        android:textColor="@color/orange"
                         android:textSize="14sp"
                         tools:text="Error" />
 
@@ -145,8 +159,8 @@
                 android:elevation="2dp"
                 app:tabBackground="@drawable/tab_layout_selector"
                 app:tabGravity="fill"
-                app:tabMaxWidth="2000dp"
                 app:tabIndicatorHeight="0dp"
+                app:tabMaxWidth="2000dp"
                 app:tabMode="fixed"
                 app:tabRippleColor="@null"
                 app:tabSelectedTextColor="@color/white"

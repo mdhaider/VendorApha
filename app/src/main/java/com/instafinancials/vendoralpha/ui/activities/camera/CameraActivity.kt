@@ -1,4 +1,4 @@
-package com.instafinancials.vendoralpha.ui.activities
+package com.instafinancials.vendoralpha.ui.activities.camera
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -7,40 +7,54 @@ import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.hardware.Camera
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
+import android.text.InputType
 import android.util.Log
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.WhichButton
+import com.afollestad.materialdialogs.actions.setActionButtonEnabled
+import com.afollestad.materialdialogs.input.getInputField
+import com.afollestad.materialdialogs.input.input
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailability
-import com.google.android.gms.vision.text.TextBlock
+import com.google.android.gms.vision.text.Text
 import com.google.android.gms.vision.text.TextRecognizer
 import com.google.android.material.snackbar.Snackbar
 import com.instafinancials.vendoralpha.R
 import com.instafinancials.vendoralpha.shared.Const
-import com.instafinancials.vendoralpha.ui.activities.camera.*
 import com.instafinancials.vendoralpha.shared.GSTChecksumUtil
 import java.io.IOException
 import kotlin.properties.Delegates
 
 
 class CameraActivity : AppCompatActivity() {
+
     private val autoFocus = Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO
     private val useFlash = null; // Camera.Parameters.FLASH_MODE_TORCH
-    lateinit var mCameraSource : CameraSource
-    lateinit var preview : CameraSourcePreview
-    lateinit var tv_result : TextView
+    lateinit var mCameraSource: CameraSource
+    lateinit var preview: CameraSourcePreview
+    lateinit var tv_result: TextView
+    lateinit var progress: ProgressBar
+    //lateinit var mainHandler: Handler
+
     private var textRecognizer by Delegates.notNull<TextRecognizer>()
+    // private lateinit var textRecognizer : GSTTextRecognizer
     private lateinit var graphicOverlay: GraphicOverlay<OcrGraphic>
 
     private lateinit var scaleGestureDetector: ScaleGestureDetector
-    private lateinit var gestureDetector : GestureDetector
+    private lateinit var gestureDetector: GestureDetector
     private val TAG = "CameraAvtivity"
     // Intent request code to handle updating play services if needed.
     private val RC_HANDLE_GMS = 9001
@@ -54,6 +68,7 @@ class CameraActivity : AppCompatActivity() {
         preview = findViewById(R.id.preview);
         graphicOverlay = findViewById(R.id.graphicOverlay);
         tv_result = findViewById(R.id.tv_result)
+        progress = findViewById(R.id.progressBar_cyclic)
 
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
@@ -65,8 +80,9 @@ class CameraActivity : AppCompatActivity() {
         } else {
             requestCameraPermission()
         }
-        gestureDetector =  GestureDetector(this,  CaptureGestureListener());
+        gestureDetector = GestureDetector(this, CaptureGestureListener());
         scaleGestureDetector = ScaleGestureDetector(this, ScaleListener())
+        showProgress(false)
     }
 
     /**
@@ -107,7 +123,6 @@ class CameraActivity : AppCompatActivity() {
     }
 
 
-
     /**
      * Creates and starts the camera.  Note that this uses a higher resolution in comparison
      * to other detection examples to enable the ocr detector to detect small text samples
@@ -124,8 +139,9 @@ class CameraActivity : AppCompatActivity() {
         // is set to receive the text recognition results, track the text, and maintain
         // graphics for each text block on screen.  The factory is used by the multi-processor to
         // create a separate tracker instance for each text block.
-        val textRecognizer =  TextRecognizer.Builder(context).build();
-        textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay));
+        textRecognizer = TextRecognizer.Builder(context).build();
+        // textRecognizer =  GSTTextRecognizer(graphicOverlay)
+        textRecognizer.setProcessor(OcrDetectorProcessor(graphicOverlay, mainHandler));
 
         if (!textRecognizer.isOperational()) {
             // Note: The first time that an app using a Vision API is installed on a
@@ -153,7 +169,8 @@ class CameraActivity : AppCompatActivity() {
         //  Init camera source to use high resolution and auto focus
         mCameraSource = CameraSource.Builder(applicationContext, textRecognizer)
             .setFacing(CameraSource.CAMERA_FACING_BACK)
-            .setRequestedPreviewSize(1280, 1024)
+           // .setRequestedPreviewSize(1280, 1024)
+            .setRequestedPreviewSize(640, 480)
             .setRequestedFps(15.0f)
             .setFlashMode(useFlash)
             .setFocusMode(autoFocus)
@@ -187,6 +204,7 @@ class CameraActivity : AppCompatActivity() {
                 // for ActivityCompat#requestPermissions for more details.
                 return
             }
+
             preview.start(mCameraSource, graphicOverlay)
         } catch (e: IOException) {
             Log.e(TAG, "Unable to start camera source.", e)
@@ -198,7 +216,6 @@ class CameraActivity : AppCompatActivity() {
         return ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
                 PackageManager.PERMISSION_GRANTED
     }
-
 
 
     /**
@@ -227,9 +244,11 @@ class CameraActivity : AppCompatActivity() {
         preview.release()
     }
 
-    override fun onRequestPermissionsResult(requestCode : Int,
-                                            permissions : Array<String>,
-                                           grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (requestCode != RC_HANDLE_CAMERA_PERM) {
             Log.d(TAG, "Got unexpected permission result: " + requestCode);
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -243,20 +262,21 @@ class CameraActivity : AppCompatActivity() {
             return;
         }
 
-       /* Log.e(TAG, "Permission not granted: results len = " + grantResults.size +
-                " Result code = " + ((grantResults.size > 0)? grantResults.get(0) : "(empty)"));*/
+        /* Log.e(TAG, "Permission not granted: results len = " + grantResults.size +
+                 " Result code = " + ((grantResults.size > 0)? grantResults.get(0) : "(empty)"));*/
 
-        var listener =  DialogInterface.OnClickListener() { dialogInterface: DialogInterface, i: Int ->
-            fun onClick(dialog : DialogInterface, id: Int) {
-                finish();
-            }
-        };
+        var listener =
+            DialogInterface.OnClickListener() { dialogInterface: DialogInterface, i: Int ->
+                fun onClick(dialog: DialogInterface, id: Int) {
+                    finish();
+                }
+            };
 
-        var builder =  AlertDialog.Builder(this);
+        var builder = AlertDialog.Builder(this);
         builder.setTitle(R.string.app_name)
-                .setMessage(R.string.no_camera_permission)
-                .setPositiveButton(R.string.ok, listener)
-                .show();
+            .setMessage(R.string.no_camera_permission)
+            .setPositiveButton(R.string.ok, listener)
+            .show();
     }
 
     inner class CaptureGestureListener : SimpleOnGestureListener() {
@@ -280,7 +300,7 @@ class CameraActivity : AppCompatActivity() {
          * only wants to update scaling factors if the change is
          * greater than 0.01.
          */
-        override fun onScale(detector : ScaleGestureDetector ) : Boolean {
+        override fun onScale(detector: ScaleGestureDetector): Boolean {
             return false;
         }
 
@@ -296,7 +316,7 @@ class CameraActivity : AppCompatActivity() {
          * sense, onScaleBegin() may return false to ignore the
          * rest of the gesture.
          */
-        override fun onScaleBegin(detector : ScaleGestureDetector ) : Boolean {
+        override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
             return true;
         }
 
@@ -311,21 +331,23 @@ class CameraActivity : AppCompatActivity() {
          * @param detector The detector reporting the event - use this to
          *                 retrieve extended info about event state.
          */
-        override fun onScaleEnd(detector : ScaleGestureDetector ) {
+        override fun onScaleEnd(detector: ScaleGestureDetector) {
             mCameraSource.doZoom(detector.getScaleFactor())
         }
     }
 
     private fun onTap(rawX: Float, rawY: Float): Boolean {
         val graphic = graphicOverlay.getGraphicAtLocation(rawX, rawY)
-        var text: TextBlock? = null
+        var text: Text? = null
         if (graphic != null) {
             text = graphic.textBlock
             if (text != null && text.value != null) {
                 Log.d(TAG, "text data is being spoken! " + text.value)
                 // Speak the string.
                 //tts.speak(text.value, TextToSpeech.QUEUE_ADD, null, "DEFAULT")
+                showProgress(true)
                 checkValue(text.value)
+                showProgress(false)
             } else {
                 Log.d(TAG, "text data is null")
             }
@@ -335,7 +357,7 @@ class CameraActivity : AppCompatActivity() {
         return text != null
     }
 
-    override fun onTouchEvent(e : MotionEvent) : Boolean {
+    override fun onTouchEvent(e: MotionEvent): Boolean {
         var b = scaleGestureDetector.onTouchEvent(e);
 
         var c = gestureDetector.onTouchEvent(e);
@@ -344,29 +366,75 @@ class CameraActivity : AppCompatActivity() {
     }
 
 
-    private fun checkValue(value : String) {
-        if (value.length > 15) {
-                var substrings = value.split(" ")
-                for (i in 0 until substrings.count()) {
-                    if (substrings[i].length == 15) {
-                        tv_result.post() {
-                            tv_result.text = substrings[i]
-                        }
-                        Log.d(TAG, "GSTChecksum for ${substrings[i]}")
-                        if(GSTChecksumUtil().checValidGST(substrings[i])) {
-                            Log.d(TAG, "GSTChecksum for ${substrings[i]} is Valid")
-                            finishAndSendResult(substrings[i])
-                            return
-                        }
-                    }
-                }
+    private fun checkValue(value: String): Boolean {
+        //  if (value.length > 15) {
+        //   var substrings = value.split(" ")
+        //    for (i in 0 until substrings.count()) {
+        if (value.length == 15) {
+            tv_result.post() {
+              //  tv_result.text = "Verifying GST for $value}"
+            }
+            Log.d(TAG, "GSTChecksum for ${value}")
+            if (GSTChecksumUtil().checValidGST(value)) {
+                Log.d(TAG, "GSTChecksum for ${value} is Valid")
+                showConfirmGstDialog(value)
+              //  finishAndSendResult(value)
+                return true
+            }
+        }
+        return false
+
+        // }
+        //    }
+    }
+
+    private val mainHandler = object : Handler(Looper.getMainLooper()) {
+        override fun handleMessage(msg: Message) {
+            if(msg.what == Const.GSTIN_SCAN_DATA) {
+                var gstin = msg.obj as String
+                tv_result.text = "Detecting and validatig checksum. Please keep the camera still..\n GST : $gstin"
+                finishAndSendResult(gstin)
+            }
         }
     }
 
-    private fun finishAndSendResult(gst : String) {
+    private fun finishAndSendResult(gst: String) {
         val intent = getIntent()
-         intent.putExtra(Const.SCAN_DATA, gst)
-         setResult(Activity.RESULT_OK, intent)
-            finish()
+        intent.putExtra(Const.SCAN_DATA, gst)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
+    private fun showProgress(shouldShow: Boolean) {
+        if (shouldShow) {
+            progress.visibility = View.VISIBLE
+        } else {
+            progress.visibility = View.GONE
+        }
+    }
+
+    private fun showConfirmGstDialog(gstin: String) {
+        val type = InputType.TYPE_CLASS_TEXT
+        var gstTextFinal:String ?=null
+        MaterialDialog(this).show {
+            message(R.string.confirm_gst_title)
+            input(
+                prefill = gstin, hintRes = R.string.gstin_hint,
+                inputType = type, maxLength = 15
+            ) { dialog, text ->
+                val inputField = dialog.getInputField()
+                val isValid = text.length == 15
+                gstTextFinal=text.toString()
+                inputField.error = if (isValid) null else "Must be 15-digit character"
+                dialog.setActionButtonEnabled(WhichButton.POSITIVE, isValid)
+            }
+            positiveButton(R.string.proceed) { dialog ->
+                finishAndSendResult(gstTextFinal!!)
+                dialog.dismiss()
+            }
+            negativeButton(R.string.retry) { dialog ->
+                dialog.dismiss()
+            }
+        }
     }
 }

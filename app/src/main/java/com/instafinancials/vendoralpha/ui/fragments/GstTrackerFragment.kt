@@ -1,10 +1,12 @@
 package com.instafinancials.vendoralpha.ui.fragments
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -26,6 +28,7 @@ import com.instafinancials.vendoralpha.models.GSTComplianceRecord
 import com.instafinancials.vendoralpha.models.GSTSingleRecord
 import com.instafinancials.vendoralpha.models.GstResponse
 import com.instafinancials.vendoralpha.shared.Const
+import com.instafinancials.vendoralpha.shared.TaxPayerEnum
 import com.instafinancials.vendoralpha.shared.TimeUtil
 import com.instafinancials.vendoralpha.viewmodels.BasicViewModel
 import kotlinx.android.synthetic.main.custom_view_2.view.*
@@ -34,7 +37,6 @@ class GstTrackerFragment : Fragment() {
 
     private lateinit var viewModel: BasicViewModel
     private lateinit var binding: GsttrackerFragmentBinding
-  //  private lateinit var data: GstResponse
     private lateinit var data: GstResponse
     private lateinit var adapter: GstFilingAdapter
     private lateinit var adapter1: GstFilingDetailAdapter
@@ -42,6 +44,8 @@ class GstTrackerFragment : Fragment() {
     private lateinit var complList1: ArrayList<GSTComplianceRecord>
     private lateinit var complList3: ArrayList<GSTComplianceRecord>
     private lateinit var singlelList: ArrayList<GSTSingleRecord>
+    private var retType3: String? = null
+    private var noOfCol = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,10 +88,10 @@ class GstTrackerFragment : Fragment() {
         }
 
         binding.imgRefresh.setOnClickListener {
-          //  goToHome(binding.imgRefresh,data.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!)
+            //  goToHome(binding.imgRefresh,data.gSTInformationAndCompliance?.gSTRegistrationDetails?.gSTIN!!)
         }
 
-        Log.d("gstracker",data.toString())
+        Log.d("gstracker", data.toString())
 
         setData(data)
 
@@ -111,6 +115,16 @@ class GstTrackerFragment : Fragment() {
 
         val customView = dialog.getCustomView()
         val rvDetail: RecyclerView = customView.findViewById(R.id.rvGstDetail)
+        val gsttxt1: TextView = customView.findViewById(R.id.cstvgst1)
+        val gsttxt3: TextView = customView.findViewById(R.id.cstvgst3)
+
+        if (noOfCol == 2) {
+            gsttxt1.text = "GSTR1"
+            gsttxt3.text = "GSTR3B"
+        } else {
+            gsttxt1.text = retType3
+            gsttxt3.visibility = View.INVISIBLE
+        }
 
         rvDetail.setHasFixedSize(true)
         adapter1 = GstFilingDetailAdapter(singlelList)
@@ -120,25 +134,78 @@ class GstTrackerFragment : Fragment() {
     }
 
     private fun setData(data: GstResponse) {
-        binding.tvLast.text =
-            TimeUtil.stringToString1(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime!!)
-        binding.tvConstitu.text =
-            data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
-        if(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect=="true"){
-            binding.tvEligibleText.text = getString(R.string.yes_text)
-            binding.tvEligibleText.setTextColor(resources.getColor(R.color.green))
-        } else{
-            binding.tvEligibleText.text = getString(R.string.no_text)
-            binding.tvEligibleText.setTextColor(resources.getColor(R.color.red))
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime)) {
+            binding.tvLast.text =
+                TimeUtil.stringToString1(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.lastUpdatedDateTime!!)
+        } else {
+            binding.tvLast.text = getString(R.string.na)
         }
 
-        binding.tvFilStatusText.text =
-            data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution)) {
+            binding.tvConstitu.text =
+                data.gSTInformationAndCompliance?.gSTRegistrationDetails?.constitution
+        } else {
+            binding.tvConstitu.text = getString(R.string.na)
+        }
+
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect)) {
+            if (data.gSTInformationAndCompliance?.gSTRegistrationDetails?.eligibleToCollect == "true") {
+                binding.tvEligibleText.text = getString(R.string.yes_text)
+                binding.tvEligibleText.setTextColor(resources.getColor(R.color.green))
+            } else {
+                binding.tvEligibleText.text = getString(R.string.no_text)
+                binding.tvEligibleText.setTextColor(resources.getColor(R.color.red))
+            }
+
+        } else {
+            binding.tvEligibleText.text = getString(R.string.na)
+        }
+
+        if (!TextUtils.isEmpty(data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus)) {
+            binding.tvFilStatusText.text =
+                data.gSTInformationAndCompliance?.gSTRegistrationDetails?.filingStatus
+        } else {
+            binding.tvFilStatusText.text = getString(R.string.na)
+        }
+
+        setGstFilingDetails(data)
+    }
+
+    private fun setGstFilingDetails(data: GstResponse) {
+        val taxType = data.gSTInformationAndCompliance?.gSTRegistrationDetails?.taxpayerType
+
+        if (!TextUtils.isEmpty(taxType)) {
+            for (item in TaxPayerEnum.values()) {
+                if (taxType!!.contains(item.taxType, true)) {
+                    retType3 = item.retType
+                    noOfCol = item.noOfCol
+                    break
+                }
+            }
+        } else {
+            return
+        }
+
+        if (noOfCol == 2) {
+            binding.tvGst1.text = "GSTR1"
+            binding.tvGst3.text = "GSTR3B"
+            adapter = GstFilingAdapter(combineDataList())
+        } else {
+            binding.tvGst1.text = retType3
+            adapter = GstFilingAdapter(combineDataList1(retType3!!))
+            binding.tvGst3.visibility = View.INVISIBLE
+        }
 
         binding.rvGstFiling.setHasFixedSize(true)
-        adapter = GstFilingAdapter(combineDataList())
         binding.rvGstFiling.adapter = adapter
         binding.rvGstFiling.layoutManager = LinearLayoutManager(activity)
+
+        if (singlelList.isEmpty()) {
+            binding.firstRow.visibility = View.GONE
+            binding.detailsIcon.visibility = View.INVISIBLE
+            binding.rvGstFiling.visibility = View.GONE
+            binding.tvNA.visibility = View.VISIBLE
+        }
     }
 
     private fun getGstFilingList() {
@@ -150,8 +217,16 @@ class GstTrackerFragment : Fragment() {
         for (item in complList) {
             if (item.returnType == "GSTR1") {
                 complList1.add(item)
-            } else {
+            } else if (item.returnType == "GSTR3B") {
                 complList3.add(item)
+            }
+        }
+    }
+
+    private fun getGstTyepWiseList2(retType1: String) {
+        for (item in complList) {
+            if (item.returnType == retType1) {
+                complList1.add(item)
             }
         }
     }
@@ -164,15 +239,42 @@ class GstTrackerFragment : Fragment() {
                 if (item.taxPeriod == item1.taxPeriod) {
                     singlelList.add(
                         GSTSingleRecord(
+                            2,
+                            retType3,
                             item1.taxPeriod,
+                            item1.financialYear,
                             item.filingStatus,
+                            item.filingDate,
+                            item.dueDateForTheMonth,
                             item1.filingStatus,
-                            item.filingDate, item.dueDateForTheMonth,
                             item1.filingDate, item1.dueDateForTheMonth
                         )
                     )
                 }
             }
+        }
+
+        return singlelList
+    }
+
+
+    private fun combineDataList1(retType: String): ArrayList<GSTSingleRecord> {
+        getGstFilingList()
+        getGstTyepWiseList2(retType)
+        for (item in complList1) {
+            singlelList.add(
+                GSTSingleRecord(
+                    1,
+                    retType3,
+                    item.taxPeriod,
+                    item.financialYear,
+                    item.filingStatus,
+                    item.filingDate,
+                    item.dueDateForTheMonth,
+                    "",
+                    "", ""
+                )
+            )
         }
 
         return singlelList
@@ -189,7 +291,8 @@ class GstTrackerFragment : Fragment() {
                 }
             }
     }
-    private fun goToHome(img: View,gstNo: String) {
+
+    private fun goToHome(img: View, gstNo: String) {
         val bundle = Bundle().apply {
             putString(Const.GST_NUMBER, gstNo)
         }
