@@ -139,5 +139,7 @@
     <string name="menu_s_feedback">Feedback</string>
     <string name="menu_s_help">Help</string>
     <string name="menu_s_refer">Refer &amp; Earn</string>
+    <string name="log_out">Log out</string>
+    <string name="log_in">Log In</string>
 
 </resources>

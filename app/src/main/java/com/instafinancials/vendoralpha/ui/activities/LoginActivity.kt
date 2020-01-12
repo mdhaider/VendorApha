@@ -239,7 +239,7 @@ class LoginActivity : AppCompatActivity() {
                         if (verifyOtpResponse.response?.isValid!!) {
                             if (isUserReg) {
                                 AppPreferences.isLoggedIn = true
-                                startActivity(Intent(VendorApp.instance, MainActivity::class.java))
+                                startActivity(Intent(VendorApp.instance, HomeActivity::class.java))
                                 finish()
                             } else {
                                 binding.creatAccPar.visibility = View.VISIBLE
@@ -287,7 +287,7 @@ class LoginActivity : AppCompatActivity() {
                                 userProfileResponse
                             )
                             AppPreferences.isVerified = false
-                            startActivity(Intent(VendorApp.instance, MainActivity::class.java))
+                            startActivity(Intent(VendorApp.instance, HomeActivity::class.java))
                             finish()
                         }
 

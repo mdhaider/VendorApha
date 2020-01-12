@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -25,7 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : DialogFragment() {
 
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var binding: FragmentProfileBinding
@@ -62,10 +63,10 @@ class ProfileFragment : Fragment() {
           findNavController().navigate(R.id.action_profile_home_only)
         }
 
-        if(!TextUtils.isEmpty(mobNo)){
-            checkUserApi(mobNo!!)
+        if(TextUtils.isEmpty(mobNo)){
+            checkUserApi( "9962232611")
         } else{
-            findNavController().navigate(R.id.action_profile_home_only)
+          //  findNavController().navigate(R.id.action_profile_home_only)
         }
     }
 
